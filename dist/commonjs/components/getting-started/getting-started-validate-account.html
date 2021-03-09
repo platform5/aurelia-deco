@@ -1,0 +1,22 @@
+<template>
+  <h4 t="gettingStarted.Validate your account"></h4>
+  <p class="getting-started--no-wrap-span" t="[html]gettingStarted.We sent you a code to <span>{{username}}</span>, please enter it below" t-params.bind="{username: gs.newAccountUsername}"></p>
+  <p class="getting-started--no-wrap-span"><small t=""></small></p>
+  <form submit.trigger="gs.validateCode()" if.bind="gs && gs.step === 'validate-account'">
+    <ux-form>
+      <ux-field>
+        <ux-input label="${'gettingStarted.Code' | t}" value.bind="gs.code & validate:gs.validationController" autocomplete="one-time-code"></ux-input>
+        <ux-input-info t="gettingStarted.If you do not receive this email, please check your spam or bulk email folder"></ux-input-info>
+      </ux-field>
+    </ux-form>
+    <ar-spinner-line active.bind="gs.processing" class="getting-started__ar-spinner-line"></ar-spinner-line>
+    <ux-button click.delegate="gs.validateCode()" size="large"><span t="gettingStarted.Validate"></span></ux-button>
+  </form>
+
+  <div class="getting-started__secondary-buttons-row">
+    <ux-button type="text" click.delegate="gs.sendValidationCodeAgain()"><span t="gettingStarted.Send the code again"></span></ux-button>
+    <ux-button type="text" click.delegate="gs.goToStart()"><span t="gettingStarted.Back to login"></ux-button>
+      <br>
+      <ux-button style="--aurelia-ux--button-background: red;" type="text" click.delegate="gs.cancelAccountCreation()"><span t="Cancel"></ux-button>
+  </div>
+</template>

@@ -1,0 +1,13 @@
+<template>
+  <require from="./ad-images.css"></require>
+  <template repeat.for="picture of instance[property]" if.bind="instance"><img css="transform: translateX(-${activeIndex * 100}%)" as-element="ad-image" instance.bind="instance" property="${property}" w="${w}" h="${h}" hardsize.bind="hardsize" src="${src}" invisible-before-loading.bind="invisibleBeforeLoading" file-id.bind="picture.filename" /></template>
+  <div class="ad-images-bullets" if.bind="instance && showBullets">
+    <span repeat.for="picture of instance[property]" class="${activeIndex === $index ? 'active':''}" click.delegate="activeIndex = $index"></span>
+  </div>
+  <div class="ad-images-navigation-left" click.delegate="left()" if.bind="instance && showNavigation && activeIndex > 0">
+    <ux-icon icon="chevron_left"></ux-icon>
+  </div>
+  <div class="ad-images-navigation-right" click.delegate="right()" if.bind="instance && showNavigation && activeIndex < instance[property].length - 1">
+    <ux-icon icon="chevron_right"></ux-icon>
+  </div>
+</template>

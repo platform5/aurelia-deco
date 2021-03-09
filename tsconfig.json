@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es5",
+    "lib": [
+      "es2017",
+      "dom",
+      "es2018.promise"
+    ],
+    "typeRoots": ["node_modules/@types", "custom_typings"],
+    "outDir": "dist/commonjs",
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "strictNullChecks": false,
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "noEmitHelpers": false,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": [
+    ".vscode",
+    "dist",
+    "doc",
+    "node_modules",
+    "test",
+    "dico-tool"
+  ]
+}

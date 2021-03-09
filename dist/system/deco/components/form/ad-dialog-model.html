@@ -1,0 +1,8 @@
+<template>
+  <ux-form if.bind="instance">
+    <template repeat.for="prop of instance.deco.propertyTypes | objectKeys">
+      <deco-field instance.bind="instance" property="${prop}" if.bind="properties === 'all' || properties.indexOf(prop) !== -1" display-ref-locale.bind="displayRefLocale" ref-locale.bind="refLocale"></deco-field>
+    </template>
+  </ux-form>
+</template>
+  

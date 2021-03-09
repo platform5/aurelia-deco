@@ -1,0 +1,7 @@
+.ad-image.animate-opacity {
+  transition: 100ms opacity ease-in;
+}
+.ad-image.invisible {
+  /*visibility: hidden;*/
+  opacity: 0;
+}

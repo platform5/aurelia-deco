@@ -1,0 +1,13 @@
+<template class="request-recorder-tool ${request.recording ? 'request-recorder-tool--recording' : ''}">
+  <require from="./request-recorder-tool.css"></require>
+  <ux-button size="small" type="fab" class="request-recorder-tool__toggle-button" click.delegate="recorder.toggle()">
+    <ux-icon icon="${recorder.recording ? 'stop' : 'play_arrow'}"></ux-icon>
+  </ux-button>
+  <ux-button size="small" type="fab" class="request-recorder-tool__view-button" click.delegate="view()" if.bind="recorder.requests.length">
+    <ux-icon icon="visibility"></ux-icon>
+  </ux-button>
+
+  <div class="request-recorder-tool__viewer">
+
+  </div>
+</template>

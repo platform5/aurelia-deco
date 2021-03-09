@@ -1,0 +1,10 @@
+import { DecoAppState } from './interfaces';
+export declare function clearDecoState(state: DecoAppState): DecoAppState;
+export declare function initDecoState(state: DecoAppState): DecoAppState;
+export declare function setStateVersion(state: DecoAppState, stateVersion: string): DecoAppState;
+export declare function setLanguages(state: DecoAppState, languages: Array<string> | null): DecoAppState;
+export declare function setLanguage(state: DecoAppState, language: string | null): DecoAppState;
+export declare function setRefLanguage(state: DecoAppState, language: string | null): DecoAppState;
+export declare function setCountryCode(state: DecoAppState, countryCode: undefined | string): DecoAppState;
+export declare function setCountry(state: DecoAppState, countryCode: undefined | string): DecoAppState;
+export declare function setCountries(state: DecoAppState, countries: Array<string> | null): DecoAppState;

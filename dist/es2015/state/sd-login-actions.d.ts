@@ -1,0 +1,16 @@
+import { ProfileModel } from './../models/profile.model';
+import { AppState, SwissdataUser } from './interfaces';
+export declare function reset(state: AppState): AppState;
+export declare function setUsername(state: AppState, username: string): AppState;
+export declare function passwordStep(state: AppState, username: string): AppState;
+export declare function validateAccountStep(state: AppState, token: string, tokenExpiry?: string): AppState;
+export declare function doubleAuthStep(state: AppState, token: string): AppState;
+export declare function setAccessToken(state: AppState, accessToken: string): AppState;
+export declare function authenticate(state: AppState, user: SwissdataUser, accessToken?: string, profile?: ProfileModel): AppState;
+export declare function setCurrentProfile(state: AppState, profile: ProfileModel): AppState;
+export declare function resetPasswordStep(state: AppState, token: string): AppState;
+export declare function logout(state: AppState): AppState;
+export declare function registerUserId(state: AppState, userId: string, firstname: string, lastname: string, username: string, profileUrl: string): AppState;
+export declare function updateRegisteredUserId(state: AppState, userId: string, firstname: string | undefined, lastname: string | undefined, username: string | undefined, profileUrl: string | undefined): AppState;
+export declare function registerCurrentUserId(state: AppState, username: string): AppState;
+export declare function removeRegisteredUserId(state: AppState, userId: string): AppState;

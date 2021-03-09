@@ -1,0 +1,32 @@
+import { Model } from './../decorators/model';
+export declare class AdImages {
+    private element;
+    private log;
+    instance: Model;
+    property: string;
+    w: number;
+    h: number;
+    hardsize: boolean;
+    src: string;
+    invisibleBeforeLoading: boolean;
+    clickNavigation: boolean;
+    showBullets: boolean;
+    showNavigation: boolean;
+    private activeIndex;
+    private handleClick;
+    private handleTouchStart;
+    private handleTouchMove;
+    private handleTouchStop;
+    private xtouchstart;
+    private xtouchmove;
+    private ytouchstart;
+    private ytouchmove;
+    private xmove;
+    private longtouch;
+    private longtouchTimeout;
+    constructor(element: HTMLElement);
+    attached(): void;
+    detached(): void;
+    right(): void;
+    left(): void;
+}

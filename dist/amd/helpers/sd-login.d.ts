@@ -1,0 +1,35 @@
+import { UserModel } from './../models/user.model';
+import { SwissdataApi } from './swissdata-api';
+import { Store } from '../deco';
+import { AppState } from '../state/interfaces';
+import { EventAggregator } from 'aurelia-event-aggregator';
+export declare class SdLogin {
+    inited: boolean;
+    store: Store<unknown>;
+    state: AppState;
+    api: SwissdataApi;
+    private log;
+    private strongRegex;
+    private mediumRegex;
+    private weakRegex;
+    passwordStrengthRequired: 'strong' | 'medium' | 'weak';
+    eventAggregator: EventAggregator;
+    processing: boolean;
+    constructor();
+    init(store: Store<unknown>, api: SwissdataApi): void;
+    readySub: Array<Function>;
+    ready(): Promise<void>;
+    registerActions(): void;
+    checkIfUsernameExists(username: string): Promise<false | 'email' | 'mobile'>;
+    private authenticate;
+    login(username: string, password: string): Promise<any>;
+    doubleAuth(code: any): void;
+    passwordRegex(): RegExp;
+    createAccount(firstname: string, lastname: string, email: string | null, mobile: string | null, password: string, ensureEmail: boolean, ensureMobile: boolean, extraData?: any): Promise<any>;
+    validateCode(code: string, type: 'email' | 'mobile'): Promise<UserModel>;
+    resendCode(method: 'email' | 'mobile'): Promise<any>;
+    processValidationResponse(response: any): true;
+    requestResetPassword(input: string): Promise<any>;
+    resetPassword(code: string, password: string): Promise<any>;
+    logout(): Promise<void>;
+}
