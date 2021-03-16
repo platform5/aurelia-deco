@@ -18,9 +18,11 @@ else
   sed -i -E "s/${search}/${replace}/g" "package.json"
 fi
 sleep 1
-echo "npm install to pull in the latest version of aurelia-resources"
+echo "Remove ref to 'aurelia-resources' in 'package-lock.json'"
+echo "`jq 'del(.dependencies."aurelia-resources")' package-lock.json`" > package-lock.json
+echo "Remove 'aurelia-resources' in node_modules"
 rm -rf node_modules/aurelia-resources
-rm package-lock.json
+echo "npm install to pull in the latest version of aurelia-resources"
 npm install
 git add package.json package-lock.json
 git commit -m "Bump aurelia-resources dependency"
