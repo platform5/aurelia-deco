@@ -17,14 +17,15 @@ define(["require", "exports", "aurelia-validation", "aurelia-logging"], function
         target._validations[key].push(validation);
     }
     exports.addTargetValidation = addTargetValidation;
-    exports.required = function (target, key, descriptor) {
+    var required = function (target, key, descriptor) {
         if (descriptor)
             descriptor.writable = true;
         addTargetValidation(target, 'required', key);
         if (descriptor)
             return descriptor;
     };
-    exports.minLength = function (minLength) {
+    exports.required = required;
+    var minLength = function (minLength) {
         if (minLength === void 0) { minLength = 0; }
         return function (target, key, descriptor) {
             if (descriptor)
@@ -34,7 +35,8 @@ define(["require", "exports", "aurelia-validation", "aurelia-logging"], function
                 return descriptor;
         };
     };
-    exports.maxLength = function (maxLength) {
+    exports.minLength = minLength;
+    var maxLength = function (maxLength) {
         if (maxLength === void 0) { maxLength = 0; }
         return function (target, key, descriptor) {
             if (descriptor)
@@ -44,14 +46,16 @@ define(["require", "exports", "aurelia-validation", "aurelia-logging"], function
                 return descriptor;
         };
     };
-    exports.email = function (target, key, descriptor) {
+    exports.maxLength = maxLength;
+    var email = function (target, key, descriptor) {
         if (descriptor)
             descriptor.writable = true;
         addTargetValidation(target, 'email', key);
         if (descriptor)
             return descriptor;
     };
-    exports.internationalPhoneNumber = function (acceptedCountryList) {
+    exports.email = email;
+    var internationalPhoneNumber = function (acceptedCountryList) {
         if (acceptedCountryList === void 0) { acceptedCountryList = []; }
         return function (target, key, descriptor) {
             if (descriptor)
@@ -61,13 +65,15 @@ define(["require", "exports", "aurelia-validation", "aurelia-logging"], function
                 return descriptor;
         };
     };
-    exports.slug = function (target, key, descriptor) {
+    exports.internationalPhoneNumber = internationalPhoneNumber;
+    var slug = function (target, key, descriptor) {
         if (descriptor)
             descriptor.writable = true;
         addTargetValidation(target, 'slug', key);
         if (descriptor)
             return descriptor;
     };
+    exports.slug = slug;
     aurelia_validation_1.ValidationRules.customRule("validate:internationalPhoneNumber", function (value, obj, options) {
         var validatedPhoneNumber = validatePhoneNumber(value);
         if (validatedPhoneNumber === false)

@@ -1,10 +1,8 @@
 "use strict";
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.i18nSetup = exports.getI18NSetupOptions = void 0;
@@ -22,7 +20,7 @@ function getI18NSetupOptions() {
     return _options;
 }
 exports.getI18NSetupOptions = getI18NSetupOptions;
-exports.i18nSetup = function (options) {
+var i18nSetup = function (options) {
     _options = options;
     var saveMissing = options.saveMissing !== undefined ? options.saveMissing : true;
     var skipTranslationOnMissingKey = options.skipTranslationOnMissingKey !== undefined ? options.skipTranslationOnMissingKey : false;
@@ -80,10 +78,11 @@ exports.i18nSetup = function (options) {
                     var parts = format.replace(/\\:/g, '%%%%').split(':').map(function (p) { return p.replace(/%%%%/g, ':'); });
                     //  Check if the value converter is registered as a resource
                     var vc = options.aurelia.resources.getValueConverter(parts.shift());
-                    return vc ? (_a = vc).toView.apply(_a, __spreadArrays([value], parts)) : value;
+                    return vc ? (_a = vc).toView.apply(_a, __spreadArray([value], parts)) : value;
                 }
             },
             debug: debug
         });
     };
 };
+exports.i18nSetup = i18nSetup;

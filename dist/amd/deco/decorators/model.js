@@ -6,7 +6,7 @@ define(["require", "exports", "aurelia-framework", "../helpers/deco-api", "aurel
     var defaultModelOptions = {
         enableStory: false
     };
-    exports.model = function (baseroute, options) {
+    var model = function (baseroute, options) {
         if (options === void 0) { options = {}; }
         options = Object.assign({}, defaultModelOptions, options);
         return function (target) {
@@ -29,6 +29,7 @@ define(["require", "exports", "aurelia-framework", "../helpers/deco-api", "aurel
             target.prototype._deco = deco;
         };
     };
+    exports.model = model;
     var Model = /** @class */ (function () {
         function Model() {
         }

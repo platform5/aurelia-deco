@@ -16,7 +16,7 @@ define(["require", "exports", "aurelia-logging"], function (require, exports, au
         target._forms[key].push(form);
     }
     exports.addTargetFormDecoration = addTargetFormDecoration;
-    exports.hint = function (hintText) {
+    var hint = function (hintText) {
         if (hintText === void 0) { hintText = ''; }
         return function (target, key, descriptor) {
             if (descriptor)
@@ -26,7 +26,8 @@ define(["require", "exports", "aurelia-logging"], function (require, exports, au
                 return descriptor;
         };
     };
-    exports.label = function (labelText) {
+    exports.hint = hint;
+    var label = function (labelText) {
         if (labelText === void 0) { labelText = ''; }
         return function (target, key, descriptor) {
             if (descriptor)
@@ -36,4 +37,5 @@ define(["require", "exports", "aurelia-logging"], function (require, exports, au
                 return descriptor;
         };
     };
+    exports.label = label;
 });

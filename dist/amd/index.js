@@ -6,12 +6,12 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 define(["require", "exports", "aurelia-framework", "aurelia-dependency-injection", "./deco", "./models", "./state/actions", "./state/sd-login-actions", "./helpers/swissdata-api", "./helpers/request-recorder", "./helpers/profile-helper", "./helpers/analytics", "./components/notification/swissdata-notification", "./helpers/i18n-setup", "./helpers/swissdata-global", "./helpers/sd-login", "./components/address", "./components/login/swissdata-login", "./components/login/swissdata-login-theme", "./components/dico2/dico", "./components/dico2/dico-dialog", "./components/dico/dico-translate-key-locale", "./components/form/swissdata-field", "./components/form/swissdata-user-field", "./components/contact/as-contact", "./components/contact/as-contact-theme", "./components/getting-started/getting-started", "./components/getting-started/getting-started-theme", "./components/getting-started/tour-step", "./components/users/select-user", "./state", "./decorators"], function (require, exports, aurelia_framework_1, aurelia_dependency_injection_1, deco_1, models_1, actions_1, SdLoginActions, swissdata_api_1, request_recorder_1, profile_helper_1, analytics_1, swissdata_notification_1, i18n_setup_1, swissdata_global_1, sd_login_1, address_1, swissdata_login_1, swissdata_login_theme_1, dico_1, dico_dialog_1, dico_translate_key_locale_1, swissdata_field_1, swissdata_user_field_1, as_contact_1, as_contact_theme_1, getting_started_1, getting_started_theme_1, tour_step_1, select_user_1, state_1, decorators_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.SdLoginActions = exports.configure = void 0;
+    exports.SwissdataLoginTheme = exports.SwissdataLogin = exports.SdLoginActions = exports.configure = exports.Container = void 0;
     Object.defineProperty(exports, "Container", { enumerable: true, get: function () { return aurelia_dependency_injection_1.Container; } });
     __exportStar(deco_1, exports);
     var defaultSettings = {

@@ -6,7 +6,7 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 define(["require", "exports", "./user.model", "./profile.model", "./app.model", "./dico.model", "./dynamicconfig.model", "./dynamicdata.model"], function (require, exports, user_model_1, profile_model_1, app_model_1, dico_model_1, dynamicconfig_model_1, dynamicdata_model_1) {
     "use strict";

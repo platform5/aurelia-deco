@@ -34,12 +34,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
 };
 define(["require", "exports", "./../models/profile.model", "./../models/user.model", "./sd-login", "./../models/dynamicconfig.model", "aurelia-event-aggregator", "aurelia-router", "aurelia-i18n", "./swissdata-api", "aurelia-dependency-injection", "aurelia-logging", "../models/dynamicdata.model", "../deco", "aurelia-store", "../state/actions", "rxjs/operators", "aurelia-resources", "moment"], function (require, exports, profile_model_1, user_model_1, sd_login_1, dynamicconfig_model_1, aurelia_event_aggregator_1, aurelia_router_1, aurelia_i18n_1, swissdata_api_1, aurelia_dependency_injection_1, aurelia_logging_1, dynamicdata_model_1, deco_1, aurelia_store_1, actions_1, operators_1, aurelia_resources_1, moment) {
     "use strict";
@@ -322,7 +320,7 @@ define(["require", "exports", "./../models/profile.model", "./../models/user.mod
             for (var _i = 1; _i < arguments.length; _i++) {
                 rest[_i - 1] = arguments[_i];
             }
-            (_a = this.log).info.apply(_a, __spreadArrays([message], rest));
+            (_a = this.log).info.apply(_a, __spreadArray([message], rest));
         };
         SwissdataGlobal.prototype.debug = function (message) {
             var _a;
@@ -330,7 +328,7 @@ define(["require", "exports", "./../models/profile.model", "./../models/user.mod
             for (var _i = 1; _i < arguments.length; _i++) {
                 rest[_i - 1] = arguments[_i];
             }
-            (_a = this.log).debug.apply(_a, __spreadArrays([message], rest));
+            (_a = this.log).debug.apply(_a, __spreadArray([message], rest));
         };
         SwissdataGlobal.prototype.error = function (message) {
             var _a;
@@ -338,7 +336,7 @@ define(["require", "exports", "./../models/profile.model", "./../models/user.mod
             for (var _i = 1; _i < arguments.length; _i++) {
                 rest[_i - 1] = arguments[_i];
             }
-            (_a = this.log).error.apply(_a, __spreadArrays([message], rest));
+            (_a = this.log).error.apply(_a, __spreadArray([message], rest));
         };
         SwissdataGlobal.prototype.warn = function (message) {
             var _a;
@@ -346,7 +344,7 @@ define(["require", "exports", "./../models/profile.model", "./../models/user.mod
             for (var _i = 1; _i < arguments.length; _i++) {
                 rest[_i - 1] = arguments[_i];
             }
-            (_a = this.log).warn.apply(_a, __spreadArrays([message], rest));
+            (_a = this.log).warn.apply(_a, __spreadArray([message], rest));
         };
         SwissdataGlobal.prototype.listenToRouteAndSaveInState = function () {
             var store = this.container.get(deco_1.Store);
@@ -363,15 +361,15 @@ define(["require", "exports", "./../models/profile.model", "./../models/user.mod
                 return new Promise(function (resolve) {
                     var stateCurrentRoute = Object.assign({}, state.currentRoute);
                     if (!stateCurrentRoute || !stateCurrentRoute.name)
-                        return resolve();
+                        return resolve(null);
                     _this.getCurrentRouteASAP().then(function (currentRouteName) {
                         if (currentRouteName && onlyOnSpecificRouteNames.length && onlyOnSpecificRouteNames.indexOf(currentRouteName) === -1) {
-                            resolve();
+                            resolve(null);
                         }
                         else if (stateCurrentRoute.name) {
                             var params = stateCurrentRoute.params || {};
                             _this.router.navigateToRoute(stateCurrentRoute.name, params);
-                            resolve();
+                            resolve(null);
                         }
                     });
                 });

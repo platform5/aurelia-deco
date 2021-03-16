@@ -360,14 +360,14 @@ export class SwissdataGlobal {
     return this.router.ensureConfigured().then((): Promise<any> => {
       return new Promise((resolve) => {
         let stateCurrentRoute = Object.assign({}, state.currentRoute);
-        if (!stateCurrentRoute || !stateCurrentRoute.name) return resolve();
+        if (!stateCurrentRoute || !stateCurrentRoute.name) return resolve(null);
         this.getCurrentRouteASAP().then((currentRouteName) => {
           if (currentRouteName && onlyOnSpecificRouteNames.length && onlyOnSpecificRouteNames.indexOf(currentRouteName) === -1) {
-            resolve();
+            resolve(null);
           } else if (stateCurrentRoute.name) {
             let params = stateCurrentRoute.params || {};
             this.router.navigateToRoute(stateCurrentRoute.name, params)
-            resolve();
+            resolve(null);
           }
         });
       });

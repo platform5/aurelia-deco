@@ -7,7 +7,7 @@ define(["require", "exports", "./type-decorator", "moment", "aurelia-logging"], 
     exports.any = exports.anyDecorator.decorator();
     exports.idDecorator = new type_decorator_1.TypeDecorator('id');
     exports.id = exports.idDecorator.decorator();
-    exports.validateString = function (value, options) {
+    var validateString = function (value, options) {
         if (value === null || value === undefined)
             return true;
         // if value is string we accept its value for multilang or not
@@ -25,6 +25,7 @@ define(["require", "exports", "./type-decorator", "moment", "aurelia-logging"], 
         }
         return true;
     };
+    exports.validateString = validateString;
     exports.stringDecorator = new type_decorator_1.TypeDecorator('string');
     exports.stringDecorator.defaultOptions = {
         multilang: false,
@@ -65,33 +66,38 @@ define(["require", "exports", "./type-decorator", "moment", "aurelia-logging"], 
         return true;
     };
     exports.select = exports.selectDecorator.decorator();
-    exports.validateInteger = function (value) { return value === null || value === undefined || (typeof value === 'number' && Math.round(value) === value); };
+    var validateInteger = function (value) { return value === null || value === undefined || (typeof value === 'number' && Math.round(value) === value); };
+    exports.validateInteger = validateInteger;
     exports.integerDecorator = new type_decorator_1.TypeDecorator('integer');
     exports.integerDecorator.validate = function (value, obj, options) {
         return exports.validateInteger(value);
     };
     exports.integer = exports.integerDecorator.decorator();
-    exports.validateBoolean = function (value) { return value === null || value === undefined || typeof value === 'boolean'; };
+    var validateBoolean = function (value) { return value === null || value === undefined || typeof value === 'boolean'; };
+    exports.validateBoolean = validateBoolean;
     exports.booleanDecorator = new type_decorator_1.TypeDecorator('boolean');
     exports.booleanDecorator.validate = function (value, obj, options) {
         return exports.validateBoolean(value);
     };
     exports.boolean = exports.booleanDecorator.decorator();
-    exports.fromApiDate = function (value, dateFormat) {
+    var fromApiDate = function (value, dateFormat) {
         if (dateFormat === void 0) { dateFormat = 'DD-MM-YYYY'; }
         if (typeof value === 'string') {
             value = moment(value, dateFormat).toDate();
         }
         return value;
     };
-    exports.toApiDate = function (value, dateFormat) {
+    exports.fromApiDate = fromApiDate;
+    var toApiDate = function (value, dateFormat) {
         if (dateFormat === void 0) { dateFormat = 'DD-MM-YYYY'; }
         if (value instanceof Date) {
             value = moment(value).format(dateFormat);
         }
         return value;
     };
-    exports.validateDate = function (value) { return value === null || value === undefined || value instanceof Date; };
+    exports.toApiDate = toApiDate;
+    var validateDate = function (value) { return value === null || value === undefined || value instanceof Date; };
+    exports.validateDate = validateDate;
     exports.dateDecorator = new type_decorator_1.TypeDecorator('date');
     exports.dateDecorator.defaultOptions = {
         dateFormat: 'DD-MM-YYYY'
@@ -108,7 +114,8 @@ define(["require", "exports", "./type-decorator", "moment", "aurelia-logging"], 
         return exports.validateDate(value);
     };
     exports.date = exports.dateDecorator.decorator();
-    exports.validateFloat = function (value) { return value === null || value === undefined || (typeof value === 'number'); };
+    var validateFloat = function (value) { return value === null || value === undefined || (typeof value === 'number'); };
+    exports.validateFloat = validateFloat;
     exports.floatDecorator = new type_decorator_1.TypeDecorator('float');
     exports.floatDecorator.validate = function (value, obj, options) {
         return exports.validateFloat(value);

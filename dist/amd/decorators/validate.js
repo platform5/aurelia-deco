@@ -2,13 +2,14 @@ define(["require", "exports", "./../helpers/swissdata-api", "../deco", "aurelia-
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.uniqueByApp = void 0;
-    exports.uniqueByApp = function (target, key, descriptor) {
+    var uniqueByApp = function (target, key, descriptor) {
         if (descriptor)
             descriptor.writable = true;
         deco_1.validate.addTargetValidation(target, 'uniqueByApp', key);
         if (descriptor)
             return descriptor;
     };
+    exports.uniqueByApp = uniqueByApp;
     deco_1.validate.ValidationRules.customRule("validate:uniqueByApp", function (value, obj, options) {
         if (value === null || value === undefined)
             return true;

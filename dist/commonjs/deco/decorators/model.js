@@ -11,7 +11,7 @@ var log = aurelia_logging_1.getLogger('decorators:model');
 var defaultModelOptions = {
     enableStory: false
 };
-exports.model = function (baseroute, options) {
+var model = function (baseroute, options) {
     if (options === void 0) { options = {}; }
     options = Object.assign({}, defaultModelOptions, options);
     return function (target) {
@@ -34,6 +34,7 @@ exports.model = function (baseroute, options) {
         target.prototype._deco = deco;
     };
 };
+exports.model = model;
 var Model = /** @class */ (function () {
     function Model() {
     }

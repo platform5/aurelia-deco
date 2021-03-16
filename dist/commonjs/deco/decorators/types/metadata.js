@@ -5,7 +5,7 @@ var type_decorator_1 = require("./type-decorator");
 var aurelia_logging_1 = require("aurelia-logging");
 var log = aurelia_logging_1.getLogger('decorators:type:metadata');
 // TODO: convert null to undefined somewhere ??
-exports.validateMetadata = function (value, options) {
+var validateMetadata = function (value, options) {
     if (value === null)
         return true; // this is true only because before sending the data to api it will be converted to undefined (see .toApi);
     if (value === undefined)
@@ -30,6 +30,7 @@ exports.validateMetadata = function (value, options) {
     }
     return true;
 };
+exports.validateMetadata = validateMetadata;
 exports.metadataDecorator = new type_decorator_1.TypeDecorator('metadata');
 exports.metadataDecorator.validate = function (value, obj, options) {
     return exports.validateMetadata(value, options);

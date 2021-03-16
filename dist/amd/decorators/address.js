@@ -3,13 +3,14 @@ define(["require", "exports", "../deco", "aurelia-logging"], function (require, 
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isSameAddress = exports.addressArray = exports.addressArrayDecorator = exports.validateAddressArray = exports.inputAddressArray = exports.address = exports.addressDecorator = exports.validateAddress = exports.inputAddress = void 0;
     var log = aurelia_logging_1.getLogger('decorators:address');
-    exports.inputAddress = function (value) {
+    var inputAddress = function (value) {
         if (value === null || value === undefined) {
             value = undefined;
         }
         return value;
     };
-    exports.validateAddress = function (value, options) {
+    exports.inputAddress = inputAddress;
+    var validateAddress = function (value, options) {
         if (value === undefined)
             return true;
         if (typeof value !== 'object')
@@ -23,18 +24,20 @@ define(["require", "exports", "../deco", "aurelia-logging"], function (require, 
         }
         return true;
     };
+    exports.validateAddress = validateAddress;
     exports.addressDecorator = new deco_1.TypeDecorator('address');
     exports.addressDecorator.validate = function (value, obj, options) {
         return exports.validateAddress(value, options);
     };
     exports.address = exports.addressDecorator.decorator();
-    exports.inputAddressArray = function (value) {
+    var inputAddressArray = function (value) {
         if (value === null || value === undefined) {
             value = [];
         }
         return value;
     };
-    exports.validateAddressArray = function (value, options) {
+    exports.inputAddressArray = inputAddressArray;
+    var validateAddressArray = function (value, options) {
         if (!Array.isArray(value))
             return false;
         for (var index in value) {
@@ -44,6 +47,7 @@ define(["require", "exports", "../deco", "aurelia-logging"], function (require, 
         }
         return true;
     };
+    exports.validateAddressArray = validateAddressArray;
     exports.addressArrayDecorator = new deco_1.TypeDecorator('addressArray');
     exports.addressArrayDecorator.input = function (key, value, options, element, target) {
         return Promise.resolve(exports.inputAddressArray(value));

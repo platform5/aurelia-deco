@@ -3,7 +3,7 @@ define(["require", "exports", "./type-decorator", "./basics", "aurelia-logging"]
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.object = exports.objectDecorator = exports.validateObject = void 0;
     var log = aurelia_logging_1.getLogger('decorators:type:object');
-    exports.validateObject = function (value, options) {
+    var validateObject = function (value, options) {
         if (value === null || value === undefined)
             return true;
         if (typeof value !== 'object')
@@ -38,6 +38,7 @@ define(["require", "exports", "./type-decorator", "./basics", "aurelia-logging"]
         }
         return true;
     };
+    exports.validateObject = validateObject;
     exports.objectDecorator = new type_decorator_1.TypeDecorator('object');
     exports.objectDecorator.validate = function (value, obj, options) {
         return exports.validateObject(value, options);

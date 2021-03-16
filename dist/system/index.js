@@ -43,9 +43,9 @@ System.register(["aurelia-framework", "aurelia-dependency-injection", "./deco", 
     }
     exports_1("configure", configure);
     var exportedNames_1 = {
+        "Container": true,
         "configure": true,
         "SdLoginActions": true,
-        "Container": true,
         "SwissdataLogin": true,
         "SwissdataLoginTheme": true
     };

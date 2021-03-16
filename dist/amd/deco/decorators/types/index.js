@@ -6,7 +6,7 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 define(["require", "exports", "./type-decorator", "./basics", "./array", "./object", "./models", "./files", "./metadata"], function (require, exports, type_decorator_1, basics_1, array_1, object_1, models_1, files_1, metadata_1) {
     "use strict";
