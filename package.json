@@ -89,9 +89,6 @@
     }
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.25.0",
-    "@aurelia-ux/datepicker": "^0.25.0",
-    "@aurelia-ux/modal": "^0.25.0",
     "aurelia-binding": "^2.5.4",
     "aurelia-dialog": "^2.0.0",
     "aurelia-event-aggregator": "^1.0.3",
