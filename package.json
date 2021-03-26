@@ -100,7 +100,7 @@
     "aurelia-metadata": "^1.0.7",
     "aurelia-pal": "^1.8.2",
     "aurelia-path": "^1.1.5",
-    "aurelia-resources": "git+https://github.com/platform5/aurelia-resources.git#4f75144cf0e5f0a9a6f3252cbcfafaee7ea89b6b",
+    "aurelia-resources": "git+https://github.com/platform5/aurelia-resources.git#7bf589be6e0fae3559283e1b3f910aaad85915a0",
     "aurelia-router": "^1.7.1",
     "aurelia-store": "^1.6.0",
     "aurelia-task-queue": "^1.3.3",
