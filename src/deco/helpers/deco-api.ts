@@ -130,7 +130,6 @@ export class DecoApi {
   }
 
   extendEntrpoint(entrypoint: string): string {
-    this.log.debug('extendEntrpoint', entrypoint, this.version);
     if (!entrypoint.includes('download=') && this.version) {
       entrypoint += entrypoint.includes('?') ? '&' : '?';
       entrypoint += `__v=${this.version}`;

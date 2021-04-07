@@ -148,7 +148,6 @@ define(["require", "exports", "aurelia-framework", "aurelia-fetch-client", "aure
             return o;
         };
         DecoApi.prototype.extendEntrpoint = function (entrypoint) {
-            this.log.debug('extendEntrpoint', entrypoint, this.version);
             if (!entrypoint.includes('download=') && this.version) {
                 entrypoint += entrypoint.includes('?') ? '&' : '?';
                 entrypoint += "__v=" + this.version;

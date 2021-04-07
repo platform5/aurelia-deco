@@ -16,7 +16,7 @@ export declare class EnsureModel<T extends typeof Model> {
     get(id: string): Promise<InstanceType<T> | null>;
     reload(id: string): Promise<InstanceType<T> | null>;
     reloadAll(): void;
-    ensureIds(ids: string[]): Promise<InstanceType<T>[]>;
+    ensureIds(ids: string[], force?: boolean): Promise<InstanceType<T>[]>;
     private fetchNextItems;
     get isFetching(): boolean;
 }

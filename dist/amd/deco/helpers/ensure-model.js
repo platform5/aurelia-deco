@@ -92,7 +92,8 @@ define(["require", "exports", "aurelia-event-aggregator", "aurelia-framework", "
             (_a = this.idsToFetch).push.apply(_a, ids);
             this.fetchNextItems();
         };
-        EnsureModel.prototype.ensureIds = function (ids) {
+        EnsureModel.prototype.ensureIds = function (ids, force) {
+            if (force === void 0) { force = false; }
             return __awaiter(this, void 0, void 0, function () {
                 var idsToAdd, promises, _loop_1, _i, idsToAdd_1, id;
                 var _a;
@@ -100,7 +101,7 @@ define(["require", "exports", "aurelia-event-aggregator", "aurelia-framework", "
                 return __generator(this, function (_b) {
                     switch (_b.label) {
                         case 0:
-                            idsToAdd = ids.filter(function (i) { return _this.instances[i] === undefined; }).filter(function (i) { return _this.idsToFetch.indexOf(i) === -1; });
+                            idsToAdd = ids.filter(function (i) { return force || _this.instances[i] === undefined; }).filter(function (i) { return _this.idsToFetch.indexOf(i) === -1; });
                             (_a = this.idsToFetch).push.apply(_a, idsToAdd);
                             this.fetchNextItems();
                             promises = [];

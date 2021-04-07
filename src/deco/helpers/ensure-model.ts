@@ -56,8 +56,8 @@ export class EnsureModel<T extends typeof Model> {
     this.fetchNextItems();
   }
 
-  public async ensureIds(ids: string[]): Promise<InstanceType<T>[]> {
-    const idsToAdd = ids.filter(i => this.instances[i] === undefined).filter(i => this.idsToFetch.indexOf(i) === -1);
+  public async ensureIds(ids: string[], force = false): Promise<InstanceType<T>[]> {
+    const idsToAdd = ids.filter(i => force || this.instances[i] === undefined).filter(i => this.idsToFetch.indexOf(i) === -1);
     this.idsToFetch.push(...idsToAdd);
     this.fetchNextItems();
 

@@ -150,7 +150,6 @@ var DecoApi = /** @class */ (function () {
         return o;
     };
     DecoApi.prototype.extendEntrpoint = function (entrypoint) {
-        this.log.debug('extendEntrpoint', entrypoint, this.version);
         if (!entrypoint.includes('download=') && this.version) {
             entrypoint += entrypoint.includes('?') ? '&' : '?';
             entrypoint += "__v=" + this.version;
