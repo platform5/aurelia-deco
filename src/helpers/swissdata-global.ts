@@ -430,7 +430,8 @@ export class SwissdataGlobal {
 
   public async lastUpdateText(instance: Model): Promise<string> {
     const date = instance._updatedAt ? moment(instance._updatedAt).format() : this.i18n.tr('global.Unknown');
-    const user = instance._updatedBy ? (await this.ensureUsers.get(instance._updatedBy))._label : this.i18n.tr('global.Unknown');
+    const _user = instance._updatedBy ? (await this.ensureUsers.get(instance._updatedBy)) : undefined;
+    const user = _user ? _user._label : this.i18n.tr('global.Unknown');
     return this.i18n.tr('Last update by {{user}} on {{- date}}', {user, date});
   }
 

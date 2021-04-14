@@ -453,7 +453,7 @@ var SwissdataGlobal = /** @class */ (function () {
     };
     SwissdataGlobal.prototype.lastUpdateText = function (instance) {
         return __awaiter(this, void 0, void 0, function () {
-            var date, user, _a;
+            var date, _user, _a, user;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -461,13 +461,14 @@ var SwissdataGlobal = /** @class */ (function () {
                         if (!instance._updatedBy) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.ensureUsers.get(instance._updatedBy)];
                     case 1:
-                        _a = (_b.sent())._label;
+                        _a = (_b.sent());
                         return [3 /*break*/, 3];
                     case 2:
-                        _a = this.i18n.tr('global.Unknown');
+                        _a = undefined;
                         _b.label = 3;
                     case 3:
-                        user = _a;
+                        _user = _a;
+                        user = _user ? _user._label : this.i18n.tr('global.Unknown');
                         return [2 /*return*/, this.i18n.tr('Last update by {{user}} on {{- date}}', { user: user, date: date })];
                 }
             });
