@@ -27,6 +27,7 @@ export declare class AdImages {
     constructor(element: HTMLElement);
     attached(): void;
     detached(): void;
-    right(): void;
-    left(): void;
+    makeActive(index: number, event?: MouseEvent): void;
+    right(event?: MouseEvent): void;
+    left(event?: MouseEvent): void;
 }

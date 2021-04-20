@@ -91,11 +91,24 @@ export class AdImages {
     this.element.removeEventListener('touchend', this.handleTouchStop);
   }
 
-  right() {
+  makeActive(index: number, event?: MouseEvent) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.activeIndex = index;
+  }
+
+  right(event?: MouseEvent) {
+    if (event) {
+      event.stopPropagation();
+    }
     if (this.activeIndex < this.instance[this.property].length - 1) this.activeIndex++;
   }
 
-  left() {
+  left(event?: MouseEvent) {
+    if (event) {
+      event.stopPropagation();
+    }
     if (this.activeIndex > 0) this.activeIndex--;
   }
 

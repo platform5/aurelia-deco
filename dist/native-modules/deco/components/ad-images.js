@@ -75,11 +75,23 @@ var AdImages = /** @class */ (function () {
         this.element.removeEventListener('touchmove', this.handleTouchMove);
         this.element.removeEventListener('touchend', this.handleTouchStop);
     };
-    AdImages.prototype.right = function () {
+    AdImages.prototype.makeActive = function (index, event) {
+        if (event) {
+            event.stopPropagation();
+        }
+        this.activeIndex = index;
+    };
+    AdImages.prototype.right = function (event) {
+        if (event) {
+            event.stopPropagation();
+        }
         if (this.activeIndex < this.instance[this.property].length - 1)
             this.activeIndex++;
     };
-    AdImages.prototype.left = function () {
+    AdImages.prototype.left = function (event) {
+        if (event) {
+            event.stopPropagation();
+        }
         if (this.activeIndex > 0)
             this.activeIndex--;
     };
