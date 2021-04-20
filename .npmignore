@@ -13,4 +13,3 @@ gulpfile.js
 gulpfile-watch.js
 tsconfig.json
 tslint.json
-webpack.dev.js
