@@ -1,0 +1,15 @@
+/node_modules
+
+# Documentation
+
+/docs
+typedoc.json
+
+# Source
+/src
+/dico-tool
+/test
+gulpfile.js
+gulpfile-watch.js
+tsconfig.json
+tslint.json
