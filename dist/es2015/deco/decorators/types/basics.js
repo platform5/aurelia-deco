@@ -1,6 +1,7 @@
 import { TypeDecorator } from './type-decorator';
 import * as moment from 'moment';
 import { getLogger } from 'aurelia-logging';
+import { DateHelper } from 'aurelia-resources';
 var log = getLogger('decorators:type:basics');
 export var anyDecorator = new TypeDecorator('any');
 export var any = anyDecorator.decorator();
@@ -79,7 +80,10 @@ export var boolean = booleanDecorator.decorator();
 export var fromApiDate = function (value, dateFormat) {
     if (dateFormat === void 0) { dateFormat = 'DD-MM-YYYY'; }
     if (typeof value === 'string') {
-        value = moment(value, dateFormat).toDate();
+        var m = DateHelper.moment(value, dateFormat);
+        if (m && m.isValid()) {
+            value = m.toDate();
+        }
     }
     return value;
 };

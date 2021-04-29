@@ -1,6 +1,6 @@
-System.register(["./type-decorator", "moment", "aurelia-logging"], function (exports_1, context_1) {
+System.register(["./type-decorator", "moment", "aurelia-logging", "aurelia-resources"], function (exports_1, context_1) {
     "use strict";
-    var type_decorator_1, moment, aurelia_logging_1, log, anyDecorator, any, idDecorator, id, validateString, stringDecorator, string, selectDecorator, select, validateInteger, integerDecorator, integer, validateBoolean, booleanDecorator, boolean, fromApiDate, toApiDate, validateDate, dateDecorator, date, validateFloat, floatDecorator, float;
+    var type_decorator_1, moment, aurelia_logging_1, aurelia_resources_1, log, anyDecorator, any, idDecorator, id, validateString, stringDecorator, string, selectDecorator, select, validateInteger, integerDecorator, integer, validateBoolean, booleanDecorator, boolean, fromApiDate, toApiDate, validateDate, dateDecorator, date, validateFloat, floatDecorator, float;
     var __moduleName = context_1 && context_1.id;
     return {
         setters: [
@@ -12,6 +12,9 @@ System.register(["./type-decorator", "moment", "aurelia-logging"], function (exp
             },
             function (aurelia_logging_1_1) {
                 aurelia_logging_1 = aurelia_logging_1_1;
+            },
+            function (aurelia_resources_1_1) {
+                aurelia_resources_1 = aurelia_resources_1_1;
             }
         ],
         execute: function () {
@@ -93,7 +96,10 @@ System.register(["./type-decorator", "moment", "aurelia-logging"], function (exp
             exports_1("fromApiDate", fromApiDate = function (value, dateFormat) {
                 if (dateFormat === void 0) { dateFormat = 'DD-MM-YYYY'; }
                 if (typeof value === 'string') {
-                    value = moment(value, dateFormat).toDate();
+                    var m = aurelia_resources_1.DateHelper.moment(value, dateFormat);
+                    if (m && m.isValid()) {
+                        value = m.toDate();
+                    }
                 }
                 return value;
             });

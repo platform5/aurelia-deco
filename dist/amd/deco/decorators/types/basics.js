@@ -1,4 +1,4 @@
-define(["require", "exports", "./type-decorator", "moment", "aurelia-logging"], function (require, exports, type_decorator_1, moment, aurelia_logging_1) {
+define(["require", "exports", "./type-decorator", "moment", "aurelia-logging", "aurelia-resources"], function (require, exports, type_decorator_1, moment, aurelia_logging_1, aurelia_resources_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.float = exports.floatDecorator = exports.validateFloat = exports.date = exports.dateDecorator = exports.validateDate = exports.toApiDate = exports.fromApiDate = exports.boolean = exports.booleanDecorator = exports.validateBoolean = exports.integer = exports.integerDecorator = exports.validateInteger = exports.select = exports.selectDecorator = exports.string = exports.stringDecorator = exports.validateString = exports.id = exports.idDecorator = exports.any = exports.anyDecorator = void 0;
@@ -83,7 +83,10 @@ define(["require", "exports", "./type-decorator", "moment", "aurelia-logging"], 
     var fromApiDate = function (value, dateFormat) {
         if (dateFormat === void 0) { dateFormat = 'DD-MM-YYYY'; }
         if (typeof value === 'string') {
-            value = moment(value, dateFormat).toDate();
+            var m = aurelia_resources_1.DateHelper.moment(value, dateFormat);
+            if (m && m.isValid()) {
+                value = m.toDate();
+            }
         }
         return value;
     };

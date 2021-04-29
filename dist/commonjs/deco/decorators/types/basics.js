@@ -4,6 +4,7 @@ exports.float = exports.floatDecorator = exports.validateFloat = exports.date = 
 var type_decorator_1 = require("./type-decorator");
 var moment = require("moment");
 var aurelia_logging_1 = require("aurelia-logging");
+var aurelia_resources_1 = require("aurelia-resources");
 var log = aurelia_logging_1.getLogger('decorators:type:basics');
 exports.anyDecorator = new type_decorator_1.TypeDecorator('any');
 exports.any = exports.anyDecorator.decorator();
@@ -85,7 +86,10 @@ exports.boolean = exports.booleanDecorator.decorator();
 var fromApiDate = function (value, dateFormat) {
     if (dateFormat === void 0) { dateFormat = 'DD-MM-YYYY'; }
     if (typeof value === 'string') {
-        value = moment(value, dateFormat).toDate();
+        var m = aurelia_resources_1.DateHelper.moment(value, dateFormat);
+        if (m && m.isValid()) {
+            value = m.toDate();
+        }
     }
     return value;
 };
