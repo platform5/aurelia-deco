@@ -99,6 +99,7 @@ export class AdImages {
   }
 
   right(event?: MouseEvent) {
+    console.log('click right');
     if (event) {
       event.stopPropagation();
     }
@@ -106,6 +107,7 @@ export class AdImages {
   }
 
   left(event?: MouseEvent) {
+    console.log('click left');
     if (event) {
       event.stopPropagation();
     }
