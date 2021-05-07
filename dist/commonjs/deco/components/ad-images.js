@@ -85,6 +85,7 @@ var AdImages = /** @class */ (function () {
         this.activeIndex = index;
     };
     AdImages.prototype.right = function (event) {
+        console.log('click right');
         if (event) {
             event.stopPropagation();
         }
@@ -92,6 +93,7 @@ var AdImages = /** @class */ (function () {
             this.activeIndex++;
     };
     AdImages.prototype.left = function (event) {
+        console.log('click left');
         if (event) {
             event.stopPropagation();
         }

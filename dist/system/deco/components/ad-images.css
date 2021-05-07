@@ -5,6 +5,7 @@ ad-images {
   overflow: hidden;
   width: 100%;
   position: relative;
+  font-size: 0px;
 }
 
 ad-images > img {

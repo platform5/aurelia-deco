@@ -94,6 +94,7 @@ System.register(["aurelia-framework", "aurelia-logging"], function (exports_1, c
                     this.activeIndex = index;
                 };
                 AdImages.prototype.right = function (event) {
+                    console.log('click right');
                     if (event) {
                         event.stopPropagation();
                     }
@@ -101,6 +102,7 @@ System.register(["aurelia-framework", "aurelia-logging"], function (exports_1, c
                         this.activeIndex++;
                 };
                 AdImages.prototype.left = function (event) {
+                    console.log('click left');
                     if (event) {
                         event.stopPropagation();
                     }

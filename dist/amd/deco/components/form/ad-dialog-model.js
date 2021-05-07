@@ -51,7 +51,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-resources"], functio
             bindingContext: options.bindingContext,
             content: options.content,
             contentViewModelPath: options.contentViewModelPath,
-            editionViewModelPath: options.editionViewModelPath ? options.editionViewModelPath : 'aurelia-deco/components/form/ad-dialog-model',
+            editionViewModelPath: options.editionViewModelPath ? options.editionViewModelPath : 'aurelia-deco/deco/components/form/ad-dialog-model',
         };
         dialogOptions.editionModel = {
             instance: instance,

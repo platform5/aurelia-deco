@@ -84,6 +84,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging"], function 
             this.activeIndex = index;
         };
         AdImages.prototype.right = function (event) {
+            console.log('click right');
             if (event) {
                 event.stopPropagation();
             }
@@ -91,6 +92,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging"], function 
                 this.activeIndex++;
         };
         AdImages.prototype.left = function (event) {
+            console.log('click left');
             if (event) {
                 event.stopPropagation();
             }
