@@ -1,6 +1,6 @@
 System.register(["./type-decorator", "./basics", "aurelia-logging"], function (exports_1, context_1) {
     "use strict";
-    var type_decorator_1, basics_1, aurelia_logging_1, log, validateObject, objectDecorator, object;
+    var type_decorator_1, basics_1, aurelia_logging_1, log, validateObject, toApiObject, objectDecorator, object;
     var __moduleName = context_1 && context_1.id;
     return {
         setters: [
@@ -51,7 +51,22 @@ System.register(["./type-decorator", "./basics", "aurelia-logging"], function (e
                 }
                 return true;
             });
+            exports_1("toApiObject", toApiObject = function (value, options) {
+                var allowOtherKeys = (options.allowOtherKeys === true);
+                if (!allowOtherKeys) {
+                    var newValue = {};
+                    for (var _i = 0, _a = Object.keys(options.keys); _i < _a.length; _i++) {
+                        var key = _a[_i];
+                        newValue[key] = value[key];
+                    }
+                    value = newValue;
+                }
+                return value;
+            });
             exports_1("objectDecorator", objectDecorator = new type_decorator_1.TypeDecorator('object'));
+            objectDecorator.toApi = function (key, value, options, element, target) {
+                return Promise.resolve(toApiObject(value, options));
+            };
             objectDecorator.validate = function (value, obj, options) {
                 return validateObject(value, options);
             };

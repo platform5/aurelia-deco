@@ -37,7 +37,22 @@ export var validateObject = function (value, options) {
     }
     return true;
 };
+export var toApiObject = function (value, options) {
+    var allowOtherKeys = (options.allowOtherKeys === true);
+    if (!allowOtherKeys) {
+        var newValue = {};
+        for (var _i = 0, _a = Object.keys(options.keys); _i < _a.length; _i++) {
+            var key = _a[_i];
+            newValue[key] = value[key];
+        }
+        value = newValue;
+    }
+    return value;
+};
 export var objectDecorator = new TypeDecorator('object');
+objectDecorator.toApi = function (key, value, options, element, target) {
+    return Promise.resolve(toApiObject(value, options));
+};
 objectDecorator.validate = function (value, obj, options) {
     return validateObject(value, options);
 };

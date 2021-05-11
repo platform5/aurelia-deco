@@ -1,7 +1,7 @@
 define(["require", "exports", "./type-decorator", "./basics", "aurelia-logging"], function (require, exports, type_decorator_1, basics_1, aurelia_logging_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.object = exports.objectDecorator = exports.validateObject = void 0;
+    exports.object = exports.objectDecorator = exports.toApiObject = exports.validateObject = void 0;
     var log = aurelia_logging_1.getLogger('decorators:type:object');
     var validateObject = function (value, options) {
         if (value === null || value === undefined)
@@ -39,7 +39,23 @@ define(["require", "exports", "./type-decorator", "./basics", "aurelia-logging"]
         return true;
     };
     exports.validateObject = validateObject;
+    var toApiObject = function (value, options) {
+        var allowOtherKeys = (options.allowOtherKeys === true);
+        if (!allowOtherKeys) {
+            var newValue = {};
+            for (var _i = 0, _a = Object.keys(options.keys); _i < _a.length; _i++) {
+                var key = _a[_i];
+                newValue[key] = value[key];
+            }
+            value = newValue;
+        }
+        return value;
+    };
+    exports.toApiObject = toApiObject;
     exports.objectDecorator = new type_decorator_1.TypeDecorator('object');
+    exports.objectDecorator.toApi = function (key, value, options, element, target) {
+        return Promise.resolve(exports.toApiObject(value, options));
+    };
     exports.objectDecorator.validate = function (value, obj, options) {
         return exports.validateObject(value, options);
     };

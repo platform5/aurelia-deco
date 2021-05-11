@@ -28,7 +28,23 @@ export let validateObject = (value: any, options: any) => {
   }
   return true;
 }
+
+export let toApiObject = (value: any, options: {allowOtherKeys?: boolean, keys: {[key: string]: any}}) => {
+  let allowOtherKeys = (options.allowOtherKeys === true)
+  if (!allowOtherKeys) {
+    const newValue: {[key: string]: any} = {};
+    for (const key of Object.keys(options.keys)) {
+      newValue[key] = value[key];
+    }
+    value = newValue
+  }
+  return value;
+};
+
 export let objectDecorator = new TypeDecorator('object');
+objectDecorator.toApi = (key: string, value: any, options: any, element: any, target: any) => {
+  return Promise.resolve(toApiObject(value, options));
+};
 objectDecorator.validate = (value: any, obj: any, options: any) => {
   return validateObject(value, options);
 };
