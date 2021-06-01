@@ -76,7 +76,12 @@ let adDialogModel = (instance: Model, options: AdDialogOptions, properties: Arra
   if (options.editionCallback) {
     dialogOptions.editionCallback = options.editionCallback;
   } else {
-    dialogOptions.editionCallback = () => {
+    dialogOptions.editionCallback = async () => {
+      const validationResult = await instance.validationController.validate();
+      if (!validationResult.valid) {
+        const firstInvalid = validationResult.results.find(r => r.valid === false);
+        throw new Error(firstInvalid.message || 'Invalid form');
+      }
       if (instance.id) {
         let prop = Array.isArray(properties) ? properties : Object.keys(instance);
         return instance.updateProperties(options.editionCallbackSuffix, prop);
