@@ -11,7 +11,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Store = exports.DecoField = exports.AdImage = exports.TypeDecorator = void 0;
-__exportStar(require("./components/form/aurelia-ux-form-renderer"), exports);
 __exportStar(require("./components/form/ad-dialog-model"), exports);
 __exportStar(require("./dialogs"), exports);
 __exportStar(require("./decorators"), exports);

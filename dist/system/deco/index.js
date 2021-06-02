@@ -1,4 +1,4 @@
-System.register(["./components/form/aurelia-ux-form-renderer", "./components/form/ad-dialog-model", "./dialogs", "./decorators", "./helpers/deco-api", "./helpers/file-upload", "./helpers/ipstack", "./helpers/ensure-model", "./decorators/types", "./interfaces/deco", "./interfaces/file", "./state", "./components/ad-image", "./components/form/deco-field", "./components/ad-images", "./components/ad-images-theme", "aurelia-store"], function (exports_1, context_1) {
+System.register(["./components/form/ad-dialog-model", "./dialogs", "./decorators", "./helpers/deco-api", "./helpers/file-upload", "./helpers/ipstack", "./helpers/ensure-model", "./decorators/types", "./interfaces/deco", "./interfaces/file", "./state", "./components/ad-image", "./components/form/deco-field", "./components/ad-images", "./components/ad-images-theme", "aurelia-store"], function (exports_1, context_1) {
     "use strict";
     var types_1;
     var __moduleName = context_1 && context_1.id;
@@ -17,9 +17,6 @@ System.register(["./components/form/aurelia-ux-form-renderer", "./components/for
     }
     return {
         setters: [
-            function (aurelia_ux_form_renderer_1_1) {
-                exportStar_1(aurelia_ux_form_renderer_1_1);
-            },
             function (ad_dialog_model_1_1) {
                 exportStar_1(ad_dialog_model_1_1);
             },

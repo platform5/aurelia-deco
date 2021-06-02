@@ -1,4 +1,3 @@
-export * from './components/form/aurelia-ux-form-renderer';
 export * from './components/form/ad-dialog-model';
 export * from './dialogs';
 export * from './decorators';
