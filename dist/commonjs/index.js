@@ -12,6 +12,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SwissdataLoginTheme = exports.SwissdataLogin = exports.SdLoginActions = exports.configure = exports.Container = void 0;
 var aurelia_framework_1 = require("aurelia-framework");
+var aurelia_validation_1 = require("aurelia-validation");
+var aurelia_i18n_1 = require("aurelia-i18n");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 Object.defineProperty(exports, "Container", { enumerable: true, get: function () { return aurelia_dependency_injection_1.Container; } });
 __exportStar(require("./deco"), exports);
@@ -60,6 +62,31 @@ function configure(config, pluginConfig) {
         aurelia_framework_1.PLATFORM.moduleName('./components/users/select-user'),
         aurelia_framework_1.PLATFORM.moduleName('./components/users/user-item'),
     ]);
+    // Default Validation messages by key
+    // default: "${$displayName} is invalid.",
+    // required: "${$displayName} is required.",
+    // matches: "${$displayName} is not correctly formatted.",
+    // email: "${$displayName} is not a valid email.",
+    // minLength: "${$displayName} must be at least ${$config.length} character${$config.length === 1 ? '' : 's'}.",
+    // maxLength: "${$displayName} cannot be longer than ${$config.length} character${$config.length === 1 ? '' : 's'}.",
+    // minItems: "${$displayName} must contain at least ${$config.count} item${$config.count === 1 ? '' : 's'}.",
+    // maxItems: "${$displayName} cannot contain more than ${$config.count} item${$config.count === 1 ? '' : 's'}.",
+    // min: "${$displayName} must be at least ${$config.constraint}.",
+    // max: "${$displayName} must be at most ${$config.constraint}.",
+    // range: "${$displayName} must be between or equal to ${$config.min} and ${$config.max}.",
+    // between: "${$displayName} must be between but not equal to ${$config.min} and ${$config.max}.",
+    // equals: "${$displayName} must be ${$config.expectedValue}.",
+    var i18n = config.container.get(aurelia_i18n_1.I18N);
+    aurelia_validation_1.ValidationMessageProvider.prototype.getMessage = function (key) {
+        var translation = i18n.tr("global.validationMessages." + key);
+        return this.parser.parse(translation);
+    };
+    aurelia_validation_1.ValidationMessageProvider.prototype.getDisplayName = function (propertyName, displayName) {
+        if (displayName !== null && displayName !== undefined) {
+            return typeof displayName === 'string' ? displayName : displayName();
+        }
+        return i18n.tr(propertyName);
+    };
 }
 exports.configure = configure;
 /* Expose models */

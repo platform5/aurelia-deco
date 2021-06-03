@@ -1,6 +1,6 @@
-System.register(["aurelia-framework", "aurelia-dependency-injection", "./deco", "./models", "./state/actions", "./state/sd-login-actions", "./helpers/swissdata-api", "./helpers/request-recorder", "./helpers/profile-helper", "./helpers/analytics", "./components/notification/swissdata-notification", "./helpers/i18n-setup", "./helpers/swissdata-global", "./helpers/sd-login", "./components/address", "./components/login/swissdata-login", "./components/login/swissdata-login-theme", "./components/dico2/dico", "./components/dico2/dico-dialog", "./components/dico/dico-translate-key-locale", "./components/form/swissdata-field", "./components/form/swissdata-user-field", "./components/contact/as-contact", "./components/contact/as-contact-theme", "./components/getting-started/getting-started", "./components/getting-started/getting-started-theme", "./components/getting-started/tour-step", "./components/users/select-user", "./state", "./decorators"], function (exports_1, context_1) {
+System.register(["aurelia-framework", "aurelia-validation", "aurelia-i18n", "aurelia-dependency-injection", "./deco", "./models", "./state/actions", "./state/sd-login-actions", "./helpers/swissdata-api", "./helpers/request-recorder", "./helpers/profile-helper", "./helpers/analytics", "./components/notification/swissdata-notification", "./helpers/i18n-setup", "./helpers/swissdata-global", "./helpers/sd-login", "./components/address", "./components/login/swissdata-login", "./components/login/swissdata-login-theme", "./components/dico2/dico", "./components/dico2/dico-dialog", "./components/dico/dico-translate-key-locale", "./components/form/swissdata-field", "./components/form/swissdata-user-field", "./components/contact/as-contact", "./components/contact/as-contact-theme", "./components/getting-started/getting-started", "./components/getting-started/getting-started-theme", "./components/getting-started/tour-step", "./components/users/select-user", "./state", "./decorators"], function (exports_1, context_1) {
     "use strict";
-    var aurelia_framework_1, defaultSettings, SdLoginActions;
+    var aurelia_framework_1, aurelia_validation_1, aurelia_i18n_1, defaultSettings, SdLoginActions;
     var __moduleName = context_1 && context_1.id;
     function configure(config, pluginConfig) {
         var pConfig = Object.assign({}, defaultSettings, pluginConfig);
@@ -40,6 +40,31 @@ System.register(["aurelia-framework", "aurelia-dependency-injection", "./deco", 
             aurelia_framework_1.PLATFORM.moduleName('./components/users/select-user'),
             aurelia_framework_1.PLATFORM.moduleName('./components/users/user-item'),
         ]);
+        // Default Validation messages by key
+        // default: "${$displayName} is invalid.",
+        // required: "${$displayName} is required.",
+        // matches: "${$displayName} is not correctly formatted.",
+        // email: "${$displayName} is not a valid email.",
+        // minLength: "${$displayName} must be at least ${$config.length} character${$config.length === 1 ? '' : 's'}.",
+        // maxLength: "${$displayName} cannot be longer than ${$config.length} character${$config.length === 1 ? '' : 's'}.",
+        // minItems: "${$displayName} must contain at least ${$config.count} item${$config.count === 1 ? '' : 's'}.",
+        // maxItems: "${$displayName} cannot contain more than ${$config.count} item${$config.count === 1 ? '' : 's'}.",
+        // min: "${$displayName} must be at least ${$config.constraint}.",
+        // max: "${$displayName} must be at most ${$config.constraint}.",
+        // range: "${$displayName} must be between or equal to ${$config.min} and ${$config.max}.",
+        // between: "${$displayName} must be between but not equal to ${$config.min} and ${$config.max}.",
+        // equals: "${$displayName} must be ${$config.expectedValue}.",
+        var i18n = config.container.get(aurelia_i18n_1.I18N);
+        aurelia_validation_1.ValidationMessageProvider.prototype.getMessage = function (key) {
+            var translation = i18n.tr("global.validationMessages." + key);
+            return this.parser.parse(translation);
+        };
+        aurelia_validation_1.ValidationMessageProvider.prototype.getDisplayName = function (propertyName, displayName) {
+            if (displayName !== null && displayName !== undefined) {
+                return typeof displayName === 'string' ? displayName : displayName();
+            }
+            return i18n.tr(propertyName);
+        };
     }
     exports_1("configure", configure);
     var exportedNames_1 = {
@@ -60,6 +85,12 @@ System.register(["aurelia-framework", "aurelia-dependency-injection", "./deco", 
         setters: [
             function (aurelia_framework_1_1) {
                 aurelia_framework_1 = aurelia_framework_1_1;
+            },
+            function (aurelia_validation_1_1) {
+                aurelia_validation_1 = aurelia_validation_1_1;
+            },
+            function (aurelia_i18n_1_1) {
+                aurelia_i18n_1 = aurelia_i18n_1_1;
             },
             function (aurelia_dependency_injection_1_1) {
                 exports_1({

@@ -8,7 +8,7 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
-define(["require", "exports", "aurelia-framework", "aurelia-dependency-injection", "./deco", "./models", "./state/actions", "./state/sd-login-actions", "./helpers/swissdata-api", "./helpers/request-recorder", "./helpers/profile-helper", "./helpers/analytics", "./components/notification/swissdata-notification", "./helpers/i18n-setup", "./helpers/swissdata-global", "./helpers/sd-login", "./components/address", "./components/login/swissdata-login", "./components/login/swissdata-login-theme", "./components/dico2/dico", "./components/dico2/dico-dialog", "./components/dico/dico-translate-key-locale", "./components/form/swissdata-field", "./components/form/swissdata-user-field", "./components/contact/as-contact", "./components/contact/as-contact-theme", "./components/getting-started/getting-started", "./components/getting-started/getting-started-theme", "./components/getting-started/tour-step", "./components/users/select-user", "./state", "./decorators"], function (require, exports, aurelia_framework_1, aurelia_dependency_injection_1, deco_1, models_1, actions_1, SdLoginActions, swissdata_api_1, request_recorder_1, profile_helper_1, analytics_1, swissdata_notification_1, i18n_setup_1, swissdata_global_1, sd_login_1, address_1, swissdata_login_1, swissdata_login_theme_1, dico_1, dico_dialog_1, dico_translate_key_locale_1, swissdata_field_1, swissdata_user_field_1, as_contact_1, as_contact_theme_1, getting_started_1, getting_started_theme_1, tour_step_1, select_user_1, state_1, decorators_1) {
+define(["require", "exports", "aurelia-framework", "aurelia-validation", "aurelia-i18n", "aurelia-dependency-injection", "./deco", "./models", "./state/actions", "./state/sd-login-actions", "./helpers/swissdata-api", "./helpers/request-recorder", "./helpers/profile-helper", "./helpers/analytics", "./components/notification/swissdata-notification", "./helpers/i18n-setup", "./helpers/swissdata-global", "./helpers/sd-login", "./components/address", "./components/login/swissdata-login", "./components/login/swissdata-login-theme", "./components/dico2/dico", "./components/dico2/dico-dialog", "./components/dico/dico-translate-key-locale", "./components/form/swissdata-field", "./components/form/swissdata-user-field", "./components/contact/as-contact", "./components/contact/as-contact-theme", "./components/getting-started/getting-started", "./components/getting-started/getting-started-theme", "./components/getting-started/tour-step", "./components/users/select-user", "./state", "./decorators"], function (require, exports, aurelia_framework_1, aurelia_validation_1, aurelia_i18n_1, aurelia_dependency_injection_1, deco_1, models_1, actions_1, SdLoginActions, swissdata_api_1, request_recorder_1, profile_helper_1, analytics_1, swissdata_notification_1, i18n_setup_1, swissdata_global_1, sd_login_1, address_1, swissdata_login_1, swissdata_login_theme_1, dico_1, dico_dialog_1, dico_translate_key_locale_1, swissdata_field_1, swissdata_user_field_1, as_contact_1, as_contact_theme_1, getting_started_1, getting_started_theme_1, tour_step_1, select_user_1, state_1, decorators_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.SwissdataLoginTheme = exports.SwissdataLogin = exports.SdLoginActions = exports.configure = exports.Container = void 0;
@@ -59,6 +59,31 @@ define(["require", "exports", "aurelia-framework", "aurelia-dependency-injection
             aurelia_framework_1.PLATFORM.moduleName('./components/users/select-user'),
             aurelia_framework_1.PLATFORM.moduleName('./components/users/user-item'),
         ]);
+        // Default Validation messages by key
+        // default: "${$displayName} is invalid.",
+        // required: "${$displayName} is required.",
+        // matches: "${$displayName} is not correctly formatted.",
+        // email: "${$displayName} is not a valid email.",
+        // minLength: "${$displayName} must be at least ${$config.length} character${$config.length === 1 ? '' : 's'}.",
+        // maxLength: "${$displayName} cannot be longer than ${$config.length} character${$config.length === 1 ? '' : 's'}.",
+        // minItems: "${$displayName} must contain at least ${$config.count} item${$config.count === 1 ? '' : 's'}.",
+        // maxItems: "${$displayName} cannot contain more than ${$config.count} item${$config.count === 1 ? '' : 's'}.",
+        // min: "${$displayName} must be at least ${$config.constraint}.",
+        // max: "${$displayName} must be at most ${$config.constraint}.",
+        // range: "${$displayName} must be between or equal to ${$config.min} and ${$config.max}.",
+        // between: "${$displayName} must be between but not equal to ${$config.min} and ${$config.max}.",
+        // equals: "${$displayName} must be ${$config.expectedValue}.",
+        var i18n = config.container.get(aurelia_i18n_1.I18N);
+        aurelia_validation_1.ValidationMessageProvider.prototype.getMessage = function (key) {
+            var translation = i18n.tr("global.validationMessages." + key);
+            return this.parser.parse(translation);
+        };
+        aurelia_validation_1.ValidationMessageProvider.prototype.getDisplayName = function (propertyName, displayName) {
+            if (displayName !== null && displayName !== undefined) {
+                return typeof displayName === 'string' ? displayName : displayName();
+            }
+            return i18n.tr(propertyName);
+        };
     }
     exports.configure = configure;
     /* Expose models */
