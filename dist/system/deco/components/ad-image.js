@@ -6,6 +6,42 @@ System.register(["aurelia-resources", "aurelia-framework", "../decorators/model"
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
+    var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+    var __generator = (this && this.__generator) || function (thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    };
     var aurelia_resources_1, aurelia_framework_1, model_1, AdImage;
     var __moduleName = context_1 && context_1.id;
     return {
@@ -31,6 +67,7 @@ System.register(["aurelia-resources", "aurelia-framework", "../decorators/model"
                     this.src = '';
                     this.invisibleBeforeLoading = true;
                     this.hardsize = false;
+                    this.internalResize = true;
                     this.originalSrc = '';
                     this._preventMultipleRequests = false;
                     if (element.tagName === 'AD-IMAGE') {
@@ -109,7 +146,7 @@ System.register(["aurelia-resources", "aurelia-framework", "../decorators/model"
                         this.element.classList.add('invisible');
                     }
                     else {
-                        this.element.classList.remove('animate-opacity');
+                        // this.element.classList.remove('animate-opacity');
                     }
                 };
                 AdImage.prototype.setFormat = function () {
@@ -132,88 +169,125 @@ System.register(["aurelia-resources", "aurelia-framework", "../decorators/model"
                     this.getSrc();
                 };
                 AdImage.prototype.getSrc = function () {
-                    var _this = this;
-                    if (this._preventMultipleRequests) {
-                        setTimeout(function () {
-                            _this.getSrc();
-                        }, 100);
-                        return;
-                    }
-                    clearTimeout(this._timeout);
-                    this._timeout = setTimeout(function () {
-                        if (!_this.instance)
-                            return _this.setOriginal();
-                        var rightInstance = _this.instance instanceof model_1.Model;
-                        if (!rightInstance)
-                            return _this.setOriginal();
-                        if (!_this.property)
-                            return _this.setOriginal();
-                        if (!_this.instance[_this.property])
-                            return _this.setOriginal();
-                        var propValue = _this.instance[_this.property];
-                        var filename;
-                        if (Array.isArray(propValue)) {
-                            if (propValue.length === 0)
-                                return _this.setOriginal();
-                            // we have a multiple files property
-                            if (_this.fileId === 'first') {
-                                filename = _this.instance[_this.property][0].filename || '';
+                    return __awaiter(this, void 0, void 0, function () {
+                        var rightInstance, propValue, filename, url, _a, error_1;
+                        var _this = this;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
+                                case 0:
+                                    if (this._preventMultipleRequests) {
+                                        setTimeout(function () {
+                                            _this.getSrc();
+                                        }, 100);
+                                        return [2 /*return*/];
+                                    }
+                                    this._preventMultipleRequests = true;
+                                    return [4 /*yield*/, new Promise(function (r) { return setTimeout(r, 10); })];
+                                case 1:
+                                    _b.sent();
+                                    if (!this.instance)
+                                        return [2 /*return*/, this.setOriginal()];
+                                    rightInstance = this.instance instanceof model_1.Model;
+                                    if (!rightInstance)
+                                        return [2 /*return*/, this.setOriginal()];
+                                    if (!this.property)
+                                        return [2 /*return*/, this.setOriginal()];
+                                    if (!this.instance[this.property])
+                                        return [2 /*return*/, this.setOriginal()];
+                                    propValue = this.instance[this.property];
+                                    if (Array.isArray(propValue)) {
+                                        if (propValue.length === 0)
+                                            return [2 /*return*/, this.setOriginal()];
+                                        // we have a multiple files property
+                                        if (this.fileId === 'first') {
+                                            filename = this.instance[this.property][0].filename || '';
+                                        }
+                                        else {
+                                            filename = this.fileId;
+                                        }
+                                    }
+                                    else {
+                                        // we have a single file property
+                                        filename = this.instance[this.property].filename || '';
+                                    }
+                                    if (this._requestedImage === this.instance.id + '-' + this.property + '-' + this.format + '-' + filename) {
+                                        // ignore this, we already just previously requested this image
+                                        this.removeInvisible();
+                                        // this.element.classList.remove('animate-opacity');
+                                        this._preventMultipleRequests = false;
+                                        return [2 /*return*/];
+                                    }
+                                    this._requestedImage = this.instance.id + '-' + this.property + '-' + this.format + '-' + filename;
+                                    _b.label = 2;
+                                case 2:
+                                    _b.trys.push([2, 7, , 8]);
+                                    if (!this.internalResize) return [3 /*break*/, 4];
+                                    return [4 /*yield*/, this.instance.getFilePreview(this.property, this.format, { fileId: filename }).then(function (blob) {
+                                            if (blob.type.substr(0, 6) !== 'image/')
+                                                throw new Error('Invalid Blob Type:' + blob.type);
+                                            return aurelia_resources_1.ImageHelpers.open(blob);
+                                        }).then(function (image) {
+                                            console.log('image.mimetype', image.mimetype);
+                                            if (_this.w && _this.h) {
+                                                image.cover(_this.w, _this.h);
+                                            }
+                                            else if (_this.w) {
+                                                image.resize(_this.w, aurelia_resources_1.ImageHelpers.AUTO);
+                                            }
+                                            else if (_this.h) {
+                                                image.resize(aurelia_resources_1.ImageHelpers.AUTO, _this.h);
+                                            }
+                                            //image.cover(300, 300);
+                                            return image.toDataUrl();
+                                        })];
+                                case 3:
+                                    _a = _b.sent();
+                                    return [3 /*break*/, 6];
+                                case 4: return [4 /*yield*/, this.instance.getFilePreviewUrl(this.property, this.format, { fileId: filename })];
+                                case 5:
+                                    _a = _b.sent();
+                                    _b.label = 6;
+                                case 6:
+                                    url = _a;
+                                    this.src = url;
+                                    this._preventMultipleRequests = false;
+                                    this.removeInvisible();
+                                    return [3 /*break*/, 8];
+                                case 7:
+                                    error_1 = _b.sent();
+                                    console.error(error_1);
+                                    this.setOriginal();
+                                    this._preventMultipleRequests = false;
+                                    return [3 /*break*/, 8];
+                                case 8:
+                                    ;
+                                    return [2 /*return*/];
                             }
-                            else {
-                                filename = _this.fileId;
-                            }
-                        }
-                        else {
-                            // we have a single file property
-                            filename = _this.instance[_this.property].filename || '';
-                        }
-                        if (_this._requestedImage === _this.instance.id + '-' + _this.property + '-' + _this.format + '-' + filename) {
-                            // ignore this, we already just previously requested this image
-                            _this.element.classList.remove('invisible');
-                            _this.element.classList.remove('animate-opacity');
-                            return;
-                        }
-                        _this._preventMultipleRequests = true;
-                        _this._requestedImage = _this.instance.id + '-' + _this.property + '-' + _this.format + '-' + filename;
-                        _this.instance.getFilePreview(_this.property, _this.format, { fileId: filename }).then(function (blob) {
-                            if (blob.type.substr(0, 6) !== 'image/')
-                                throw new Error('Invalid Blob Type:' + blob.type);
-                            return aurelia_resources_1.ImageHelpers.open(blob);
-                        }).then(function (image) {
-                            // TODO: check the mimetype here
-                            // it's all PNG, but should also be JPEG for some preview
-                            console.log('image.mimetype', image.mimetype);
-                            if (_this.w && _this.h) {
-                                image.cover(_this.w, _this.h);
-                            }
-                            else if (_this.w) {
-                                image.resize(_this.w, aurelia_resources_1.ImageHelpers.AUTO);
-                            }
-                            else if (_this.h) {
-                                image.resize(aurelia_resources_1.ImageHelpers.AUTO, _this.h);
-                            }
-                            //image.cover(300, 300);
-                            return image.toDataUrl();
-                        }).then(function (url) {
-                            _this.src = url;
-                            _this._preventMultipleRequests = false;
-                            _this.element.classList.remove('invisible');
-                            _this.element.classList.remove('animate-opacity');
-                        }).catch(function (error) {
-                            console.error(error);
-                            _this.setOriginal();
-                            _this._preventMultipleRequests = false;
                         });
-                    }, 10);
+                    });
                 };
                 AdImage.prototype.setOriginal = function () {
                     this.src = this.originalSrc;
-                    this.element.classList.remove('invisible');
-                    this.element.classList.remove('animate-opacity');
+                    this.removeInvisible();
+                    // this.element.classList.remove('animate-opacity');
                     this._requestedImage = '';
+                    this._preventMultipleRequests = false;
                 };
                 AdImage.prototype.srcChanged = function () {
                     this.element.setAttribute('src', this.src);
+                };
+                AdImage.prototype.removeInvisible = function () {
+                    return __awaiter(this, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, new Promise(function (r) { return setTimeout(r, 10); })];
+                                case 1:
+                                    _a.sent();
+                                    this.element.classList.remove('invisible');
+                                    return [2 /*return*/];
+                            }
+                        });
+                    });
                 };
                 AdImage.prototype.observeProperty = function () {
                     var _this = this;
@@ -255,6 +329,9 @@ System.register(["aurelia-resources", "aurelia-framework", "../decorators/model"
                 __decorate([
                     aurelia_framework_1.bindable
                 ], AdImage.prototype, "hardsize", void 0);
+                __decorate([
+                    aurelia_framework_1.bindable
+                ], AdImage.prototype, "internalResize", void 0);
                 __decorate([
                     aurelia_framework_1.observable
                 ], AdImage.prototype, "format", void 0);

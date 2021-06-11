@@ -18,6 +18,7 @@ var AdImages = /** @class */ (function () {
         this.clickNavigation = true;
         this.showBullets = true;
         this.showNavigation = true;
+        this.internalResize = true;
         this.activeIndex = 0;
         this.log = getLogger('comp:ad-images');
         this.handleClick = function (event) {
@@ -127,6 +128,9 @@ var AdImages = /** @class */ (function () {
     __decorate([
         bindable
     ], AdImages.prototype, "showNavigation", void 0);
+    __decorate([
+        bindable
+    ], AdImages.prototype, "internalResize", void 0);
     AdImages = __decorate([
         inject(Element)
     ], AdImages);

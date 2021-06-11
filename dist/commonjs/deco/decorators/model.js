@@ -23,8 +23,8 @@ var model = function (baseroute, options) {
             propertyTypesOptions: target.prototype._typesOptions || {},
             propertyFromApiOnly: target.prototype._fromApiOnly || [],
             propertyForms: target.prototype._forms || {},
-            //propertyOutputs: target.prototype._outputs || [],
-            //propertyToDocuments: target.prototype._toDocuments || [],
+            //propertyOutputs: target.prototype._outputs || [],
+            //propertyToDocuments: target.prototype._toDocuments || [],
             propertyValidations: target.prototype._validations || {},
             propertySearchables: target.prototype._searchables || [],
             propertySortables: target.prototype._sortables || [],
@@ -526,8 +526,8 @@ var Model = /** @class */ (function () {
         });
         return promise;
     };
-    Model.prototype.getFilePreviewUrl = function (property, format) {
-        return this.getFilePreview(property, format).then(function (blob) {
+    Model.prototype.getFilePreviewUrl = function (property, format, options) {
+        return this.getFilePreview(property, format, options).then(function (blob) {
             if (blob) {
                 return URL.createObjectURL(blob);
             }

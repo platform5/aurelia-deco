@@ -1,7 +1,7 @@
 <template>
   <require from="./ad-images.css"></require>
   <template repeat.for="picture of instance[property]" if.bind="instance">
-    <img css="transform: translateX(-${activeIndex * 100}%)" as-element="ad-image" instance.bind="instance" property="${property}" w="${w}" h="${h}" hardsize.bind="hardsize" src="${src}" invisible-before-loading.bind="invisibleBeforeLoading" file-id.bind="picture.filename" />
+    <img css="transform: translateX(-${activeIndex * 100}%)" as-element="ad-image" instance.bind="instance" property="${property}" w="${w}" h="${h}" hardsize.bind="hardsize" src="${src}" invisible-before-loading.bind="invisibleBeforeLoading" file-id.bind="picture.filename" internal-resize.bind="internalResize" />
   </template>
   <div class="ad-images-bullets" if.bind="instance && showBullets && instance[property].length > 1">
     <span repeat.for="picture of instance[property]" class="${activeIndex === $index ? 'active':''}" click.delegate="makeActive($index, $event)"></span>

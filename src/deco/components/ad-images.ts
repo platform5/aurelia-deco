@@ -17,6 +17,7 @@ export class AdImages {
   @bindable clickNavigation: boolean = true;
   @bindable showBullets: boolean = true;
   @bindable showNavigation: boolean = true;
+  @bindable internalResize = true;
   
   private activeIndex: number = 0;
   private handleClick: EventListenerOrEventListenerObject;

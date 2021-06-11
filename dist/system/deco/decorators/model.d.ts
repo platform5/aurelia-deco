@@ -73,7 +73,7 @@ export declare class Model {
     unClass(): any;
     updateProperties(suffix: string, properties: Array<string>, options?: UpdatePropertiesOptions): Promise<this>;
     getFilePreview(property: string, format: string, options?: FilePreviewOptions): Promise<Blob | null>;
-    getFilePreviewUrl(property: string, format: string): Promise<string | null>;
+    getFilePreviewUrl(property: string, format: string, options?: FilePreviewOptions): Promise<string | null>;
     getUxFilePreviewData(property: string, file: UxFileItem, format: string): Promise<void>;
     validationRules(): any;
     validate(): Promise<boolean>;

@@ -11,6 +11,7 @@ export declare class AdImage {
     src: string;
     invisibleBeforeLoading: boolean;
     hardsize: boolean;
+    internalResize: boolean;
     format: string;
     private originalSrc;
     private observerSubscription;
@@ -27,11 +28,11 @@ export declare class AdImage {
     attached(): void;
     setFormat(): void;
     formatChanged(): void;
-    _timeout: any;
     _preventMultipleRequests: boolean;
     _requestedImage: string;
-    getSrc(): void;
+    private getSrc;
     setOriginal(): void;
     srcChanged(): void;
+    private removeInvisible;
     observeProperty(): void;
 }

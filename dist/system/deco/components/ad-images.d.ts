@@ -12,6 +12,7 @@ export declare class AdImages {
     clickNavigation: boolean;
     showBullets: boolean;
     showNavigation: boolean;
+    internalResize: boolean;
     private activeIndex;
     private handleClick;
     private handleTouchStart;

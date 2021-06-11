@@ -13,6 +13,7 @@ export class AdImage {
   @bindable src: string = '';
   @bindable invisibleBeforeLoading: boolean = true;
   @bindable hardsize: boolean = false;
+  @bindable internalResize = true;
 
   @observable format: string;
   private originalSrc: string = '';
@@ -98,7 +99,7 @@ export class AdImage {
       this.element.classList.add('ad-image');
       this.element.classList.add('invisible');
     } else {
-      this.element.classList.remove('animate-opacity');
+      // this.element.classList.remove('animate-opacity');
     }
   }
 
@@ -120,84 +121,91 @@ export class AdImage {
     this.getSrc();
   }
 
-  _timeout;
   _preventMultipleRequests = false;
   _requestedImage: string;
   
-  getSrc() {
+  private async getSrc() {
     if (this._preventMultipleRequests) {
       setTimeout(() => {
         this.getSrc();
       }, 100);
       return;
     }
-    clearTimeout(this._timeout);
-    this._timeout = setTimeout(() => {
-      if (!this.instance) return this.setOriginal();
-      let rightInstance = this.instance instanceof Model;
-      if (!rightInstance) return this.setOriginal();
-      if (!this.property) return this.setOriginal();
-      if (!this.instance[this.property]) return this.setOriginal();
-      let propValue = this.instance[this.property];
-      let filename: string;
-      if (Array.isArray(propValue)) {
-        if (propValue.length === 0) return this.setOriginal();
-        // we have a multiple files property
-        if (this.fileId === 'first') {
-          filename = this.instance[this.property][0].filename || '';
-        } else {
-          filename = this.fileId;
-        }
+    this._preventMultipleRequests = true;
+    await new Promise(r => setTimeout(r, 10));
+    if (!this.instance) return this.setOriginal();
+    let rightInstance = this.instance instanceof Model;
+    if (!rightInstance) return this.setOriginal();
+    if (!this.property) return this.setOriginal();
+    if (!this.instance[this.property]) return this.setOriginal();
+    let propValue = this.instance[this.property];
+    let filename: string;
+    if (Array.isArray(propValue)) {
+      if (propValue.length === 0) return this.setOriginal();
+      // we have a multiple files property
+      if (this.fileId === 'first') {
+        filename = this.instance[this.property][0].filename || '';
       } else {
-        // we have a single file property
-        filename = this.instance[this.property].filename || '';
+        filename = this.fileId;
       }
-      if (this._requestedImage === this.instance.id + '-' + this.property + '-' + this.format + '-' + filename) {
-        // ignore this, we already just previously requested this image
-        this.element.classList.remove('invisible');
-        this.element.classList.remove('animate-opacity');
-        return;
-      }
-      this._preventMultipleRequests = true;
-      this._requestedImage = this.instance.id + '-' + this.property + '-' + this.format + '-' + filename;
-      this.instance.getFilePreview(this.property, this.format, {fileId: filename}).then((blob) => {
-        if (blob.type.substr(0, 6) !== 'image/') throw new Error('Invalid Blob Type:' + blob.type);
-        return ImageHelpers.open(blob);
-      }).then((image) => {
-        // TODO: check the mimetype here
-        // it's all PNG, but should also be JPEG for some preview
-        console.log('image.mimetype', image.mimetype);
-        if (this.w && this.h) {
-          image.cover(this.w, this.h);
-        } else if (this.w) {
-          image.resize(this.w, ImageHelpers.AUTO);
-        } else if (this.h) {
-          image.resize(ImageHelpers.AUTO, this.h);
-        }
-        //image.cover(300, 300);
-        return image.toDataUrl();
-      }).then((url) => {
-        this.src = url;
-        this._preventMultipleRequests = false;
-        this.element.classList.remove('invisible');
-        this.element.classList.remove('animate-opacity');
-      }).catch((error) => {
-        console.error(error);
-        this.setOriginal();
-        this._preventMultipleRequests = false;
-      });
-    }, 10);
+    } else {
+      // we have a single file property
+      filename = this.instance[this.property].filename || '';
+    }
+    if (this._requestedImage === this.instance.id + '-' + this.property + '-' + this.format + '-' + filename) {
+      // ignore this, we already just previously requested this image
+      this.removeInvisible()
+      // this.element.classList.remove('animate-opacity');
+      this._preventMultipleRequests = false;
+      return;
+    }
+    this._requestedImage = this.instance.id + '-' + this.property + '-' + this.format + '-' + filename;
+
+    try {
+      const url = this.internalResize
+      ? await this.instance.getFilePreview(this.property, this.format, {fileId: filename}).then((blob) => {
+          if (blob.type.substr(0, 6) !== 'image/') throw new Error('Invalid Blob Type:' + blob.type);
+          return ImageHelpers.open(blob);
+        }).then((image) => {
+          console.log('image.mimetype', image.mimetype);
+          if (this.w && this.h) {
+            image.cover(this.w, this.h);
+          } else if (this.w) {
+            image.resize(this.w, ImageHelpers.AUTO);
+          } else if (this.h) {
+            image.resize(ImageHelpers.AUTO, this.h);
+          }
+          //image.cover(300, 300);
+          return image.toDataUrl();
+        })
+      : await this.instance.getFilePreviewUrl(this.property, this.format, {fileId: filename});
+
+      this.src = url;
+      this._preventMultipleRequests = false;
+      this.removeInvisible()
+      // this.element.classList.remove('animate-opacity');
+    } catch (error) {
+      console.error(error);
+      this.setOriginal();
+      this._preventMultipleRequests = false;
+    };
   }
 
   setOriginal() {
     this.src = this.originalSrc;
-    this.element.classList.remove('invisible');
-    this.element.classList.remove('animate-opacity');
+    this.removeInvisible();
+    // this.element.classList.remove('animate-opacity');
     this._requestedImage = '';
+    this._preventMultipleRequests = false;
   }
   
   srcChanged() {
     this.element.setAttribute('src', this.src);
+  }
+
+  private async removeInvisible() {
+    await new Promise(r => setTimeout(r, 10));
+    this.element.classList.remove('invisible');
   }
 
   observeProperty() {

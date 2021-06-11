@@ -70,17 +70,17 @@ export const model = (baseroute: string, options: ModelOptions = {}) => {
       baseroute: baseroute,
       target: target,
       options: options,
-      propertyTypes: target.prototype._types || {},
-      propertyTypesOptions: target.prototype._typesOptions || {},
-      propertyFromApiOnly: target.prototype._fromApiOnly || [],
-      propertyForms: target.prototype._forms || {},
-      //propertyOutputs: target.prototype._outputs || [],
-      //propertyToDocuments: target.prototype._toDocuments || [],
-      propertyValidations: target.prototype._validations || {},
-      propertySearchables: target.prototype._searchables || [],
-      propertySortables: target.prototype._sortables || [],
-      propertyFilterables: target.prototype._filterables || [],
-      propertyFilterablesOptions: target.prototype._filterablesOptions || {}
+      propertyTypes: target.prototype._types || {},
+      propertyTypesOptions: target.prototype._typesOptions || {},
+      propertyFromApiOnly: target.prototype._fromApiOnly || [],
+      propertyForms: target.prototype._forms || {},
+      //propertyOutputs: target.prototype._outputs || [],
+      //propertyToDocuments: target.prototype._toDocuments || [],
+      propertyValidations: target.prototype._validations || {},
+      propertySearchables: target.prototype._searchables || [],
+      propertySortables: target.prototype._sortables || [],
+      propertyFilterables: target.prototype._filterables || [],
+      propertyFilterablesOptions: target.prototype._filterablesOptions || {}
     };
 
     target.prototype._deco = deco;
@@ -189,7 +189,7 @@ export class Model {
 
   static getAll<T extends typeof Model>(this: T, suffix: string = '', options: GetAllOptions = {} ): Promise<Array<InstanceType <T>>> {
     suffix = this.addLocaleInSuffixIfNecessary(suffix, options);
-    let route = options.route || this.deco.target.getAllRoute();
+    let route = options.route || this.deco.target.getAllRoute();
     let response: any;
     return this.api.get(route + suffix, options)
     .then(jsonify)
@@ -202,7 +202,7 @@ export class Model {
       }
       return Promise.all(instancesPromises);
     }).then((elements) => {
-      if (options.includeResponse === undefined || options.includeResponse === true) {
+      if (options.includeResponse === undefined || options.includeResponse === true) {
         (elements as any)._response = response;
       }
       return elements;
@@ -211,7 +211,7 @@ export class Model {
 
   static getOneWithId<T extends typeof Model>(this: T, id: string, suffix: string = '', options: GetOneOptions = {}): Promise<InstanceType<T>> {
     suffix = this.addLocaleInSuffixIfNecessary(suffix, options);
-    let route = options.route || this.deco.target.getOneRoute(id);
+    let route = options.route || this.deco.target.getOneRoute(id);
     let response: any;
     return this.api.get(route + suffix, options)
     .then(jsonify)
@@ -220,7 +220,7 @@ export class Model {
       if (!element) return element;
       return this.instanceFromApi(element);
     }).then((element) => {
-      if (options.includeResponse === undefined || options.includeResponse === true) {
+      if (options.includeResponse === undefined || options.includeResponse === true) {
         (element as any)._response = response;
         return element;
       }
@@ -293,13 +293,13 @@ export class Model {
     return instance;
   }
 
-  get _label() {
+  get _label() {
     return this.id;
   }
 
   save (suffix: string = '', options: SaveOptions = {}) {
     suffix = this.addLocaleInSuffixIfNecessary(suffix, options);
-    let body: any = options.body || {};
+    let body: any = options.body || {};
     let toApiPromises = [];
     for (let property of Object.keys(this.deco.propertyTypes)) {
       let type: TypeDecorator = this.deco.propertyTypes[property];
@@ -319,7 +319,7 @@ export class Model {
     return Promise.all(toApiPromises).then(() => {
       return this.fixBodyIfFilesToUpload(body, options);
     }).then((body) => {
-      let route = options.route || this.postRoute();
+      let route = options.route || this.postRoute();
       return this.api.post(route + suffix, body, options);
     }).then(jsonify).then((element) => {
       response = Object.assign({}, element);
@@ -328,7 +328,7 @@ export class Model {
         return instance;
       });
     }).then((element) => {
-      if (options.includeResponse === undefined || options.includeResponse === true) {
+      if (options.includeResponse === undefined || options.includeResponse === true) {
         (element as any)._response = response;
         return element;
       }
@@ -357,7 +357,7 @@ export class Model {
           filesToUpload = true;
           form.append(property, body[property], body[property].name);
           if (body[property].blobs) {
-            for (let format of Object.keys(body[property].blobs)) {
+            for (let format of Object.keys(body[property].blobs)) {
               form.append(property + '_preview', body[property].blobs[format], body[property].name);
             }
           }
@@ -368,7 +368,7 @@ export class Model {
             filesToUpload = true;
             form.append(property, (file as File), file.name);
             if (file.blobs) {
-              for (let format of Object.keys(file.blobs)) {
+              for (let format of Object.keys(file.blobs)) {
                 form.append(property + '_preview', file.blobs[format], file.name);
               }
             }
@@ -396,7 +396,7 @@ export class Model {
   }
 
   remove(suffix: string = '', options: RemoveOptions = {}) {
-    let route = options.route || this.deleteRoute(this.id);
+    let route = options.route || this.deleteRoute(this.id);
     return this.api.delete(route + suffix, options).then(jsonify);
   }
 
@@ -470,16 +470,16 @@ export class Model {
     return Promise.all(toApiPromises).then(() => {
       return this.fixBodyIfFilesToUpload(body, options);
     }).then((body) => {
-      let route = options.route || this.putRoute(this.id);
+      let route = options.route || this.putRoute(this.id);
       return this.api.put(route + suffix, body, options);
     }).then(jsonify).then((element) => {
       response = Object.assign({}, element);
       this.validationController.reset();
-      if (options.includeResponse === undefined || options.includeResponse === true) {
+      if (options.includeResponse === undefined || options.includeResponse === true) {
         (this as any)._updateResponse = element;
         (this as any)._response = response;
       }
-      if (options.updateInstanceWithResponse === undefined || options.updateInstanceWithResponse === true) {
+      if (options.updateInstanceWithResponse === undefined || options.updateInstanceWithResponse === true) {
         return this.updateInstanceFromElement(element, properties).then((instance) => {
           (instance as any)._response = response;
           return instance;
@@ -490,7 +490,7 @@ export class Model {
     });
   }
 
-  getFilePreview(property: string, format: string, options?: FilePreviewOptions): Promise<Blob | null> {
+  getFilePreview(property: string, format: string, options?: FilePreviewOptions): Promise<Blob | null> {
     let etag = options && options.etag ? options.etag : null;
     let fileId = options && options.fileId ? options.fileId : null;
     let type: TypeDecorator = this.deco.propertyTypes[property];
@@ -499,8 +499,8 @@ export class Model {
     let requestOptions: RequestOption = {};
     if (etag) requestOptions.etag = etag;
     else if (this[property] && this[property].filename) requestOptions.etag = this[property].filename;
-    fileId = (type.name === 'files' || fileId) ? `&fileId=${fileId}` : '';
-    let route = options && options.route || this.getOneRoute(this.id);
+    fileId = (type.name === 'files' || fileId) ? `&fileId=${fileId}` : '';
+    let route = options && options.route || this.getOneRoute(this.id);
     //let requestId = route + '?download=' + property + '&preview=' + format + fileId + '&etag=' + etag;
     let promise = this.api.get(route + '?download=' + property + '&preview=' + format + fileId, requestOptions).then((response) => {
       return response.blob();
@@ -510,8 +510,8 @@ export class Model {
     return promise;
   }
 
-  getFilePreviewUrl(property: string, format: string): Promise<string | null> {
-    return this.getFilePreview(property, format).then((blob) => {
+  getFilePreviewUrl(property: string, format: string, options?: FilePreviewOptions): Promise<string | null> {
+    return this.getFilePreview(property, format, options).then((blob) => {
       if (blob) {
         return URL.createObjectURL(blob);
       } else {
@@ -537,10 +537,10 @@ export class Model {
     for (let key in this.deco.propertyTypes) {
       let type: TypeDecorator = this.deco.propertyTypes[key];
       let options: any = this.deco.propertyTypesOptions[key];
-      let validation = this.deco.propertyValidations[key] || null;
+      let validation = this.deco.propertyValidations[key] || null;
       rules = (rules || ValidationRules).ensure(key);
       rules = rules.satisfiesRule(`type:${type.name}`, options);
-      for (let validate of validation || []) {
+      for (let validate of validation || []) {
         if (validate.type === 'required') {
           rules = rules.required();
         }  else if (validate.type === 'email') {

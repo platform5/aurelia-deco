@@ -30,6 +30,7 @@ System.register(["aurelia-framework", "aurelia-logging"], function (exports_1, c
                     this.clickNavigation = true;
                     this.showBullets = true;
                     this.showNavigation = true;
+                    this.internalResize = true;
                     this.activeIndex = 0;
                     this.log = aurelia_logging_1.getLogger('comp:ad-images');
                     this.handleClick = function (event) {
@@ -139,6 +140,9 @@ System.register(["aurelia-framework", "aurelia-logging"], function (exports_1, c
                 __decorate([
                     aurelia_framework_1.bindable
                 ], AdImages.prototype, "showNavigation", void 0);
+                __decorate([
+                    aurelia_framework_1.bindable
+                ], AdImages.prototype, "internalResize", void 0);
                 AdImages = __decorate([
                     aurelia_framework_1.inject(Element)
                 ], AdImages);
