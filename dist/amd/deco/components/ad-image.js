@@ -128,8 +128,9 @@ define(["require", "exports", "aurelia-resources", "aurelia-framework", "../deco
             this.hardsizeChanged();
         };
         AdImage.prototype.attached = function () {
+            this.element.classList.add('ad-image');
             if (this.invisibleBeforeLoading) {
-                this.element.classList.add('ad-image');
+                this.element.classList.add('animate-opacity');
                 this.element.classList.add('invisible');
             }
             else {

@@ -95,8 +95,9 @@ export class AdImage {
 
 
   attached() {
+    this.element.classList.add('ad-image');
     if (this.invisibleBeforeLoading) {
-      this.element.classList.add('ad-image');
+      this.element.classList.add('animate-opacity');
       this.element.classList.add('invisible');
     } else {
       // this.element.classList.remove('animate-opacity');
