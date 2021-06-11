@@ -1,6 +1,6 @@
 {
   "name": "aurelia-deco",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "description": "Aurelia plugin to mirror deco-api features",
   "main": "dist/commonjs/index.js",
   "typings": "dist/commonjs/index.d.ts",
