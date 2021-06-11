@@ -1,12 +1,12 @@
 <template class="deco-field type-${_type}">
   <require from="./deco-field.css"></require>
-  <let mylabel="${context(dicoContext) + 'data.label.' + (firstLetterUpper(label) || 'No label') | t}"></let>
+  <let mylabel="${context(dicoContext) + 'data.label.' + (firstLetterUpper(label) || 'No label') | t}"></let>
   <template if.bind="_type === 'string'">
     <ux-field>
       <label if.bind="labelPosition === 'label'">${mylabel}</label>
       <ux-input variant="${outline ? 'outline':'filled'}" 
         value.bind="instance[property] & validate:instance.validationController" 
-        if.bind="!options.textarea && variant !== 'textarea'"
+        if.bind="!options.textarea && variant !== 'textarea'"
         label="${labelPosition === 'floating' ? mylabel : ''}"
         placeholder="${labelPosition === 'placeholder' ? mylabel : ''}"
         disabled.bind="disabled"
@@ -15,7 +15,7 @@
         auto-resize.bind="true"
         variant="${outline ? 'outline':'filled'}" 
         value.bind="instance[property] & validate:instance.validationController"
-        if.bind="options.textarea || variant === 'textarea'"
+        if.bind="options.textarea || variant === 'textarea'"
         label="${labelPosition === 'floating' ? mylabel : ''}"
         placeholder="${labelPosition === 'placeholder' ? mylabel : ''}"
         disabled.bind="disabled"
@@ -126,7 +126,7 @@
   <template if.bind="_type === 'select' && !options.multiple && variant !== 'radio' && variant !== 'chips'">
     <ux-field>
       <label>${mylabel}</label>
-      <ar-select value.two-way="instance[property] & validate:instance.validationController" placeholder.bind="options.placeholder || placeholder" disabled.bind="disabled" allow-any.bind="options.allowAny" add-extra-value-button-text.bind="options.addExtraValueButtonText">
+      <ar-select value.two-way="instance[property] & validate:instance.validationController" placeholder.bind="options.placeholder || placeholder" disabled.bind="disabled" allow-any.bind="options.allowAny" add-extra-value-button-text.bind="options.addExtraValueButtonText">
         <ar-option repeat.for="option of options.options" value.bind="option" label="${context(dicoContext) + 'data.selectOption.' + firstLetterUpper(option) | t}"></ar-option>
       </ar-select>
       <ux-input-info if.bind="hint" t="data.hint.${hint | firstLetterUpper}"></ux-input-info>
@@ -137,7 +137,7 @@
   <template if.bind="_type === 'select' && options.multiple && variant !== 'radio' && variant !== 'chips'">
     <ux-field>
       <label>${mylabel}</label>
-      <ar-select value.two-way="instance[property] & validate:instance.validationController" multiple.bind="true" placeholder.bind="options.placeholder || placeholder" disabled.bind="disabled" allow-any.bind="options.allowAny" add-extra-value-button-text.bind="options.addExtraValueButtonText">
+      <ar-select value.two-way="instance[property] & validate:instance.validationController" multiple.bind="true" placeholder.bind="options.placeholder || placeholder" disabled.bind="disabled" allow-any.bind="options.allowAny" add-extra-value-button-text.bind="options.addExtraValueButtonText">
         <ar-option repeat.for="option of options.options" value.bind="option" label="${context(dicoContext) + 'data.selectOption.' + firstLetterUpper(option) | t}"></ar-option>
       </ar-select>
       <ux-input-info if.bind="hint" t="data.hint.${hint | firstLetterUpper}"></ux-input-info>
@@ -195,7 +195,13 @@
   <template if.bind="_type === 'file'">
     <ux-field>
       <label>${mylabel}</label>
-      <ux-file-input file.two-way="instance[property] & validate:instance.validationController" accept.bind="options.accepted" multiple.bind="false" previews-formats.bind="options.previewsFormats" default-preview.bind="options.defaultPreview"></ux-file-input>
+      <ux-file-input 
+        file.two-way="instance[property] & validate:instance.validationController" 
+        accept.bind="options.accepted" 
+        multiple.bind="false" 
+        previews-formats.bind="options.previewsFormats"
+        default-preview.bind="options.defaultPreview"
+        image-export-quality.bind="options.imageExportQuality || 0.6"></ux-file-input>
       <ux-input-info if.bind="hint" t="data.hint.${hint | firstLetterUpper}"></ux-input-info>
       <ux-input-info></ux-input-info>
     </ux-field>
@@ -204,7 +210,13 @@
   <template if.bind="_type === 'files'">
     <ux-field>
       <label>${mylabel}</label>
-      <ux-file-input files.two-way="instance[property] & validate:instance.validationController" accept.bind="options.accepted" multiple.bind="true" previews-formats.bind="options.previewsFormats" default-preview.bind="options.defaultPreview"></ux-file-input>
+      <ux-file-input
+        files.two-way="instance[property] & validate:instance.validationController"
+        accept.bind="options.accepted"
+        multiple.bind="true"
+        previews-formats.bind="options.previewsFormats"
+        default-preview.bind="options.defaultPreview"
+        image-export-quality.bind="options.imageExportQuality || 0.6"></ux-file-input>
       <ux-input-info if.bind="hint" t="data.hint.${hint | firstLetterUpper}"></ux-input-info>
       <ux-input-info></ux-input-info>
     </ux-field>
@@ -218,7 +230,7 @@
         <ux-option repeat.for="option of selectOptions" value.bind="option.id">${option._label}</ux-option>
       </ux-select>
       -->
-      <ar-select value.bind="instance[property] & validate:instance.validationController" placeholder.bind="options.placeholder || placeholder">
+      <ar-select value.bind="instance[property] & validate:instance.validationController" placeholder.bind="options.placeholder || placeholder">
         <ar-option repeat.for="option of selectOptions" value.two-way="option.id" label="${option._label}"></ar-option>
       </ar-select>
       <ux-input-info if.bind="hint" t="data.hint.${hint | firstLetterUpper}"></ux-input-info>
@@ -229,7 +241,7 @@
   <template if.bind="_type === 'models'">
     <ux-field>
       <label>${mylabel}</label>
-      <ar-select multiple.bind="true" value.two-way="instance[property] & validate:instance.validationController" placeholder.bind="options.placeholder || placeholder" disabled.bind="disabled">
+      <ar-select multiple.bind="true" value.two-way="instance[property] & validate:instance.validationController" placeholder.bind="options.placeholder || placeholder" disabled.bind="disabled">
         <ar-option repeat.for="option of selectOptions" value.bind="option.id" label.bind="option._label"></ar-option>
       </ar-select>
       <ux-input-info if.bind="hint" t="data.hint.${hint | firstLetterUpper}"></ux-input-info>

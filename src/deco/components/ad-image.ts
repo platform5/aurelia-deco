@@ -144,13 +144,13 @@ export class AdImage {
         if (propValue.length === 0) return this.setOriginal();
         // we have a multiple files property
         if (this.fileId === 'first') {
-          filename = this.instance[this.property][0].filename || '';
+          filename = this.instance[this.property][0].filename || '';
         } else {
           filename = this.fileId;
         }
       } else {
         // we have a single file property
-        filename = this.instance[this.property].filename || '';
+        filename = this.instance[this.property].filename || '';
       }
       if (this._requestedImage === this.instance.id + '-' + this.property + '-' + this.format + '-' + filename) {
         // ignore this, we already just previously requested this image
@@ -164,6 +164,9 @@ export class AdImage {
         if (blob.type.substr(0, 6) !== 'image/') throw new Error('Invalid Blob Type:' + blob.type);
         return ImageHelpers.open(blob);
       }).then((image) => {
+        // TODO: check the mimetype here
+        // it's all PNG, but should also be JPEG for some preview
+        console.log('image.mimetype', image.mimetype);
         if (this.w && this.h) {
           image.cover(this.w, this.h);
         } else if (this.w) {
@@ -205,7 +208,7 @@ export class AdImage {
       this.getSrc();
     });
 
-    if (this.instance[this.property] && typeof this.instance[this.property] === 'object' && this.instance[this.property].filename) {
+    if (this.instance[this.property] && typeof this.instance[this.property] === 'object' && this.instance[this.property].filename) {
       // if the value is set with a filename, we also want to observer this property
       this.observerSubscription = this.bindingEngine.propertyObserver(this.instance[this.property], 'filename').subscribe(() => {
         this.getSrc();

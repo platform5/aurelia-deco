@@ -27,6 +27,7 @@ var UxFileInput = /** @class */ (function () {
         this.files = []; // hold files for multiple files input
         this.previewsFormats = [];
         this.defaultPreview = '';
+        this.imageExportQuality = 0.6;
         this.rawValue = '';
         this.focused = false;
         this.canEdit = false;
@@ -98,7 +99,7 @@ var UxFileInput = /** @class */ (function () {
         }
         if (!this.multiple)
             newFiles.slice(0, 1);
-        file_upload_1.FileUpload.generatePreviews(newFiles, this.previewsFormats, this.defaultPreview).then(function () {
+        file_upload_1.FileUpload.generatePreviews(newFiles, this.previewsFormats, this.defaultPreview, this.imageExportQuality).then(function () {
             var form = new FormData();
             for (var _i = 0, newFiles_1 = newFiles; _i < newFiles_1.length; _i++) {
                 var file = newFiles_1[_i];
@@ -186,6 +187,9 @@ var UxFileInput = /** @class */ (function () {
     __decorate([
         aurelia_templating_1.bindable
     ], UxFileInput.prototype, "defaultPreview", void 0);
+    __decorate([
+        aurelia_templating_1.bindable
+    ], UxFileInput.prototype, "imageExportQuality", void 0);
     __decorate([
         aurelia_binding_1.observable
     ], UxFileInput.prototype, "rawValue", void 0);

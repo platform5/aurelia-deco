@@ -40,6 +40,8 @@ export class UxFileInput implements UxComponent {
     @bindable public previewsFormats: Array<string> = [];
     @bindable public defaultPreview: string = '';
 
+    @bindable public imageExportQuality = 0.6;
+
     @observable
     public rawValue: string = '';
 
@@ -85,7 +87,7 @@ export class UxFileInput implements UxComponent {
         this.determineCanEdit();
     }
 
-    public disabledChanged()  {
+    public disabledChanged()  {
         this.determineCanEdit();
     }
 
@@ -132,13 +134,13 @@ export class UxFileInput implements UxComponent {
           newFiles.push(file);
       }
       if (!this.multiple) newFiles.slice(0, 1);
-      FileUpload.generatePreviews(newFiles, this.previewsFormats, this.defaultPreview).then(() => {
+      FileUpload.generatePreviews(newFiles, this.previewsFormats, this.defaultPreview, this.imageExportQuality).then(() => {
         let form = new FormData();
         for (let file of newFiles) {
           file.toUpload = true;
           form.append('image', (file as File), file.name);
           if (this.multiple) {
-            if (this.files === null || this.files === undefined) this.files = [file];
+            if (this.files === null || this.files === undefined) this.files = [file];
             else this.files.push(file);
           } else {
             this.file = file;
@@ -148,12 +150,12 @@ export class UxFileInput implements UxComponent {
       this.inputform.reset();
     }
 
-    public removeFile(file: Number |  UxFileItem) {
+    public removeFile(file: Number |  UxFileItem) {
       if (!this.multiple) {
         this.file = null;
         return;
       }
-      let removedFile:  UxFileItem;
+      let removedFile:  UxFileItem;
       if (typeof file === 'number') {
         removedFile = this.files.splice(file, 1)[0];
         if (removedFile && removedFile.toUpload !== true) {

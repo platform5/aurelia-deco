@@ -12,16 +12,17 @@ System.register(["aurelia-resources"], function (exports_1, context_1) {
             FileUpload = /** @class */ (function () {
                 function FileUpload() {
                 }
-                FileUpload.generatePreviews = function (files, formats, defaultPreviewFormat) {
+                FileUpload.generatePreviews = function (files, formats, defaultPreviewFormat, quality) {
                     if (formats === void 0) { formats = ['320:320']; }
                     if (defaultPreviewFormat === void 0) { defaultPreviewFormat = '320:320'; }
+                    if (quality === void 0) { quality = 0.6; }
                     var promises = [];
                     promises.push(Promise.resolve());
                     for (var _i = 0, files_1 = files; _i < files_1.length; _i++) {
                         var file = files_1[_i];
                         if (!file.previewData) {
                             if (file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'image/gif' || file.type === 'image/png') {
-                                promises.push(FileUpload.generateImagePreviews(file, formats, defaultPreviewFormat));
+                                promises.push(FileUpload.generateImagePreviews(file, formats, defaultPreviewFormat, quality));
                             }
                             else if (file.type.substr(0, 6) === 'audio/') {
                                 // tslint:disable-next-line
@@ -34,9 +35,10 @@ System.register(["aurelia-resources"], function (exports_1, context_1) {
                     }
                     return Promise.all(promises);
                 };
-                FileUpload.generateImagePreviews = function (file, formats, defaultPreviewFormat) {
+                FileUpload.generateImagePreviews = function (file, formats, defaultPreviewFormat, quality) {
                     if (formats === void 0) { formats = ['320:320']; }
                     if (defaultPreviewFormat === void 0) { defaultPreviewFormat = '320:320'; }
+                    if (quality === void 0) { quality = 0.6; }
                     if (formats.length === 0)
                         return Promise.resolve(file);
                     if (!file.previews)
@@ -64,6 +66,7 @@ System.register(["aurelia-resources"], function (exports_1, context_1) {
                                         var _loop_1 = function (format) {
                                             var createPreview = function (e) {
                                                 return aurelia_resources_1.ImageHelpers.open(e.target.result).then(function (myimage) {
+                                                    myimage.exportQuality = quality;
                                                     if (format.indexOf(':') !== -1) {
                                                         myimage.cover(parseInt(format.split(':')[0], 10), parseInt(format.split(':')[1], 10));
                                                         file.previews[format] = myimage.toDataUrl();

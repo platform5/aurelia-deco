@@ -13,13 +13,13 @@ export interface UxFileItem /*extends File*/ {
 
 export class FileUpload {
 
-  static generatePreviews(files: Array<UxFileItem>, formats = ['320:320'], defaultPreviewFormat = '320:320') {
+  static generatePreviews(files: Array<UxFileItem>, formats = ['320:320'], defaultPreviewFormat = '320:320', quality = 0.6) {
     let promises = [];
     promises.push(Promise.resolve());
     for (let file of files) {
       if (!file.previewData) {
         if (file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'image/gif' || file.type === 'image/png') {
-          promises.push(FileUpload.generateImagePreviews(file, formats, defaultPreviewFormat));
+          promises.push(FileUpload.generateImagePreviews(file, formats, defaultPreviewFormat, quality));
         } else if (file.type.substr(0, 6) === 'audio/') {
           // tslint:disable-next-line
           file.previewData = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='currentColor'><path d='M12 3v9.28a4.39 4.39 0 0 0-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z'></path></svg>";
@@ -31,7 +31,7 @@ export class FileUpload {
     return Promise.all(promises);
   }
 
-  static generateImagePreviews(file, formats = ['320:320'], defaultPreviewFormat = '320:320') {
+  static generateImagePreviews(file, formats = ['320:320'], defaultPreviewFormat = '320:320', quality = 0.6) {
     if (formats.length === 0) return Promise.resolve(file);
     if (!file.previews) file.previews = {};
     if (!file.blobs) file.blobs = {};
@@ -59,6 +59,7 @@ export class FileUpload {
               for (let format of formats) {
                 let createPreview = (e: any): Promise<any> => {
                   return ImageHelpers.open((e as any).target.result).then((myimage) => {
+                    myimage.exportQuality = quality;
                     if (format.indexOf(':') !== -1) {
                       myimage.cover(
                         parseInt(format.split(':')[0], 10),
@@ -86,7 +87,7 @@ export class FileUpload {
                 resolve(file);
               }).catch(reject);
             }
-            let fileToRead = file.fixedOrientationBlob || file;
+            let fileToRead = file.fixedOrientationBlob || file;
             reader.readAsDataURL((fileToRead as File));
           } catch (e) {
             console.error('catch', e);

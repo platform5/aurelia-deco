@@ -166,6 +166,9 @@ var AdImage = /** @class */ (function () {
                     throw new Error('Invalid Blob Type:' + blob.type);
                 return ImageHelpers.open(blob);
             }).then(function (image) {
+                // TODO: check the mimetype here
+                // it's all PNG, but should also be JPEG for some preview
+                console.log('image.mimetype', image.mimetype);
                 if (_this.w && _this.h) {
                     image.cover(_this.w, _this.h);
                 }

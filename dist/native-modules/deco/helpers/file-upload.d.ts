@@ -9,6 +9,6 @@ export interface UxFileItem {
     blobs?: StringAnyMap;
 }
 export declare class FileUpload {
-    static generatePreviews(files: Array<UxFileItem>, formats?: string[], defaultPreviewFormat?: string): Promise<any[]>;
-    static generateImagePreviews(file: any, formats?: string[], defaultPreviewFormat?: string): Promise<any>;
+    static generatePreviews(files: Array<UxFileItem>, formats?: string[], defaultPreviewFormat?: string, quality?: number): Promise<any[]>;
+    static generateImagePreviews(file: any, formats?: string[], defaultPreviewFormat?: string, quality?: number): Promise<any>;
 }

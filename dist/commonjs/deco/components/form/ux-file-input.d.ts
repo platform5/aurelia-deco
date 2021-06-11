@@ -21,6 +21,7 @@ export declare class UxFileInput implements UxComponent {
     files: UxFileItemArray<UxFileItem>;
     previewsFormats: Array<string>;
     defaultPreview: string;
+    imageExportQuality: number;
     rawValue: string;
     focused: boolean;
     inputbox: HTMLInputElement;
