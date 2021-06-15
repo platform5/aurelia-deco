@@ -1,8 +1,7 @@
 import { AppState, SwissdataState, SwissdataUser, Steps } from './interfaces';
 import { getLogger, Logger } from 'aurelia-logging';
-import { StringAnyMap } from 'aurelia-resources';
-import { DynamicDataModel } from '../models/dynamicdata.model';
-import { NavigationInstruction } from 'aurelia-router';
+import { DynamicDataModel } from '../models/dynamicdata.model';
+import { NavigationInstruction } from 'aurelia-router';
 import { ProfileModel } from '../models';
 
 let log: Logger = getLogger('swissdata-actions');
@@ -28,8 +27,8 @@ export function initSwissdataState(state: AppState) {
     loginStep: 'login',
     h: ''
   };
-  if (!newState.swissdata.publicKey || typeof newState.swissdata.publicKey !== 'string') newState.swissdata.publicKey = '';
-  if (newState.swissdata.authenticated === undefined || typeof newState.swissdata.authenticated !== 'boolean') newState.swissdata.authenticated = false;
+  if (!newState.swissdata.publicKey || typeof newState.swissdata.publicKey !== 'string') newState.swissdata.publicKey = '';
+  if (newState.swissdata.authenticated === undefined || typeof newState.swissdata.authenticated !== 'boolean') newState.swissdata.authenticated = false;
   return newState;
 }
 
@@ -98,7 +97,7 @@ export function setLoginStep(state: AppState, step: Steps) {
   return newState;
 }
 
-export function setSwissdataStateProps(state: AppState, keyValues: StringAnyMap) {
+export function setSwissdataStateProps(state: AppState, keyValues: {[key: string]: any}) {
   if (keyValues.newAccountInstance) {
     keyValues.newAccountInstance = {
       firstname: keyValues.newAccountInstance.firstname,
@@ -122,14 +121,14 @@ export function setSwissdataStateProps(state: AppState, keyValues: StringAnyMap)
 
 export function setAppModels(state: AppState, prop: string, models: Array<DynamicDataModel>) {
   const newState = Object.assign({}, state);
-  if (!newState[prop] || !Array.isArray(newState[prop])) return newState;
+  if (!newState[prop] || !Array.isArray(newState[prop])) return newState;
   newState[prop] = models;
   return newState;
 }
 
 export interface CurrentRoute {
   name: string;
-  params?: StringAnyMap;
+  params?: {[key: string]: any};
 }
 
 export function setCurrentRoute(state: AppState, instruction: NavigationInstruction) {

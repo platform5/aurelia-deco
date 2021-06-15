@@ -1,5 +1,4 @@
 import { model, Model, type, Deco, cloneDeco } from '../deco';
-import { StringTMap } from 'aurelia-resources';
 import { DynamicConfigModel } from './dynamicconfig.model';
 
 /*
@@ -34,7 +33,7 @@ export class DynamicDataModel extends Model {
     }
   }
 
-  static models: StringTMap<DynamicConfigModelWithDeco> = {};
+  static models: {[key: string]: DynamicConfigModelWithDeco} = {};
   static currentModelSlug: string;
 
   static clearRegisteredModels() {
@@ -71,7 +70,7 @@ export class DynamicDataModel extends Model {
         //field.options.locales = modelApp.locales;
       }
       let typeDecoratorKey: string = `${field.type}Decorator`;
-      deco.propertyTypes[field.name] = (type as any)[typeDecoratorKey] || type.anyDecorator;
+      deco.propertyTypes[field.name] = (type as any)[typeDecoratorKey] || type.anyDecorator;
       deco.propertyTypesOptions[field.name] = field.options;
       deco.propertyValidations[field.name] = (Array.isArray(field.validation)) ? field.validation : [];
 

@@ -1,9 +1,9 @@
 import { I18N } from 'aurelia-i18n';
 import { DicoModel } from '../../models/dico.model';
-import { inject, NewInstance, BindingEngine } from 'aurelia-framework';
+import { inject, NewInstance, BindingEngine } from 'aurelia-framework';
 import { type } from '../../deco';
-import { SwissdataApi } from '../../helpers/swissdata-api';
-import { StringTMap, StringAnyMap, errorify } from 'aurelia-resources';
+import { SwissdataApi } from '../../helpers/swissdata-api';
+import { errorify } from 'aurelia-resources';
 import { ValidationController, validateTrigger } from 'aurelia-validation';
 
 interface ModelConfigField {
@@ -15,10 +15,10 @@ interface ModelConfigField {
 export interface TranslationItem {
   key: string;
   iteration: number;
-  locales: StringTMap<DicoModel>;
+  locales: {[key: string]: DicoModel};
 }
 
-@inject(I18N,  SwissdataApi, NewInstance.of(ValidationController), BindingEngine)
+@inject(I18N,  SwissdataApi, NewInstance.of(ValidationController), BindingEngine)
 export class Dico {
 
   defaultLanguage: string = 'fr';
@@ -45,7 +45,7 @@ export class Dico {
 
   private processing: boolean = false;
 
-  constructor(private i18n: I18N, private api:  SwissdataApi, public validationController: ValidationController, public bindingEngine: BindingEngine) {
+  constructor(private i18n: I18N, private api:  SwissdataApi, public validationController: ValidationController, public bindingEngine: BindingEngine) {
     this.subscription = this.bindingEngine.collectionObserver(this.showedKeys)
           .subscribe(() => {
             this.updateItems++;
@@ -175,7 +175,7 @@ export class KeyValueConverter {
 
 export class FilterContextValueConverter {
   toView(items, keys, updateItems) {
-    if (!keys || !Array.isArray(keys) || keys.length === 0) return this.sort(items);
+    if (!keys || !Array.isArray(keys) || keys.length === 0) return this.sort(items);
     let returneditems: Array<DicoModel> = [];
     for (let item of items) {
       if (item.key.indexOf('.') === -1 && keys.indexOf('') !== -1) {

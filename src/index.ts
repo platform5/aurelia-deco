@@ -1,6 +1,6 @@
 import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
-import { ValidationMessageProvider } from 'aurelia-validation';
-import { I18N } from 'aurelia-i18n';
+import { ValidationMessageProvider } from 'aurelia-validation';
+import { I18N } from 'aurelia-i18n';
 export  { Container } from 'aurelia-dependency-injection';
 export * from './deco';
 
@@ -117,9 +117,9 @@ export * from './helpers/sd-login';
 export * from './components/address';
 export { SwissdataLogin } from './components/login/swissdata-login';
 export { SwissdataLoginTheme } from './components/login/swissdata-login-theme';
-export * from './components/dico2/dico';
-export * from './components/dico2/dico-dialog';
-export * from './components/dico/dico-translate-key-locale';
+export * from './components/dico2/dico';
+export * from './components/dico2/dico-dialog';
+export * from './components/dico/dico-translate-key-locale';
 export * from './components/form/swissdata-field';
 export * from './components/form/swissdata-user-field';
 export * from './components/contact/as-contact';
@@ -128,12 +128,6 @@ export * from './components/getting-started/getting-started';
 export * from './components/getting-started/getting-started-theme';
 export * from './components/getting-started/tour-step';
 export * from './components/users/select-user';
-
-/* Expose attributes */
-//export { SmoothScroll } from './attributes/smooth-scroll';
-
-/* Expose interfaces */
-//export { StringTMap, NumberTMap, StringAnyMap, NumberAnyMap, StringStringMap, NumberStringMap, StringNumberMap, NumberNumberMap, StringBooleanMap, NumberBooleanMap} from './interfaces/types';
 
 export * from './state';
 export * from './decorators';

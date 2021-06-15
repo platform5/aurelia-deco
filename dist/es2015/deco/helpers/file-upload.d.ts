@@ -1,12 +1,15 @@
-import { StringAnyMap } from 'aurelia-resources';
 export interface UxFileItem {
     name: string;
     filename?: string;
     type: string;
     previewData?: string;
     toUpload?: boolean;
-    previews?: StringAnyMap;
-    blobs?: StringAnyMap;
+    previews?: {
+        [key: string]: any;
+    };
+    blobs?: {
+        [key: string]: any;
+    };
 }
 export declare class FileUpload {
     static generatePreviews(files: Array<UxFileItem>, formats?: string[], defaultPreviewFormat?: string, quality?: number): Promise<any[]>;

@@ -1,20 +1,29 @@
 import { TypeDecorator } from '../decorators/types/type-decorator';
 import { ModelOptions } from '../decorators/model';
-import { StringTMap, StringAnyMap } from 'aurelia-resources';
 import { PropertyForm } from './../decorators/form';
 import { PropertyValidation } from './../decorators/validate';
 export interface Deco {
     baseroute: string;
     target: any;
     options: ModelOptions;
-    propertyTypes: StringTMap<TypeDecorator>;
-    propertyTypesOptions: StringAnyMap;
+    propertyTypes: {
+        [key: string]: TypeDecorator;
+    };
+    propertyTypesOptions: {
+        [key: string]: any;
+    };
     propertyFromApiOnly: Array<string>;
-    propertyForms: StringTMap<Array<PropertyForm>>;
-    propertyValidations: StringTMap<Array<PropertyValidation>>;
+    propertyForms: {
+        [key: string]: Array<PropertyForm>;
+    };
+    propertyValidations: {
+        [key: string]: Array<PropertyValidation>;
+    };
     propertySearchables: Array<string>;
     propertySortables: Array<string>;
     propertyFilterables: Array<string>;
-    propertyFilterablesOptions: StringAnyMap;
+    propertyFilterablesOptions: {
+        [key: string]: any;
+    };
 }
 export declare function cloneDeco(originalDeco: Deco): Deco;

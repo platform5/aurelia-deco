@@ -1,5 +1,4 @@
 import { Model, Deco } from '../deco';
-import { StringTMap } from 'aurelia-resources';
 import { DynamicConfigModel } from './dynamicconfig.model';
 export interface DynamicConfigModelWithDeco extends DynamicConfigModel {
     deco: Deco;
@@ -7,7 +6,9 @@ export interface DynamicConfigModelWithDeco extends DynamicConfigModel {
 export declare class DynamicDataModel extends Model {
     modelId: string;
     constructor(slug?: string);
-    static models: StringTMap<DynamicConfigModelWithDeco>;
+    static models: {
+        [key: string]: DynamicConfigModelWithDeco;
+    };
     static currentModelSlug: string;
     static clearRegisteredModels(): void;
     static registerModel(model: DynamicConfigModel): void;

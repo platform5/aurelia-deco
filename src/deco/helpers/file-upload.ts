@@ -1,4 +1,3 @@
-import { StringAnyMap } from 'aurelia-resources';
 import { ImageHelpers } from 'aurelia-resources';
 
 export interface UxFileItem /*extends File*/ {
@@ -7,8 +6,8 @@ export interface UxFileItem /*extends File*/ {
   type: string; // mime-type
   previewData ? : string; // preview generated on upload, so that we can immediately display the image in the list
   toUpload?: boolean;
-  previews?: StringAnyMap;
-  blobs?: StringAnyMap;
+  previews?: {[key: string]: any};
+  blobs?: {[key: string]: any};
 }
 
 export class FileUpload {

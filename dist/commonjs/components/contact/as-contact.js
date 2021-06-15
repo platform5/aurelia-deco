@@ -13,7 +13,6 @@ var core_1 = require("@aurelia-ux/core");
 var aurelia_logging_1 = require("aurelia-logging");
 var aurelia_event_aggregator_1 = require("aurelia-event-aggregator");
 var aurelia_pal_1 = require("aurelia-pal");
-//import { errorHandler, notifier } from '../notification/swissdata-notification';
 var aurelia_framework_2 = require("aurelia-framework");
 var models_1 = require("../../models");
 var aurelia_resources_1 = require("aurelia-resources");

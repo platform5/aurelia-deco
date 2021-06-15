@@ -8,7 +8,6 @@ import { ValidationRules, Validator, ValidationControllerFactory, ValidationCont
 import { AureliaUXFormRenderer } from 'aurelia-resources';
 import { getLogger, Logger } from 'aurelia-logging';
 import * as moment from 'moment';
-import { StringAnyMap, StringTMap } from 'aurelia-resources';
 let log: Logger = getLogger('decorators:model');
 
 //export type StaticThis<T> = { new (): T };
@@ -95,7 +94,7 @@ export class Model {
   _updatedAt: Date;
   _updatedBy: string;
 
-  _refLocales?: StringTMap<StringAnyMap>;
+  _refLocales?: {[key: string]: {[key: string]: any}};
 
   static options: ModelOptions;
 

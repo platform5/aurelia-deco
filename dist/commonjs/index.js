@@ -121,9 +121,5 @@ __exportStar(require("./components/getting-started/getting-started"), exports);
 __exportStar(require("./components/getting-started/getting-started-theme"), exports);
 __exportStar(require("./components/getting-started/tour-step"), exports);
 __exportStar(require("./components/users/select-user"), exports);
-/* Expose attributes */
-//export { SmoothScroll } from './attributes/smooth-scroll';
-/* Expose interfaces */
-//export { StringTMap, NumberTMap, StringAnyMap, NumberAnyMap, StringStringMap, NumberStringMap, StringNumberMap, NumberNumberMap, StringBooleanMap, NumberBooleanMap} from './interfaces/types';
 __exportStar(require("./state"), exports);
 __exportStar(require("./decorators"), exports);

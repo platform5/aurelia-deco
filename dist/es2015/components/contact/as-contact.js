@@ -10,7 +10,6 @@ import { StyleEngine } from '@aurelia-ux/core';
 import { getLogger } from 'aurelia-logging';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { DOM } from 'aurelia-pal';
-//import { errorHandler, notifier } from '../notification/swissdata-notification';
 import { computedFrom } from 'aurelia-framework';
 import { DynamicDataModel } from '../../models';
 import { errorify, notify } from 'aurelia-resources';

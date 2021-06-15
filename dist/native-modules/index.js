@@ -104,9 +104,5 @@ export * from './components/getting-started/getting-started';
 export * from './components/getting-started/getting-started-theme';
 export * from './components/getting-started/tour-step';
 export * from './components/users/select-user';
-/* Expose attributes */
-//export { SmoothScroll } from './attributes/smooth-scroll';
-/* Expose interfaces */
-//export { StringTMap, NumberTMap, StringAnyMap, NumberAnyMap, StringStringMap, NumberStringMap, StringNumberMap, NumberNumberMap, StringBooleanMap, NumberBooleanMap} from './interfaces/types';
 export * from './state';
 export * from './decorators';

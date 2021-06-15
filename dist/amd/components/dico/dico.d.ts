@@ -2,12 +2,13 @@ import { I18N } from 'aurelia-i18n';
 import { DicoModel } from '../../models/dico.model';
 import { BindingEngine } from 'aurelia-framework';
 import { SwissdataApi } from '../../helpers/swissdata-api';
-import { StringTMap } from 'aurelia-resources';
 import { ValidationController } from 'aurelia-validation';
 export interface TranslationItem {
     key: string;
     iteration: number;
-    locales: StringTMap<DicoModel>;
+    locales: {
+        [key: string]: DicoModel;
+    };
 }
 export declare class Dico {
     private i18n;

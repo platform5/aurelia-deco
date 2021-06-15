@@ -115,10 +115,6 @@ define(["require", "exports", "aurelia-framework", "aurelia-validation", "aureli
     __exportStar(getting_started_theme_1, exports);
     __exportStar(tour_step_1, exports);
     __exportStar(select_user_1, exports);
-    /* Expose attributes */
-    //export { SmoothScroll } from './attributes/smooth-scroll';
-    /* Expose interfaces */
-    //export { StringTMap, NumberTMap, StringAnyMap, NumberAnyMap, StringStringMap, NumberStringMap, StringNumberMap, NumberNumberMap, StringBooleanMap, NumberBooleanMap} from './interfaces/types';
     __exportStar(state_1, exports);
     __exportStar(decorators_1, exports);
 });

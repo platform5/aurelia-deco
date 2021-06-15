@@ -1,5 +1,4 @@
 import { AppState, SwissdataState, SwissdataUser, Steps } from './interfaces';
-import { StringAnyMap } from 'aurelia-resources';
 import { DynamicDataModel } from '../models/dynamicdata.model';
 import { NavigationInstruction } from 'aurelia-router';
 import { ProfileModel } from '../models';
@@ -13,11 +12,15 @@ export declare function authenticate(state: AppState, user: SwissdataUser, acces
 export declare function waitForDoubleAuth(state: AppState, doubleAuthValidationToken: string): AppState;
 export declare function logout(state: AppState): AppState;
 export declare function setLoginStep(state: AppState, step: Steps): AppState;
-export declare function setSwissdataStateProps(state: AppState, keyValues: StringAnyMap): AppState;
+export declare function setSwissdataStateProps(state: AppState, keyValues: {
+    [key: string]: any;
+}): AppState;
 export declare function setAppModels(state: AppState, prop: string, models: Array<DynamicDataModel>): AppState;
 export interface CurrentRoute {
     name: string;
-    params?: StringAnyMap;
+    params?: {
+        [key: string]: any;
+    };
 }
 export declare function setCurrentRoute(state: AppState, instruction: NavigationInstruction): AppState;
 export declare function setOnline(state: AppState, online: 'unkown' | boolean): AppState;

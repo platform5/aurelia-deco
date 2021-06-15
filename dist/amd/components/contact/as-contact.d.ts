@@ -2,7 +2,6 @@ import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { AsContactTheme } from './as-contact-theme';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { DynamicDataModel } from '../../models';
-import { StringAnyMap } from 'aurelia-resources';
 export declare class AsContact implements UxComponent {
     private element;
     styleEngine: StyleEngine;
@@ -13,7 +12,9 @@ export declare class AsContact implements UxComponent {
     excludeProperties: Array<string>;
     success: string;
     showSuccess: boolean;
-    defaultValues: StringAnyMap;
+    defaultValues: {
+        [key: string]: any;
+    };
     instance: DynamicDataModel;
     private log;
     sending: boolean;

@@ -5,10 +5,9 @@ import { AsContactTheme } from './as-contact-theme';
 import { getLogger, Logger } from 'aurelia-logging';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { DOM } from 'aurelia-pal';
-//import { errorHandler, notifier } from '../notification/swissdata-notification';
 import { computedFrom } from 'aurelia-framework';
 import { DynamicDataModel } from '../../models';
-import { StringAnyMap, errorify, notify } from 'aurelia-resources';
+import { errorify, notify } from 'aurelia-resources';
 
 @inject(Element, StyleEngine, EventAggregator)
 @customElement('as-contact')
@@ -20,7 +19,7 @@ export class AsContact implements UxComponent {
   @bindable public excludeProperties: Array<string> = [];
   @bindable public success: string = 'Your message has been sent';
   @bindable public showSuccess: boolean = false;
-  @bindable public defaultValues: StringAnyMap = {};
+  @bindable public defaultValues: {[key: string]: any} = {};
 
   public instance: DynamicDataModel;
   private log: Logger;

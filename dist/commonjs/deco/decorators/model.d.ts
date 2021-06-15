@@ -2,7 +2,6 @@ import { UxFileItem } from '../helpers/file-upload';
 import { Deco } from '../interfaces/deco';
 import { DecoApi, RequestOption } from '../helpers/deco-api';
 import { ValidationController } from 'aurelia-validation';
-import { StringAnyMap, StringTMap } from 'aurelia-resources';
 export interface ModelOptions {
     enableStory?: boolean;
 }
@@ -47,7 +46,11 @@ export declare class Model {
     _createdBy: string;
     _updatedAt: Date;
     _updatedBy: string;
-    _refLocales?: StringTMap<StringAnyMap>;
+    _refLocales?: {
+        [key: string]: {
+            [key: string]: any;
+        };
+    };
     static options: ModelOptions;
     static get deco(): Deco;
     get deco(): Deco;
