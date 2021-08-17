@@ -28,6 +28,7 @@ export declare class DecoApi {
     state: DecoAppState;
     container: Container;
     private version;
+    sessionId: string;
     constructor(http: HttpClient);
     init(store: Store<DecoAppState>, options?: DecoInitOptions): Promise<any>;
     configureHost(host: string): void;

@@ -55,6 +55,7 @@ var DecoApi = /** @class */ (function () {
         this.configured = false;
         this.initDone = false;
         this.version = '';
+        this.sessionId = '';
         this.log = aurelia_logging_1.getLogger('deco-api');
     }
     DecoApi.prototype.init = function (store, options) {
@@ -141,7 +142,9 @@ var DecoApi = /** @class */ (function () {
         if (options === void 0) { options = {}; }
         var o = {
             method: 'get',
-            headers: {}
+            headers: {
+                "sdiosid": this.sessionId
+            }
         };
         o = Object.assign({}, o, options);
         if (!o.headers['Content-Type'] && (!options.bodyFormat || options.bodyFormat === 'json')) {

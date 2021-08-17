@@ -2,7 +2,7 @@ import { Container, inject } from 'aurelia-framework';
 import { HttpClient } from 'aurelia-fetch-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { DecoAppState, initDecoState, clearDecoState, setLanguage, setRefLanguage, setCountryCode, setLanguages, setCountries, setCountry } from '../state';
-import { Store } from 'aurelia-store';
+import { Store } from 'aurelia-store';
 import 'whatwg-fetch';
 import { getLogger, Logger } from 'aurelia-logging';
 
@@ -33,6 +33,7 @@ export class DecoApi {
   public state: DecoAppState;
   public container: Container;
   private version: string = '';
+  public sessionId: string = '';
 
   constructor(public http: HttpClient) {
     this.log = getLogger('deco-api');
@@ -64,7 +65,7 @@ export class DecoApi {
     this.store.registerAction('clearDecoState', clearDecoState);
 
     this.container.get(EventAggregator).subscribe('language:changed', async (language) => {
-      if (typeof language !== 'string' || language.length !== 2) {
+      if (typeof language !== 'string' || language.length !== 2) {
         this.log.warn('Invalid lanuage: ', language);
         return;
       }
@@ -72,7 +73,7 @@ export class DecoApi {
     });
 
     this.container.get(EventAggregator).subscribe('country:changed', async (country) => {
-      if (typeof country !== 'string' || country.length !== 2) {
+      if (typeof country !== 'string' || country.length !== 2) {
         this.log.warn('Invalid lanuage: ', country);
         return;
       }
@@ -114,12 +115,14 @@ export class DecoApi {
   defaultOptions(options: RequestOption = {}) {
     let o: any = {
       method: 'get',
-      headers: {}
+      headers: {
+        "sdiosid": this.sessionId
+      }
     };
 
     o = Object.assign({}, o, options);
 
-    if (!o.headers['Content-Type'] && (!options.bodyFormat ||  options.bodyFormat === 'json')) {
+    if (!o.headers['Content-Type'] && (!options.bodyFormat ||  options.bodyFormat === 'json')) {
       o.headers['Content-Type'] = 'application/json';
     }
 
@@ -167,7 +170,7 @@ export class DecoApi {
   }
 
   private normalizeBody(body: any, options: any) {
-    if (!options.bodyFormat ||  options.bodyFormat === 'json') {
+    if (!options.bodyFormat ||  options.bodyFormat === 'json') {
       body = JSON.stringify(body);
     }
     return body;
@@ -175,7 +178,7 @@ export class DecoApi {
 }
 
 export function jsonify(response: Response): Promise<any> {
-  if (!response || !response.json) return Promise.resolve(response);
+  if (!response || !response.json) return Promise.resolve(response);
   if (response.status === 204) {
     return Promise.resolve({});
   }
