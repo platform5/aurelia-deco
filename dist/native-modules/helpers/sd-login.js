@@ -171,7 +171,7 @@ var SdLogin = /** @class */ (function () {
                 // if we arrive here, it's good news, what failed was not required. We can go on...
             }
             _this.processing = true;
-            _this.eventAggregator.publish('analytics:event', { key: 'create-account', value: { email: instance.email, mobile: instance.mobile } });
+            _this.eventAggregator.publish('analytics:event', { category: 'login', action: 'create-account', value: { email: instance.email, mobile: instance.mobile } });
             return instance.createAccount({ body: { password: password, extraData: extraData } });
         }).then(function (element) {
             _this.log.debug('response from create account', element);
@@ -220,7 +220,7 @@ var SdLogin = /** @class */ (function () {
         if (response.firstname) {
             // we have a user
             if (response.id) {
-                this.eventAggregator.publish('analytics:event', { key: 'validated-account', value: { userId: response.id } });
+                this.eventAggregator.publish('analytics:event', { category: 'loctin', action: 'validated-account', value: { userId: response.id } });
             }
             return true;
         }

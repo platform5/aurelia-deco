@@ -21,7 +21,7 @@ export class SdLogin {
   private strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
   private mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
   private weakRegex = new RegExp("^(?=.*[a-z])|(?=.*[A-Z])|(?=.*[0-9])|(?=.*[!@#\$%\^&\*])(?=.{8,})");
-  public passwordStrengthRequired: 'strong' | 'medium' | 'weak' = 'medium';
+  public passwordStrengthRequired: 'strong' | 'medium' | 'weak' = 'medium';
   
   public eventAggregator: EventAggregator;
   public processing: boolean = false;
@@ -56,7 +56,7 @@ export class SdLogin {
     });
   }
 
-  registerActions() {
+  registerActions() {
     this.store.registerAction('sd-login-reset', reset);
     this.store.registerAction('sd-login-setUsername', setUsername);
     this.store.registerAction('sd-login-passwordStep', passwordStep);
@@ -161,7 +161,7 @@ export class SdLogin {
       extraData?: any
     ): Promise<any> {
     let regex: RegExp = this.passwordRegex();
-    if (!regex.test(password) && password !== '0123') return Promise.reject(new Error('Password not strong enough'));
+    if (!regex.test(password) && password !== '0123') return Promise.reject(new Error('Password not strong enough'));
     let instance = new UserModel;
     instance.firstname = firstname;
     instance.lastname = lastname;
@@ -181,14 +181,14 @@ export class SdLogin {
         // if we arrive here, it's good news, what failed was not required. We can go on...
       }
       this.processing = true;
-      this.eventAggregator.publish('analytics:event', {key: 'create-account', value: {email: instance.email, mobile: instance.mobile}});
+      this.eventAggregator.publish('analytics:event', {category: 'login', action: 'create-account', value: {email: instance.email, mobile: instance.mobile}});
       return instance.createAccount({body: {password: password, extraData: extraData}});
-    }).then((element): void | Promise<any> => {
+    }).then((element): void | Promise<any> => {
       this.log.debug('response from create account', element);
       if (element.token) {
         return this.store.dispatch(validateAccountStep, element.token, element.expires);
       }
-    }).then(() => {
+    }).then(() => {
       this.processing = false;
     }).catch((error) => {
       this.processing = false;
@@ -197,7 +197,7 @@ export class SdLogin {
   }
 
   validateCode(code: string, type: 'email' | 'mobile'): Promise<UserModel> {
-    if (!code || code.length < 6) {
+    if (!code || code.length < 6) {
       return Promise.reject(new Error('The code must be contain at least 6 digits'));
     }
     this.processing = true;
@@ -232,7 +232,7 @@ export class SdLogin {
     if (response.firstname) {
       // we have a user
       if (response.id) {
-        this.eventAggregator.publish('analytics:event', {key: 'validated-account', value: {userId: response.id}});
+        this.eventAggregator.publish('analytics:event', {category: 'loctin', action: 'validated-account', value: {userId: response.id}});
       }
       return true;
     } else {
@@ -243,7 +243,7 @@ export class SdLogin {
   requestResetPassword(input: string): Promise<any> {
     this.processing = true;
     return this.api.requestResetPassword(input).then((token) => {
-      if (!token || !token.token) throw new Error('Invalid request');
+      if (!token || !token.token) throw new Error('Invalid request');
       return this.store.dispatch(resetPasswordStep, token.token);
     }).then(() => {
       this.processing = false;
@@ -258,7 +258,7 @@ export class SdLogin {
     if (this.passwordStrengthRequired === 'weak') regex = this.weakRegex;
     else if (this.passwordStrengthRequired === 'medium') regex = this.mediumRegex;
     else regex = this.strongRegex;
-    if (!regex.test(password) && password !== '0123') return Promise.reject(new Error('Password not strong enough'));
+    if (!regex.test(password) && password !== '0123') return Promise.reject(new Error('Password not strong enough'));
     this.processing = true;
     return this.api.resetPassword(this.state.sdlogin.resetPasswordToken, code, password).then(() => {
       this.processing = false;

@@ -6,13 +6,13 @@ import { SwissdataApi } from '../../helpers/swissdata-api';
 import { UserModel } from '../../models/user.model';
 import { validate, jsonify } from '../../deco';
 import { SwissdataLoginFormValidationRenderer } from './swissdata-login-form-validation-renderer';
-import { errorHandler, notifier } from '../notification/swissdata-notification';
+import { errorHandler, notifier } from '../notification/swissdata-notification';
 import { DOM } from 'aurelia-pal';
 import { countries }  from 'aurelia-resources';
 import PhoneNumber from 'awesome-phonenumber';
 import { ValidationController, validateTrigger } from 'aurelia-validation';
-import { setLoginStep, setSwissdataStateProps } from '../../state/actions';
-import { Logger, getLogger } from 'aurelia-logging';
+import { setLoginStep, setSwissdataStateProps } from '../../state/actions';
+import { Logger, getLogger } from 'aurelia-logging';
 
 // INFO: currently the "account-created" screen is useless because the component
 // will immediatly login the user and fire the "login" event when an account is created
@@ -21,7 +21,7 @@ import { Logger, getLogger } from 'aurelia-logging';
 export class SwissdataLogin implements UxComponent {
 
   @bindable theme: SwissdataLoginTheme;
-  @bindable step: 'login' | 'double-auth' | 'create-account' | 'validate-account' | 'account-created' | 'forgot-password' | 'reset-password' = 'login';
+  @bindable step: 'login' | 'double-auth' | 'create-account' | 'validate-account' | 'account-created' | 'forgot-password' | 'reset-password' = 'login';
   @bindable requireEmail: boolean = true;
   @bindable requireMobile: boolean = true;
 
@@ -35,7 +35,7 @@ export class SwissdataLogin implements UxComponent {
   newAccountInstance: UserModel;
   createAccountPassword: string = '';
   createAccountMobile: string = '';
-  createAccountValidation: 'emailOrMobile' | 'emailAndMobile' | 'emailOnly' | 'mobileOnly' | 'none' = 'emailOrMobile';
+  createAccountValidation: 'emailOrMobile' | 'emailAndMobile' | 'emailOnly' | 'mobileOnly' | 'none' = 'emailOrMobile';
   private countryCode: string = 'ch';
   private countryPrefix: string = '+41';
   private phonePlaceholder: string = '079 000 00 00';
@@ -85,7 +85,7 @@ export class SwissdataLogin implements UxComponent {
 
   public attached() {
     this.swissdataApi.isReady().then(() => {
-      this.step = this.swissdataApi.state.swissdata.loginStep || 'login';
+      this.step = this.swissdataApi.state.swissdata.loginStep || 'login';
       return this.swissdataApi.store.dispatch(setLoginStep, this.step);
     }).then(() => {
       this.fixInputs();
@@ -188,7 +188,7 @@ export class SwissdataLogin implements UxComponent {
       let inputElement;
       if (this.loginInput) {
         inputElement = this.element.querySelector('.swissdata-login-step.login').querySelector('ux-input[type=password]');
-        } else {
+        } else {
           inputElement = this.element.querySelector('.swissdata-login-step.login').querySelector('ux-input');
         }
         if (inputElement) {
@@ -300,9 +300,9 @@ export class SwissdataLogin implements UxComponent {
         // if we arrive here, it's good news, what failed was not required. We can go on...
       }
       this.processing = true;
-      this.eventAggregator.publish('analytics:event', {key: 'create-account', value: {email: this.newAccountInstance.email, mobile: this.newAccountInstance.mobile}});
+      this.eventAggregator.publish('analytics:event', {category: 'login', action: 'create-account', value: {email: this.newAccountInstance.email, mobile: this.newAccountInstance.mobile}});
       return this.newAccountInstance.createAccount({body: {password: this.createAccountPassword}});
-    }).then((element): void | Promise<any> => {
+    }).then((element): void | Promise<any> => {
       if (!element) return Promise.resolve(null);
       this.processing = false;
       if (element.token) {
@@ -315,9 +315,9 @@ export class SwissdataLogin implements UxComponent {
         // user is correctly created, go to confirmation screen
         // info: we don't go to confirmation screen, we login the user
         if (element.id) {
-          this.eventAggregator.publish('analytics:event', {key: 'validate-account', value: {userId: element.id}});
+          this.eventAggregator.publish('analytics:event', {category: 'login', action: 'validate-account', value: {userId: element.id}});
         }
-        this.loginInput = element.email || element.mobile;
+        this.loginInput = element.email || element.mobile;
         this.loginPassword = this.createAccountPassword;
         setTimeout(() => {
           this.step = 'login';
@@ -379,7 +379,7 @@ export class SwissdataLogin implements UxComponent {
   }
 
   validateEmail(): any {
-    if (!this.validateEmailCode || this.validateEmailCode.length !== 6) {
+    if (!this.validateEmailCode || this.validateEmailCode.length !== 6) {
       errorHandler('login.validate-email', {hideOnClick: false, clearHandlerWhenIntercepted: true})(new Error('The code must be 6 digits'));
       return;
     }
@@ -394,7 +394,7 @@ export class SwissdataLogin implements UxComponent {
   }
 
   validateMobile(): any {
-    if (!this.validateMobileCode || this.validateMobileCode.length !== 6) {
+    if (!this.validateMobileCode || this.validateMobileCode.length !== 6) {
       errorHandler('login.validate-mobile', {hideOnClick: false, clearHandlerWhenIntercepted: true})(new Error('The code must be 6 digits'));
       return;
     }
@@ -425,9 +425,9 @@ export class SwissdataLogin implements UxComponent {
     if (response.firstname) {
       // we have a user
       if (response.id) {
-        this.eventAggregator.publish('analytics:event', {key: 'validated-account', value: {userId: response.id}});
+        this.eventAggregator.publish('analytics:event', {category: 'login', action: 'validated-account', value: {userId: response.id}});
       }
-      if (!response.email || !response.mobile || this.createAccountValidation === 'emailOnly' || this.createAccountValidation === 'mobileOnly') {
+      if (!response.email || !response.mobile || this.createAccountValidation === 'emailOnly' || this.createAccountValidation === 'mobileOnly') {
         // we have enough validation, confirm screen
         this.goToAccountCreatedScreen();
       } else if (this.emailValidated && this.mobileValidated) {
@@ -452,7 +452,7 @@ export class SwissdataLogin implements UxComponent {
   }
 
   requestResetPassword() {
-    let forgotPasswordInput = this.forgotPasswordEmail || this.forgotPasswordMobile;
+    let forgotPasswordInput = this.forgotPasswordEmail || this.forgotPasswordMobile;
     if (!forgotPasswordInput) return;
 
     this.processing = true;

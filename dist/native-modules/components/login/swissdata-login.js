@@ -305,7 +305,7 @@ var SwissdataLogin = /** @class */ (function () {
                 // if we arrive here, it's good news, what failed was not required. We can go on...
             }
             _this.processing = true;
-            _this.eventAggregator.publish('analytics:event', { key: 'create-account', value: { email: _this.newAccountInstance.email, mobile: _this.newAccountInstance.mobile } });
+            _this.eventAggregator.publish('analytics:event', { category: 'login', action: 'create-account', value: { email: _this.newAccountInstance.email, mobile: _this.newAccountInstance.mobile } });
             return _this.newAccountInstance.createAccount({ body: { password: _this.createAccountPassword } });
         }).then(function (element) {
             if (!element)
@@ -322,7 +322,7 @@ var SwissdataLogin = /** @class */ (function () {
                 // user is correctly created, go to confirmation screen
                 // info: we don't go to confirmation screen, we login the user
                 if (element.id) {
-                    _this.eventAggregator.publish('analytics:event', { key: 'validate-account', value: { userId: element.id } });
+                    _this.eventAggregator.publish('analytics:event', { category: 'login', action: 'validate-account', value: { userId: element.id } });
                 }
                 _this.loginInput = element.email || element.mobile;
                 _this.loginPassword = _this.createAccountPassword;
@@ -430,7 +430,7 @@ var SwissdataLogin = /** @class */ (function () {
         if (response.firstname) {
             // we have a user
             if (response.id) {
-                this.eventAggregator.publish('analytics:event', { key: 'validated-account', value: { userId: response.id } });
+                this.eventAggregator.publish('analytics:event', { category: 'login', action: 'validated-account', value: { userId: response.id } });
             }
             if (!response.email || !response.mobile || this.createAccountValidation === 'emailOnly' || this.createAccountValidation === 'mobileOnly') {
                 // we have enough validation, confirm screen
