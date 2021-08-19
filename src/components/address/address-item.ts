@@ -4,6 +4,7 @@ import { bindable } from 'aurelia-framework';
 export class AddressItem {
   @bindable public address: Address;
   @bindable public dicoContext = '';
+  @bindable public displayDescription = false;
   public main: string = '';
   public secondary: string = '';
   public label: string = '';
@@ -20,17 +21,20 @@ export class AddressItem {
     }
     this.main = this.address.street;
     const parts: Array<string> = [];
-    if (this.address.zip || this.address.city) {
+    if (this.address.zip || this.address.city) {
       parts.push(`${this.address.zip} ${this.address.city}`.trim());
     }
     if (this.address.country) {
       parts.push(this.address.country);
     }
+    if (this.address.description && this.displayDescription) {
+      parts.push(this.address.description);
+    }
     this.secondary = parts.join(', ');
-    this.label = this.address.label || '';
+    this.label = this.address.label || '';
   }
 
   context() {
-    return this.dicoContext ? this.dicoContext + '.' : '';
+    return this.dicoContext ? this.dicoContext + '.' : '';
   }
 }

@@ -8,6 +8,7 @@ import { bindable } from 'aurelia-framework';
 var AddressItem = /** @class */ (function () {
     function AddressItem() {
         this.dicoContext = '';
+        this.displayDescription = false;
         this.main = '';
         this.secondary = '';
         this.label = '';
@@ -29,6 +30,9 @@ var AddressItem = /** @class */ (function () {
         if (this.address.country) {
             parts.push(this.address.country);
         }
+        if (this.address.description && this.displayDescription) {
+            parts.push(this.address.description);
+        }
         this.secondary = parts.join(', ');
         this.label = this.address.label || '';
     };
@@ -41,6 +45,9 @@ var AddressItem = /** @class */ (function () {
     __decorate([
         bindable
     ], AddressItem.prototype, "dicoContext", void 0);
+    __decorate([
+        bindable
+    ], AddressItem.prototype, "displayDescription", void 0);
     return AddressItem;
 }());
 export { AddressItem };

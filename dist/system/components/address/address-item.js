@@ -18,6 +18,7 @@ System.register(["aurelia-framework"], function (exports_1, context_1) {
             AddressItem = /** @class */ (function () {
                 function AddressItem() {
                     this.dicoContext = '';
+                    this.displayDescription = false;
                     this.main = '';
                     this.secondary = '';
                     this.label = '';
@@ -39,6 +40,9 @@ System.register(["aurelia-framework"], function (exports_1, context_1) {
                     if (this.address.country) {
                         parts.push(this.address.country);
                     }
+                    if (this.address.description && this.displayDescription) {
+                        parts.push(this.address.description);
+                    }
                     this.secondary = parts.join(', ');
                     this.label = this.address.label || '';
                 };
@@ -51,6 +55,9 @@ System.register(["aurelia-framework"], function (exports_1, context_1) {
                 __decorate([
                     aurelia_framework_1.bindable
                 ], AddressItem.prototype, "dicoContext", void 0);
+                __decorate([
+                    aurelia_framework_1.bindable
+                ], AddressItem.prototype, "displayDescription", void 0);
                 return AddressItem;
             }());
             exports_1("AddressItem", AddressItem);

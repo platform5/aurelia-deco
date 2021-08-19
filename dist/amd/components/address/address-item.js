@@ -11,6 +11,7 @@ define(["require", "exports", "aurelia-framework"], function (require, exports, 
     var AddressItem = /** @class */ (function () {
         function AddressItem() {
             this.dicoContext = '';
+            this.displayDescription = false;
             this.main = '';
             this.secondary = '';
             this.label = '';
@@ -32,6 +33,9 @@ define(["require", "exports", "aurelia-framework"], function (require, exports, 
             if (this.address.country) {
                 parts.push(this.address.country);
             }
+            if (this.address.description && this.displayDescription) {
+                parts.push(this.address.description);
+            }
             this.secondary = parts.join(', ');
             this.label = this.address.label || '';
         };
@@ -44,6 +48,9 @@ define(["require", "exports", "aurelia-framework"], function (require, exports, 
         __decorate([
             aurelia_framework_1.bindable
         ], AddressItem.prototype, "dicoContext", void 0);
+        __decorate([
+            aurelia_framework_1.bindable
+        ], AddressItem.prototype, "displayDescription", void 0);
         return AddressItem;
     }());
     exports.AddressItem = AddressItem;
