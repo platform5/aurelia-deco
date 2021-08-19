@@ -55,6 +55,7 @@ var SelectAddressControl = /** @class */ (function () {
         this.element = element;
         this.addresses = [];
         this.dicoContext = '';
+        this.displayDescription = false;
     }
     Object.defineProperty(SelectAddressControl.prototype, "hasAddress", {
         get: function () {
@@ -112,6 +113,9 @@ var SelectAddressControl = /** @class */ (function () {
     __decorate([
         aurelia_framework_1.bindable
     ], SelectAddressControl.prototype, "dicoContext", void 0);
+    __decorate([
+        aurelia_framework_1.bindable
+    ], SelectAddressControl.prototype, "displayDescription", void 0);
     __decorate([
         aurelia_framework_1.computedFrom('value', 'value.street', 'value.zip', 'value.city', 'value.country')
     ], SelectAddressControl.prototype, "hasAddress", null);

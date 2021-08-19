@@ -1,8 +1,8 @@
 import { SelectAddressDialog } from './select-address-dialog';
-import { bindable, bindingMode, inject, computedFrom } from 'aurelia-framework';
+import { bindable, bindingMode, inject, computedFrom } from 'aurelia-framework';
 import { Address } from '../../decorators';
 import { UxModalService } from '@aurelia-ux/modal';
-import { getLogger } from 'aurelia-logging';
+import { getLogger } from 'aurelia-logging';
 import { DOM, PLATFORM } from 'aurelia-pal';
 const log = getLogger('select-address-control');
 
@@ -11,6 +11,7 @@ export class SelectAddressControl {
   @bindable({defaultBindingMode: bindingMode.twoWay}) public value: any;
   @bindable public addresses: Array<Address> = [];
   @bindable public dicoContext = '';
+  @bindable public displayDescription = false;
 
   constructor(private modalService: UxModalService, private element: HTMLElement) {
 
@@ -18,7 +19,7 @@ export class SelectAddressControl {
 
   @computedFrom('value', 'value.street', 'value.zip', 'value.city', 'value.country')
   public get hasAddress(): boolean {
-    if (!this.value || typeof this.value !== 'object') {
+    if (!this.value || typeof this.value !== 'object') {
       return false;
     } else if (!this.value.street && !this.value.zip && !this.value.city && !this.value.country) {
       return false;
