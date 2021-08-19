@@ -4,6 +4,7 @@ var AddressDialog = /** @class */ (function () {
         this.mode = 'create';
         this.labels = [];
         this.dicoContext = '';
+        this.allowDescription = false;
     }
     AddressDialog.prototype.activate = function (params) {
         if (params.address && typeof params.address === 'object') {
@@ -20,6 +21,9 @@ var AddressDialog = /** @class */ (function () {
         }
         else {
             this.labels = [];
+        }
+        if (params.allowDescription && typeof params.allowDescription === 'boolean') {
+            this.allowDescription = params.allowDescription;
         }
         if (params.dicoContext) {
             this.dicoContext = params.dicoContext;

@@ -1,5 +1,5 @@
-import { bindable, computedFrom, bindingMode } from 'aurelia-framework';
-import { countries } from 'aurelia-resources';
+import { bindable, computedFrom, bindingMode } from 'aurelia-framework';
+import { countries } from 'aurelia-resources';
 
 export class AddressControl {
   @bindable({defaultBindingMode: bindingMode.twoWay}) public value: any;
@@ -7,9 +7,10 @@ export class AddressControl {
   @bindable public dense: boolean = false;
   @bindable public disabled: boolean = false;
   @bindable public countryType: 'input' | 'list' = 'input';
-  @bindable public countryList: 'all' | Array<string> = 'all';
+  @bindable public countryList: 'all' | Array<string> = 'all';
   @bindable public labels: string[] = [];
   @bindable public dicoContext = '';
+  @bindable public allowDescription = false;
 
   private ready: boolean = false;
 
@@ -41,6 +42,6 @@ export class AddressControl {
   }
 
   context() {
-    return this.dicoContext ? this.dicoContext + '.' : '';
+    return this.dicoContext ? this.dicoContext + '.' : '';
   }
 }

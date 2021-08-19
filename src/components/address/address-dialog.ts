@@ -6,6 +6,7 @@ export class AddressDialog {
   public mode: 'create' | 'edit' = 'create';
   public labels: string[] = [];
   public dicoContext = '';
+  public allowDescription = false;
 
   public activate(params: any) {
     if (params.address && typeof params.address === 'object') {
@@ -20,6 +21,9 @@ export class AddressDialog {
       this.labels = params.labels;
     } else {
       this.labels = [];
+    }
+    if (params.allowDescription && typeof params.allowDescription === 'boolean') {
+      this.allowDescription = params.allowDescription;
     }
     if (params.dicoContext) {
       this.dicoContext = params.dicoContext;

@@ -7,6 +7,7 @@ export declare class AddressControl {
     countryList: 'all' | Array<string>;
     labels: string[];
     dicoContext: string;
+    allowDescription: boolean;
     private ready;
     bind(): void;
     valueChanged(): void;

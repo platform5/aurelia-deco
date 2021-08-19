@@ -17,6 +17,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-resources"], functio
             this.countryList = 'all';
             this.labels = [];
             this.dicoContext = '';
+            this.allowDescription = false;
             this.ready = false;
         }
         AddressControl.prototype.bind = function () {
@@ -74,6 +75,9 @@ define(["require", "exports", "aurelia-framework", "aurelia-resources"], functio
         __decorate([
             aurelia_framework_1.bindable
         ], AddressControl.prototype, "dicoContext", void 0);
+        __decorate([
+            aurelia_framework_1.bindable
+        ], AddressControl.prototype, "allowDescription", void 0);
         __decorate([
             aurelia_framework_1.computedFrom('countryList')
         ], AddressControl.prototype, "computedCountryList", null);

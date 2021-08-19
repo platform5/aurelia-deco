@@ -4,6 +4,7 @@ export declare class AddressDialog {
     mode: 'create' | 'edit';
     labels: string[];
     dicoContext: string;
+    allowDescription: boolean;
     activate(params: any): void;
     private fixAddressKeys;
 }
