@@ -1,5 +1,5 @@
 import { TypeDecorator } from '../deco';
-import { getLogger } from 'aurelia-logging';
+import { getLogger } from 'aurelia-logging';
 const log = getLogger('decorators:address');
 
 export let inputAddress = (value: any) => {
@@ -11,7 +11,7 @@ export let inputAddress = (value: any) => {
 export let validateAddress = (value: any, options?: any) => {
   if (value === undefined) return true;
   if (typeof value !== 'object') return false;
-  let allowedKeys = ['label', 'street', 'city', 'zip', 'country'];
+  let allowedKeys = ['label', 'street', 'city', 'zip', 'country', 'description'];
   for (let key in value) {
     if (allowedKeys.indexOf(key) === -1) return false;
     if (typeof value !== 'string') return false;
@@ -58,11 +58,12 @@ export interface Address {
   city?: string;
   zip?: string;
   country?: string;
+  description?: string;
 }
 
 export function isSameAddress(a: Address, b: Address): boolean {
-  if (a === null || b === null) return false;
-  if (a === undefined || b === undefined) return false;
-  let same = (a.label === b.label && a.street === b.street && a.zip === b.zip && a.city === b.city && a.country === b.country);
+  if (a === null || b === null) return false;
+  if (a === undefined || b === undefined) return false;
+  let same = (a.label === b.label && a.street === b.street && a.zip === b.zip && a.city === b.city && a.country === b.country && a.description === b.description);
   return same;
 }

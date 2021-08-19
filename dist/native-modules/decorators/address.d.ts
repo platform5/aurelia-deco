@@ -13,5 +13,6 @@ export interface Address {
     city?: string;
     zip?: string;
     country?: string;
+    description?: string;
 }
 export declare function isSameAddress(a: Address, b: Address): boolean;

@@ -15,7 +15,7 @@ define(["require", "exports", "../deco", "aurelia-logging"], function (require, 
             return true;
         if (typeof value !== 'object')
             return false;
-        var allowedKeys = ['label', 'street', 'city', 'zip', 'country'];
+        var allowedKeys = ['label', 'street', 'city', 'zip', 'country', 'description'];
         for (var key in value) {
             if (allowedKeys.indexOf(key) === -1)
                 return false;
@@ -64,7 +64,7 @@ define(["require", "exports", "../deco", "aurelia-logging"], function (require, 
             return false;
         if (a === undefined || b === undefined)
             return false;
-        var same = (a.label === b.label && a.street === b.street && a.zip === b.zip && a.city === b.city && a.country === b.country);
+        var same = (a.label === b.label && a.street === b.street && a.zip === b.zip && a.city === b.city && a.country === b.country && a.description === b.description);
         return same;
     }
     exports.isSameAddress = isSameAddress;
