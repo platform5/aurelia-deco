@@ -1508,10 +1508,10 @@
   dependencies:
     "aurelia-pal" "^1.0.0"
 
-"aurelia-resources@^3.0.5":
-  "integrity" "sha512-vyPR9ME9sI7w0tNfV6l6Q8eBUTrVdJLBB6oejVtf8qHhnr5AkAtqnteUCSF/r7orQk1t+0h/hlojNndfCEc07w=="
-  "resolved" "https://registry.npmjs.org/aurelia-resources/-/aurelia-resources-3.0.5.tgz"
-  "version" "3.0.5"
+"aurelia-resources@^3.0.6":
+  "integrity" "sha512-FyUWRHwqiTM4Ih/Z+ajiAPIg6trYfYZPliz3seJR5gEf6Oovfdl6W+mHxjZIcbyKocXWkIzkgB95xi3zp0UG1g=="
+  "resolved" "https://registry.npmjs.org/aurelia-resources/-/aurelia-resources-3.0.6.tgz"
+  "version" "3.0.6"
   dependencies:
     "@sentry/browser" "^6.2.2"
     "@sentry/tracing" "^6.2.2"
