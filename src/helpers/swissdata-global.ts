@@ -7,13 +7,13 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { Router } from 'aurelia-router';
 import { I18N } from 'aurelia-i18n';
 import { SwissdataApi } from './swissdata-api';
-import { Container } from 'aurelia-dependency-injection';
+import { Container } from 'aurelia-dependency-injection';
 //import { errorHandler } from '../components/notification/swissdata-notification';
 import { getLogger, Logger } from 'aurelia-logging';
-import { DynamicDataModel } from '../models/dynamicdata.model';
+import { DynamicDataModel } from '../models/dynamicdata.model';
 import { Store, IpStackResponse, IpStack, EnsureModel, Model } from '../deco';
 import { logMiddleware, LogLevel, MiddlewarePlacement, localStorageMiddleware, rehydrateFromLocalStorage } from 'aurelia-store';
-import { setAppModels, setCurrentRoute } from '../state/actions';
+import { setAppModels, setCurrentRoute } from '../state/actions';
 import { AppState } from '../state/interfaces';
 import { pluck } from 'rxjs/operators';
 import { errorify, SentryHelper } from 'aurelia-resources';
@@ -158,7 +158,7 @@ export class SwissdataGlobal {
     }).then(() => {
       return store.dispatch('initAppState');
     }).then(() => {
-      if (config.enableIpStackAutoDetect && !this.state.countryCode) {
+      if (config.enableIpStackAutoDetect && !this.state.country) {
         this.log.info('Auto detect country');
         // async operation
         IpStack.autoDetect().then((result) => {
@@ -239,7 +239,7 @@ export class SwissdataGlobal {
 
   public onAnyLoad(): Promise<any> {
     // overwrite or enhance this method in global.ts to do some work while loading authenticated or unauthenticated users
-    if (this.config.useDynamicModels) {
+    if (this.config.useDynamicModels) {
       return DynamicConfigModel.getAll().then((elements): Promise<any> => {
         for (let instance of elements) {
           DynamicDataModel.registerModel((instance as DynamicConfigModel));
@@ -316,7 +316,7 @@ export class SwissdataGlobal {
     return this.router.navigateToRoute(route, params, options);
   }
 
-  public navigate(fragment: string, options?: any) {
+  public navigate(fragment: string, options?: any) {
     return this.router.navigate(fragment, options);
   }
 
@@ -360,12 +360,12 @@ export class SwissdataGlobal {
     return this.router.ensureConfigured().then((): Promise<any> => {
       return new Promise((resolve) => {
         let stateCurrentRoute = Object.assign({}, state.currentRoute);
-        if (!stateCurrentRoute || !stateCurrentRoute.name) return resolve(null);
+        if (!stateCurrentRoute || !stateCurrentRoute.name) return resolve(null);
         this.getCurrentRouteASAP().then((currentRouteName) => {
           if (currentRouteName && onlyOnSpecificRouteNames.length && onlyOnSpecificRouteNames.indexOf(currentRouteName) === -1) {
             resolve(null);
           } else if (stateCurrentRoute.name) {
-            let params = stateCurrentRoute.params || {};
+            let params = stateCurrentRoute.params || {};
             this.router.navigateToRoute(stateCurrentRoute.name, params)
             resolve(null);
           }
@@ -398,7 +398,7 @@ export class SwissdataGlobal {
     })
   }
 
-  public imageSrc(modelRoute: 'string', fieldname: 'string', previewFormat: string | null = null) {
+  public imageSrc(modelRoute: 'string', fieldname: 'string', previewFormat: string | null = null) {
     let preview = previewFormat ? `&preview=${previewFormat}` : '';
     let config: AureliaSwissdataConfig = this.container.get('aurelia-deco-config');
     return `${config.api.host}/${modelRoute}?apiKey=${this.swissdataApi.state.swissdata.publicKey}&download=${fieldname}${preview}`
@@ -406,7 +406,7 @@ export class SwissdataGlobal {
 
   public updateAllModelsFromApi(ignoreError: boolean = false): Promise<any> {
     let promises: Array<Promise<any>> = [];
-    for (let modelName of this.config.dynamicModelSlugsForAutoLoading || []) {
+    for (let modelName of this.config.dynamicModelSlugsForAutoLoading || []) {
       let promise = this.updateModelsFromApi(modelName, ignoreError);
       promises.push(promise);
     }

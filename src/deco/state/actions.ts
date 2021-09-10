@@ -30,7 +30,7 @@ export function setStateVersion(state: DecoAppState, stateVersion: string) {
   return newState;
 }
 
-export function setLanguages(state: DecoAppState, languages: Array<string> | null) {
+export function setLanguages(state: DecoAppState, languages: Array<string> | null) {
   const newState = Object.assign({}, state);
   if (languages === null) {
     delete newState.languages;
@@ -40,7 +40,7 @@ export function setLanguages(state: DecoAppState, languages: Array<string> | nu
   return newState;
 }
 
-export function setLanguage(state: DecoAppState, language: string | null) {
+export function setLanguage(state: DecoAppState, language: string | null) {
   const newState = Object.assign({}, state);
   if (language === null) {
     delete newState.language;
@@ -50,7 +50,7 @@ export function setLanguage(state: DecoAppState, language: string | null) {
   return newState;
 }
 
-export function setRefLanguage(state: DecoAppState, language: string | null) {
+export function setRefLanguage(state: DecoAppState, language: string | null) {
   const newState = Object.assign({}, state);
   if (language === null) {
     delete newState.refLanguage;
@@ -62,10 +62,10 @@ export function setRefLanguage(state: DecoAppState, language: string | null) {
 
 export function setCountryCode(state: DecoAppState, countryCode: undefined | string) {
   const newState = Object.assign({}, state);
-  newState.countryCode = undefined;
+  newState.country = undefined;
   for (let country of countries) {
-    if (country.countryCode === countryCode || country.countryCode2 === countryCode) {
-      newState.countryCode = country.countryCode2;
+    if (country.countryCode === countryCode || country.countryCode2 === countryCode) {
+      newState.country = country.countryCode2;
     }
   }
   return newState;
@@ -75,7 +75,7 @@ export function setCountry(state: DecoAppState, countryCode: undefined | string)
   return setCountryCode(state, countryCode);
 }
 
-export function setCountries(state: DecoAppState, countries: Array<string> | null) {
+export function setCountries(state: DecoAppState, countries: Array<string> | null) {
   const newState = Object.assign({}, state);
   if (countries === null) {
     delete newState.countries;

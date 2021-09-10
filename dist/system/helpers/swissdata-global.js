@@ -208,7 +208,7 @@ System.register(["./../models/profile.model", "./../models/user.model", "./sd-lo
                     }).then(function () {
                         return store.dispatch('initAppState');
                     }).then(function () {
-                        if (config.enableIpStackAutoDetect && !_this.state.countryCode) {
+                        if (config.enableIpStackAutoDetect && !_this.state.country) {
                             _this.log.info('Auto detect country');
                             // async operation
                             deco_1.IpStack.autoDetect().then(function (result) {

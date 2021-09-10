@@ -68,11 +68,11 @@ System.register(["./interfaces", "aurelia-logging", "aurelia-resources"], functi
     exports_1("setRefLanguage", setRefLanguage);
     function setCountryCode(state, countryCode) {
         var newState = Object.assign({}, state);
-        newState.countryCode = undefined;
+        newState.country = undefined;
         for (var _i = 0, countries_1 = aurelia_resources_1.countries; _i < countries_1.length; _i++) {
             var country = countries_1[_i];
             if (country.countryCode === countryCode || country.countryCode2 === countryCode) {
-                newState.countryCode = country.countryCode2;
+                newState.country = country.countryCode2;
             }
         }
         return newState;

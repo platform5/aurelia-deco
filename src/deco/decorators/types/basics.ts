@@ -1,7 +1,7 @@
 import { TypeDecorator } from './type-decorator';
 import * as moment from 'moment';
 import { getLogger, Logger } from 'aurelia-logging';
-import { DateHelper } from 'aurelia-resources';
+import { DateHelper } from 'aurelia-resources';
 let log: Logger = getLogger('decorators:type:basics');
 
 export let anyDecorator = new TypeDecorator('any');
@@ -41,7 +41,7 @@ selectDecorator.validate = (value: any, obj: any, options: any) => {
   if (value === undefined || value === null) return true;
   if (!options.multiple) {
     // validate non-multiple values
-    if (typeof value !== 'string') return false;
+    if (typeof value !== 'string' && typeof value !== 'number' && typeof value !== 'boolean') return false;
     if (options.allowAny) return true;
     if (options.options.indexOf(value) === -1) return false;
   } else if (options.multiple) {
@@ -91,11 +91,11 @@ dateDecorator.defaultOptions = {
   dateFormat: 'DD-MM-YYYY'
 };
 dateDecorator.fromApi = (key: string, value: any, options: any, element: any, target: any) => {
-  let dateFormat = options.dateFormat || 'DD-MM-YYYY';
+  let dateFormat = options.dateFormat || 'DD-MM-YYYY';
   return Promise.resolve(fromApiDate(value, dateFormat));
 };
 dateDecorator.toApi = (key: string, value: any, options: any, element: any, target: any) => {
-  let dateFormat = options.dateFormat || 'DD-MM-YYYY';
+  let dateFormat = options.dateFormat || 'DD-MM-YYYY';
   return Promise.resolve(toApiDate(value, dateFormat));
 };
 dateDecorator.validate = (value: any, obj: any, options: any) => {

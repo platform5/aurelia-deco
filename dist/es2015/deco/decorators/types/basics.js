@@ -43,7 +43,7 @@ selectDecorator.validate = function (value, obj, options) {
         return true;
     if (!options.multiple) {
         // validate non-multiple values
-        if (typeof value !== 'string')
+        if (typeof value !== 'string' && typeof value !== 'number' && typeof value !== 'boolean')
             return false;
         if (options.allowAny)
             return true;
