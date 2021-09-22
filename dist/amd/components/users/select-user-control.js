@@ -50,6 +50,7 @@ define(["require", "exports", "aurelia-binding", "@aurelia-ux/modal", "aurelia-f
             this.modalService = modalService;
             this.ready = false;
             this.disableIds = [];
+            this.availabledIds = [];
             this.disabled = false;
         }
         SelectUserControl.prototype.bind = function () {
@@ -78,7 +79,7 @@ define(["require", "exports", "aurelia-binding", "@aurelia-ux/modal", "aurelia-f
                             }
                             return [4 /*yield*/, this.modalService.open({
                                     viewModel: select_user_1.SelectUser,
-                                    model: { value: this.value, disableIds: this.disableIds },
+                                    model: { value: this.value, disableIds: this.disableIds, availabledIds: this.availabledIds },
                                     position: 'bottom'
                                 })];
                         case 1:
@@ -105,6 +106,9 @@ define(["require", "exports", "aurelia-binding", "@aurelia-ux/modal", "aurelia-f
         __decorate([
             aurelia_framework_1.bindable
         ], SelectUserControl.prototype, "disableIds", void 0);
+        __decorate([
+            aurelia_framework_1.bindable
+        ], SelectUserControl.prototype, "availabledIds", void 0);
         __decorate([
             aurelia_framework_1.bindable
         ], SelectUserControl.prototype, "disabled", void 0);

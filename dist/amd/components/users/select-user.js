@@ -69,6 +69,9 @@ define(["require", "exports", "./../../models/user.model", "@aurelia-ux/modal", 
             if (params.disableIds) {
                 this.disableIds = params.disableIds;
             }
+            if (params.availabledIds) {
+                this.suffix += "&id=" + params.availabledIds.join(',');
+            }
             this.init();
         };
         SelectUser.prototype.init = function () {

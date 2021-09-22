@@ -9,6 +9,7 @@ export declare class SelectUserControl {
     ready: boolean;
     value: string;
     disableIds: Array<string>;
+    availabledIds: Array<string>;
     disabled: boolean;
     constructor(container: Container, modalService: UxModalService);
     bind(): void;

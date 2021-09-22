@@ -13,6 +13,7 @@ export class SelectUserControl{
   public ready: boolean = false;
   @bindable({defaultBindingMode: bindingMode.twoWay}) public value: string;
   @bindable public disableIds: Array<string> = [];
+  @bindable public availabledIds: Array<string> = [];
   @bindable public disabled: boolean = false;
 
   constructor(private container: Container, private modalService: UxModalService) {
@@ -39,7 +40,7 @@ export class SelectUserControl{
     }
     const modal = await this.modalService.open({
       viewModel: SelectUser,
-      model: {value: this.value, disableIds: this.disableIds},
+      model: {value: this.value, disableIds: this.disableIds, availabledIds: this.availabledIds},
       position: 'bottom'
     });
     modal.whenClosed().then((result) => {

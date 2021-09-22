@@ -50,6 +50,7 @@ var SelectUserControl = /** @class */ (function () {
         this.modalService = modalService;
         this.ready = false;
         this.disableIds = [];
+        this.availabledIds = [];
         this.disabled = false;
     }
     SelectUserControl.prototype.bind = function () {
@@ -78,7 +79,7 @@ var SelectUserControl = /** @class */ (function () {
                         }
                         return [4 /*yield*/, this.modalService.open({
                                 viewModel: SelectUser,
-                                model: { value: this.value, disableIds: this.disableIds },
+                                model: { value: this.value, disableIds: this.disableIds, availabledIds: this.availabledIds },
                                 position: 'bottom'
                             })];
                     case 1:
@@ -105,6 +106,9 @@ var SelectUserControl = /** @class */ (function () {
     __decorate([
         bindable
     ], SelectUserControl.prototype, "disableIds", void 0);
+    __decorate([
+        bindable
+    ], SelectUserControl.prototype, "availabledIds", void 0);
     __decorate([
         bindable
     ], SelectUserControl.prototype, "disabled", void 0);

@@ -3,8 +3,8 @@ import { UxModalService, UxModalServiceResult } from '@aurelia-ux/modal';
 import { Model } from '../../deco';
 import { inject, observable } from 'aurelia-framework';
 import { errorify } from 'aurelia-resources';
-import { getLogger } from 'aurelia-logging';
-import { SwissdataApi } from '../../helpers/swissdata-api';
+import { getLogger } from 'aurelia-logging';
+import { SwissdataApi } from '../../helpers/swissdata-api';
 const log = getLogger('select-user');
 
 @inject(SwissdataApi, UxModalService)
@@ -23,7 +23,7 @@ export class SelectUser {
   @observable public userId: string;
   public disableIds: Array<string> = [];
 
-  constructor(private swissdataApi:  SwissdataApi, private modalService: UxModalService) {
+  constructor(private swissdataApi:  SwissdataApi, private modalService: UxModalService) {
     this.model = UserModel;
     this.suffix = '&autoFetch=profile';
   }
@@ -36,6 +36,9 @@ export class SelectUser {
     }
     if (params.disableIds) {
       this.disableIds = params.disableIds;
+    }
+    if (params.availabledIds) {
+      this.suffix += `&id=${params.availabledIds.join(',')}`;
     }
     this.init();
   }

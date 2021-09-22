@@ -71,6 +71,9 @@ var SelectUser = /** @class */ (function () {
         if (params.disableIds) {
             this.disableIds = params.disableIds;
         }
+        if (params.availabledIds) {
+            this.suffix += "&id=" + params.availabledIds.join(',');
+        }
         this.init();
     };
     SelectUser.prototype.init = function () {
