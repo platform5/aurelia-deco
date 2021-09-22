@@ -59,6 +59,7 @@ function configure(config, pluginConfig) {
         aurelia_framework_1.PLATFORM.moduleName('./components/getting-started/tour-step'),
         aurelia_framework_1.PLATFORM.moduleName('./components/request-recorder/request-recorder-tool'),
         aurelia_framework_1.PLATFORM.moduleName('./components/request-recorder/request-recorder-viewer'),
+        aurelia_framework_1.PLATFORM.moduleName('./components/users/select-user-control'),
         aurelia_framework_1.PLATFORM.moduleName('./components/users/select-user'),
         aurelia_framework_1.PLATFORM.moduleName('./components/users/user-item'),
     ]);
@@ -120,6 +121,7 @@ __exportStar(require("./components/contact/as-contact-theme"), exports);
 __exportStar(require("./components/getting-started/getting-started"), exports);
 __exportStar(require("./components/getting-started/getting-started-theme"), exports);
 __exportStar(require("./components/getting-started/tour-step"), exports);
+__exportStar(require("./components/users/select-user-control"), exports);
 __exportStar(require("./components/users/select-user"), exports);
 __exportStar(require("./state"), exports);
 __exportStar(require("./decorators"), exports);

@@ -62,6 +62,7 @@ export function configure(config: FrameworkConfiguration, pluginConfig?: Aurelia
     PLATFORM.moduleName('./components/getting-started/tour-step'),
     PLATFORM.moduleName('./components/request-recorder/request-recorder-tool'),
     PLATFORM.moduleName('./components/request-recorder/request-recorder-viewer'),
+    PLATFORM.moduleName('./components/users/select-user-control'),
     PLATFORM.moduleName('./components/users/select-user'),
     PLATFORM.moduleName('./components/users/user-item'),
   ]);
@@ -127,6 +128,7 @@ export * from './components/contact/as-contact-theme';
 export * from './components/getting-started/getting-started';
 export * from './components/getting-started/getting-started-theme';
 export * from './components/getting-started/tour-step';
+export * from './components/users/select-user-control';
 export * from './components/users/select-user';
 
 export * from './state';

@@ -1,4 +1,4 @@
-System.register(["aurelia-framework", "aurelia-validation", "aurelia-i18n", "aurelia-dependency-injection", "./deco", "./models", "./state/actions", "./state/sd-login-actions", "./helpers/swissdata-api", "./helpers/request-recorder", "./helpers/profile-helper", "./helpers/analytics", "./components/notification/swissdata-notification", "./helpers/i18n-setup", "./helpers/swissdata-global", "./helpers/sd-login", "./components/address", "./components/login/swissdata-login", "./components/login/swissdata-login-theme", "./components/dico2/dico", "./components/dico2/dico-dialog", "./components/dico/dico-translate-key-locale", "./components/form/swissdata-field", "./components/form/swissdata-user-field", "./components/contact/as-contact", "./components/contact/as-contact-theme", "./components/getting-started/getting-started", "./components/getting-started/getting-started-theme", "./components/getting-started/tour-step", "./components/users/select-user", "./state", "./decorators"], function (exports_1, context_1) {
+System.register(["aurelia-framework", "aurelia-validation", "aurelia-i18n", "aurelia-dependency-injection", "./deco", "./models", "./state/actions", "./state/sd-login-actions", "./helpers/swissdata-api", "./helpers/request-recorder", "./helpers/profile-helper", "./helpers/analytics", "./components/notification/swissdata-notification", "./helpers/i18n-setup", "./helpers/swissdata-global", "./helpers/sd-login", "./components/address", "./components/login/swissdata-login", "./components/login/swissdata-login-theme", "./components/dico2/dico", "./components/dico2/dico-dialog", "./components/dico/dico-translate-key-locale", "./components/form/swissdata-field", "./components/form/swissdata-user-field", "./components/contact/as-contact", "./components/contact/as-contact-theme", "./components/getting-started/getting-started", "./components/getting-started/getting-started-theme", "./components/getting-started/tour-step", "./components/users/select-user-control", "./components/users/select-user", "./state", "./decorators"], function (exports_1, context_1) {
     "use strict";
     var aurelia_framework_1, aurelia_validation_1, aurelia_i18n_1, defaultSettings, SdLoginActions;
     var __moduleName = context_1 && context_1.id;
@@ -37,6 +37,7 @@ System.register(["aurelia-framework", "aurelia-validation", "aurelia-i18n", "aur
             aurelia_framework_1.PLATFORM.moduleName('./components/getting-started/tour-step'),
             aurelia_framework_1.PLATFORM.moduleName('./components/request-recorder/request-recorder-tool'),
             aurelia_framework_1.PLATFORM.moduleName('./components/request-recorder/request-recorder-viewer'),
+            aurelia_framework_1.PLATFORM.moduleName('./components/users/select-user-control'),
             aurelia_framework_1.PLATFORM.moduleName('./components/users/select-user'),
             aurelia_framework_1.PLATFORM.moduleName('./components/users/user-item'),
         ]);
@@ -175,6 +176,9 @@ System.register(["aurelia-framework", "aurelia-validation", "aurelia-i18n", "aur
             },
             function (tour_step_1_1) {
                 exportStar_1(tour_step_1_1);
+            },
+            function (select_user_control_1_1) {
+                exportStar_1(select_user_control_1_1);
             },
             function (select_user_1_1) {
                 exportStar_1(select_user_1_1);

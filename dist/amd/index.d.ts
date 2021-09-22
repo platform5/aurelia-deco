@@ -38,6 +38,7 @@ export * from './components/contact/as-contact-theme';
 export * from './components/getting-started/getting-started';
 export * from './components/getting-started/getting-started-theme';
 export * from './components/getting-started/tour-step';
+export * from './components/users/select-user-control';
 export * from './components/users/select-user';
 export * from './state';
 export * from './decorators';

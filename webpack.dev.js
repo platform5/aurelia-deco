@@ -75,6 +75,7 @@ const resources = [
   './components/getting-started/tour-step.html',
   './components/request-recorder/request-recorder-tool.html',
   './components/request-recorder/request-recorder-viewer.html',
+  './components/users/select-user-control.html',
   './components/users/select-user.html',
   './components/users/user-item.html',
 ];
