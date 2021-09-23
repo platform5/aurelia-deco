@@ -37,7 +37,7 @@ export class SelectUser {
     if (params.disableIds) {
       this.disableIds = params.disableIds;
     }
-    if (params.availabledIds) {
+    if (Array.isArray(params?.availabledIds) && params.availabledIds.length > 0) {
       this.suffix += `&id=${params.availabledIds.join(',')}`;
     }
     this.init();

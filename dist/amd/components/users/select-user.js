@@ -69,7 +69,7 @@ define(["require", "exports", "./../../models/user.model", "@aurelia-ux/modal", 
             if (params.disableIds) {
                 this.disableIds = params.disableIds;
             }
-            if (params.availabledIds) {
+            if (Array.isArray(params === null || params === void 0 ? void 0 : params.availabledIds) && params.availabledIds.length > 0) {
                 this.suffix += "&id=" + params.availabledIds.join(',');
             }
             this.init();
