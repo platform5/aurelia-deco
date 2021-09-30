@@ -3,7 +3,7 @@ import { SwissdataGlobal } from './swissdata-global';
 import { UserModel } from './../models/user.model';
 import { RequestRecorder } from './request-recorder';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { DecoApi, jsonify, DecoInitOptions, Store, EnsureModel } from '../deco';
+import { DecoApi, jsonify, DecoInitOptions, Store, EnsureModel } from '../deco';
 import { SwissdataUser } from './../state/interfaces';
 import { AureliaSwissdataConfig } from '../index';
 import { SwissdataState, AppState } from '../state/interfaces';
@@ -44,6 +44,7 @@ export class SwissdataApi extends DecoApi {
   private subscription: any;
   public ready: boolean = false;
   public authenticationControl: AuthenticationControl;
+  public clientUrl: string = '';
 
   //public appState?: AppState;
   //public store?: Store<AppState>;
@@ -72,6 +73,8 @@ we don't need to subscribe here, because it is done in the parent DecoApi class
       const recorder = this.container.get(RequestRecorder);
       this.authenticationControl = this.container.get(AuthenticationControl);
       let swissdataConfig: AureliaSwissdataConfig = this.container.get('aurelia-deco-config');
+
+      this.clientUrl = swissdataConfig.clientUrl;
 
       this.http.configure((config) => {
         config
@@ -122,7 +125,7 @@ we don't need to subscribe here, because it is done in the parent DecoApi class
             let apiHost = options.host;
             if (isGlobalDico(key)) {
               apiKey = options.translationMemoryApiKey;
-              apiHost = options.translationMemoryHost || options.host;
+              apiHost = options.translationMemoryHost || options.host;
             }
             if (namespace === 'local') {
               apiKey = options.apiKey;
@@ -212,7 +215,7 @@ we don't need to subscribe here, because it is done in the parent DecoApi class
     });
   }
 
-  public startCheckStatus(interval: number, unit: 'milliseconds' | 'seconds' = 'milliseconds') {
+  public startCheckStatus(interval: number, unit: 'milliseconds' | 'seconds' = 'milliseconds') {
     this.stopCheckingStatus();
     if (unit === 'seconds') interval = interval * 1000;
     this.checkStatus();
@@ -368,7 +371,7 @@ export class AuthorizeStep {
         } else {
           url += '?';
         }
-        const f = navigationInstruction.parentInstruction?.config.name || '';
+        const f = navigationInstruction.parentInstruction?.config.name || '';
         const t = navigationInstruction.config.name;
         const p = navigationInstruction.params ? btoa(JSON.stringify(navigationInstruction.params)) : '';
         if (f) {

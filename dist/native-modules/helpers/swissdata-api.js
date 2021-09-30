@@ -50,6 +50,7 @@ var SwissdataApi = /** @class */ (function (_super) {
     function SwissdataApi(http) {
         var _this = _super.call(this, http) || this;
         _this.ready = false;
+        _this.clientUrl = '';
         _this.swissdataInitDone = false;
         _this.log = getLogger('swissdata-api');
         return _this;
@@ -79,6 +80,7 @@ var SwissdataApi = /** @class */ (function (_super) {
             var recorder = _this.container.get(RequestRecorder);
             _this.authenticationControl = _this.container.get(AuthenticationControl);
             var swissdataConfig = _this.container.get('aurelia-deco-config');
+            _this.clientUrl = swissdataConfig.clientUrl;
             _this.http.configure(function (config) {
                 config
                     //.useStandardConfiguration()

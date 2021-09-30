@@ -79,6 +79,7 @@ System.register(["./authentication-control", "./swissdata-global", "./request-re
                 function SwissdataApi(http) {
                     var _this = _super.call(this, http) || this;
                     _this.ready = false;
+                    _this.clientUrl = '';
                     _this.swissdataInitDone = false;
                     _this.log = aurelia_logging_1.getLogger('swissdata-api');
                     return _this;
@@ -108,6 +109,7 @@ System.register(["./authentication-control", "./swissdata-global", "./request-re
                         var recorder = _this.container.get(request_recorder_1.RequestRecorder);
                         _this.authenticationControl = _this.container.get(authentication_control_1.AuthenticationControl);
                         var swissdataConfig = _this.container.get('aurelia-deco-config');
+                        _this.clientUrl = swissdataConfig.clientUrl;
                         _this.http.configure(function (config) {
                             config
                                 //.useStandardConfiguration()

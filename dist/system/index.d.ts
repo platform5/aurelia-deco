@@ -11,6 +11,7 @@ export interface AureliaSwissdataConfig {
         apiKey?: string;
     };
     version?: string;
+    clientUrl?: string;
 }
 export declare function configure(config: FrameworkConfiguration, pluginConfig?: AureliaSwissdataConfig): void;
 export * from './models';

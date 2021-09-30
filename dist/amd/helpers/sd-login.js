@@ -170,7 +170,7 @@ define(["require", "exports", "./../models/user.model", "../deco", "aurelia-fram
                 }
                 _this.processing = true;
                 _this.eventAggregator.publish('analytics:event', { category: 'login', action: 'create-account', value: { email: instance.email, mobile: instance.mobile } });
-                return instance.createAccount({ body: { password: password, extraData: extraData } });
+                return instance.createAccount({ body: { password: password, extraData: extraData, clientUrl: _this.api.clientUrl } });
             }).then(function (element) {
                 _this.log.debug('response from create account', element);
                 if (element.token) {

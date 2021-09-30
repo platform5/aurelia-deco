@@ -12,6 +12,7 @@ export declare class SwissdataApi extends DecoApi {
     private subscription;
     ready: boolean;
     authenticationControl: AuthenticationControl;
+    clientUrl: string;
     get ensureUsers(): EnsureModel<typeof UserModel>;
     constructor(http: any);
     private swissdataInitDone;

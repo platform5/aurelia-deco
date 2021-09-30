@@ -14,6 +14,7 @@ export interface AureliaSwissdataConfig {
     apiKey?: string
   };
   version?: string;
+  clientUrl?: string;
 }
 
 let defaultSettings:AureliaSwissdataConfig = {

@@ -182,7 +182,7 @@ export class SdLogin {
       }
       this.processing = true;
       this.eventAggregator.publish('analytics:event', {category: 'login', action: 'create-account', value: {email: instance.email, mobile: instance.mobile}});
-      return instance.createAccount({body: {password: password, extraData: extraData}});
+      return instance.createAccount({body: {password: password, extraData: extraData, clientUrl: this.api.clientUrl}});
     }).then((element): void | Promise<any> => {
       this.log.debug('response from create account', element);
       if (element.token) {
