@@ -16,7 +16,7 @@ import { getLogger } from 'aurelia-logging';
 import { Redirect, NavigationInstruction } from 'aurelia-router';
 import { getI18NSetupOptions } from './i18n-setup';
 
-const globalContexts = ['', 'gettingStarted', 'shop', 'error', 'info', 'confirmation', 'admin', 'three', 'bcf'];
+const globalContexts = ['', 'gettingStarted', 'login', 'shop', 'error', 'info', 'confirmation', 'admin', 'three', 'bcf'];
 const isGlobalDico = (key: string) => {
   if (key.indexOf('.') === -1) {
     return true;
