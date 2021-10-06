@@ -3,11 +3,11 @@ import { TypeDecorator } from '../../decorators/types/type-decorator';
 import { inject, bindable } from 'aurelia-framework';
 import { Model } from '../../decorators';
 import { getLogger, Logger } from 'aurelia-logging';
-import { DecoApi } from '../../helpers/deco-api';
+import { DecoApi } from '../../helpers/deco-api';
 import { UxFileItem } from '../../helpers/file-upload';
 let log: Logger = getLogger('components:deco-field');
 
-@inject(Element,  DecoApi)
+@inject(Element,  DecoApi)
 export class DecoField {
 
   @bindable public instance: Model;
@@ -23,6 +23,7 @@ export class DecoField {
   @bindable public labelPosition: 'floating' | 'placeholder' | 'label' = 'floating';
   @bindable public disabled: boolean = false;
   @bindable public dicoContext = ''
+  @bindable public canRemoveBg: boolean = false;
 
   @bindable public fetchAllModels: boolean = true; // if true, the comp will fetch all related models to provide a list of select options when field type is model or models
   @bindable public modelsList: Array<Model> | null = null; // if provided, this value will be the list of models used as select options when field type is model or models
@@ -68,7 +69,7 @@ export class DecoField {
 
     let rightInstance = this.instance instanceof Model;
 
-    if (!this.instance || !rightInstance) {
+    if (!this.instance || !rightInstance) {
       log.warn('this.instance [' + this.property + '] is not set properly');
       this._type = '';
       return;
@@ -92,7 +93,7 @@ export class DecoField {
   }
 
   processType() {
-    if (this._type === 'string' && (this.options.textarea || this.variant === 'textarea')) {
+    if (this._type === 'string' && (this.options.textarea || this.variant === 'textarea')) {
       setTimeout(() => {
         if (this.textarea && this.textarea.fitTextContent && typeof this.textarea.fitTextContent === 'function') this.textarea.fitTextContent();
       }, 20);
@@ -139,7 +140,7 @@ export class DecoField {
       }
     }
 
-    if (this._type === 'model' || this._type === 'models') {
+    if (this._type === 'model' || this._type === 'models') {
       if (this.fetchAllModels && !this.modelsList) {
         this.options.model.getAll().then((results) => {
           this.selectOptions = results;
@@ -152,7 +153,7 @@ export class DecoField {
   }
 
   setRefLocale() {
-    this._refLocale = this.refLocale || this.decoApi.state.refLanguage;
+    this._refLocale = this.refLocale || this.decoApi.state.refLanguage;
   }
 
   firstLetterUpper(text: string): string {
@@ -163,7 +164,7 @@ export class DecoField {
   }
 
   context() {
-    return this.dicoContext ? this.dicoContext + '.' : '';
+    return this.dicoContext ? this.dicoContext + '.' : '';
   }
 
 }

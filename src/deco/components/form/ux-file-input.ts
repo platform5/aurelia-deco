@@ -52,7 +52,7 @@ export class UxFileInput implements UxComponent {
     public inputbox: HTMLInputElement;
     public inputform: HTMLFormElement;
     public canEdit: boolean = false;
-    public canRemoveBg: boolean = false;
+    @bindable public canRemoveBg: boolean = false;
 
     @observable public selectedFiles: Array < UxFileItem > = [];
 

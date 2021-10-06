@@ -17,6 +17,7 @@ export declare class DecoField {
     labelPosition: 'floating' | 'placeholder' | 'label';
     disabled: boolean;
     dicoContext: string;
+    canRemoveBg: boolean;
     fetchAllModels: boolean;
     modelsList: Array<Model> | null;
     label: string;

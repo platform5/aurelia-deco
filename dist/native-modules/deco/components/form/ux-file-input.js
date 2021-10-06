@@ -243,6 +243,9 @@ var UxFileInput = /** @class */ (function () {
         observable
     ], UxFileInput.prototype, "focused", void 0);
     __decorate([
+        bindable
+    ], UxFileInput.prototype, "canRemoveBg", void 0);
+    __decorate([
         observable
     ], UxFileInput.prototype, "selectedFiles", void 0);
     UxFileInput = UxFileInput_1 = __decorate([

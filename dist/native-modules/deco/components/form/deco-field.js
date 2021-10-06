@@ -21,6 +21,7 @@ var DecoField = /** @class */ (function () {
         this.labelPosition = 'floating';
         this.disabled = false;
         this.dicoContext = '';
+        this.canRemoveBg = false;
         this.fetchAllModels = true; // if true, the comp will fetch all related models to provide a list of select options when field type is model or models
         this.modelsList = null; // if provided, this value will be the list of models used as select options when field type is model or models
         this.label = '';
@@ -183,6 +184,9 @@ var DecoField = /** @class */ (function () {
     __decorate([
         bindable
     ], DecoField.prototype, "dicoContext", void 0);
+    __decorate([
+        bindable
+    ], DecoField.prototype, "canRemoveBg", void 0);
     __decorate([
         bindable
     ], DecoField.prototype, "fetchAllModels", void 0);

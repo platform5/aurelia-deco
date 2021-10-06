@@ -246,6 +246,9 @@ var UxFileInput = /** @class */ (function () {
         aurelia_binding_1.observable
     ], UxFileInput.prototype, "focused", void 0);
     __decorate([
+        aurelia_templating_1.bindable
+    ], UxFileInput.prototype, "canRemoveBg", void 0);
+    __decorate([
         aurelia_binding_1.observable
     ], UxFileInput.prototype, "selectedFiles", void 0);
     UxFileInput = UxFileInput_1 = __decorate([
