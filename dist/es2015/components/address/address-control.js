@@ -16,6 +16,7 @@ var AddressControl = /** @class */ (function () {
         this.labels = [];
         this.dicoContext = '';
         this.allowDescription = false;
+        this.allowLatLngEdition = false;
         this.ready = false;
     }
     AddressControl.prototype.bind = function () {
@@ -76,6 +77,9 @@ var AddressControl = /** @class */ (function () {
     __decorate([
         bindable
     ], AddressControl.prototype, "allowDescription", void 0);
+    __decorate([
+        bindable
+    ], AddressControl.prototype, "allowLatLngEdition", void 0);
     __decorate([
         computedFrom('countryList')
     ], AddressControl.prototype, "computedCountryList", null);

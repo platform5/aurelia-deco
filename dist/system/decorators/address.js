@@ -33,11 +33,15 @@ System.register(["../deco", "aurelia-logging"], function (exports_1, context_1) 
                     return true;
                 if (typeof value !== 'object')
                     return false;
-                var allowedKeys = ['label', 'street', 'city', 'zip', 'country', 'description'];
+                var allowedKeys = ['label', 'street', 'city', 'zip', 'country', 'description', 'lat', 'lng'];
+                var stringKeys = ['label', 'street', 'city', 'zip', 'country', 'description'];
+                var numberKeys = ['lat', 'lng'];
                 for (var key in value) {
                     if (allowedKeys.indexOf(key) === -1)
                         return false;
-                    if (typeof value !== 'string')
+                    if (stringKeys.includes(key) && typeof value[key] !== 'string')
+                        return false;
+                    if (numberKeys.includes(key) && typeof value[key] !== 'number')
                         return false;
                 }
                 return true;

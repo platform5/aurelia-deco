@@ -25,4 +25,8 @@
       <ux-input-info><span t="AddressDescriptionHint"></span></ux-input-info>
     </div>
   </div>
+  <div class="ux-form__row" if.bind="allowLatLngEdition">
+    <ux-input style="width: 50%" value.bind="value['lat']" label="${'LAT' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled"></ux-input>
+    <ux-input value.bind="value['lng']" label="${'LNG' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled"></ux-input>
+  </div>
 </template>

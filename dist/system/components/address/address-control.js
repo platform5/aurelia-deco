@@ -28,6 +28,7 @@ System.register(["aurelia-framework", "aurelia-resources"], function (exports_1,
                     this.labels = [];
                     this.dicoContext = '';
                     this.allowDescription = false;
+                    this.allowLatLngEdition = false;
                     this.ready = false;
                 }
                 AddressControl.prototype.bind = function () {
@@ -88,6 +89,9 @@ System.register(["aurelia-framework", "aurelia-resources"], function (exports_1,
                 __decorate([
                     aurelia_framework_1.bindable
                 ], AddressControl.prototype, "allowDescription", void 0);
+                __decorate([
+                    aurelia_framework_1.bindable
+                ], AddressControl.prototype, "allowLatLngEdition", void 0);
                 __decorate([
                     aurelia_framework_1.computedFrom('countryList')
                 ], AddressControl.prototype, "computedCountryList", null);

@@ -8,6 +8,7 @@ export declare class AddressControl {
     labels: string[];
     dicoContext: string;
     allowDescription: boolean;
+    allowLatLngEdition: boolean;
     private ready;
     bind(): void;
     valueChanged(): void;

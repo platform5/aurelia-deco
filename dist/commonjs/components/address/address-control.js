@@ -19,6 +19,7 @@ var AddressControl = /** @class */ (function () {
         this.labels = [];
         this.dicoContext = '';
         this.allowDescription = false;
+        this.allowLatLngEdition = false;
         this.ready = false;
     }
     AddressControl.prototype.bind = function () {
@@ -79,6 +80,9 @@ var AddressControl = /** @class */ (function () {
     __decorate([
         aurelia_framework_1.bindable
     ], AddressControl.prototype, "allowDescription", void 0);
+    __decorate([
+        aurelia_framework_1.bindable
+    ], AddressControl.prototype, "allowLatLngEdition", void 0);
     __decorate([
         aurelia_framework_1.computedFrom('countryList')
     ], AddressControl.prototype, "computedCountryList", null);

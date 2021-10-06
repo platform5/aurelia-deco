@@ -14,5 +14,7 @@ export interface Address {
     zip?: string;
     country?: string;
     description?: string;
+    lat?: number;
+    lng?: number;
 }
 export declare function isSameAddress(a: Address, b: Address): boolean;

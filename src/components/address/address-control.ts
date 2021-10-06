@@ -11,6 +11,7 @@ export class AddressControl {
   @bindable public labels: string[] = [];
   @bindable public dicoContext = '';
   @bindable public allowDescription = false;
+  @bindable public allowLatLngEdition = false;
 
   private ready: boolean = false;
 
