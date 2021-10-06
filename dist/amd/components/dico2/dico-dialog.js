@@ -108,7 +108,7 @@ define(["require", "exports", "aurelia-resources", "@aurelia-ux/modal", "../../m
                                 for (_i = 0, _a = validationResult.results; _i < _a.length; _i++) {
                                     vResult = _a[_i];
                                     if (!vResult.valid) {
-                                        aurelia_resources_2.errorify(new Error(vResult.message));
+                                        aurelia_resources_2.errorify(new Error(vResult.message), { formatter: undefined });
                                     }
                                 }
                                 return [2 /*return*/, false];

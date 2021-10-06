@@ -143,7 +143,7 @@ var SwissdataUserField = /** @class */ (function () {
                         _a.sent();
                         this.currentPassword = '';
                         this.newPassword = '';
-                        notify(this.i18n.tr('userField.Your password has been updated'), { type: 'success' });
+                        notify(this.i18n.tr('userField.Your password has been updated'), { type: 'success', formatter: undefined });
                         this.notify();
                         return [3 /*break*/, 6];
                     case 5:
@@ -211,7 +211,7 @@ var SwissdataUserField = /** @class */ (function () {
                         }
                         if (this.instance === 'state')
                             this.updateStateUserWithInstance();
-                        notify(this.i18n.tr('userField.Your email has been changed'), { type: 'success' });
+                        notify(this.i18n.tr('userField.Your email has been changed'), { type: 'success', formatter: undefined });
                         this.notify();
                         return [3 /*break*/, 4];
                     case 3:
@@ -285,7 +285,7 @@ var SwissdataUserField = /** @class */ (function () {
                         }
                         if (this.instance === 'state')
                             this.updateStateUserWithInstance();
-                        notify(this.i18n.tr('userField.Your mobile has been changed'), { type: 'success' });
+                        notify(this.i18n.tr('userField.Your mobile has been changed'), { type: 'success', formatter: undefined });
                         this.notify();
                         return [3 /*break*/, 4];
                     case 3:

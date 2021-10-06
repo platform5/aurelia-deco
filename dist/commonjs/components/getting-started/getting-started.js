@@ -335,7 +335,7 @@ var GettingStarted = /** @class */ (function () {
             if (result.valid) {
                 return _this.sdLogin.checkIfUsernameExists(usernameForApi).then(function (exists) {
                     if (exists === false) {
-                        aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.This username does not exists')));
+                        aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.This username does not exists')), { formatter: undefined });
                     }
                     else if (exists === 'mobile') {
                         _this.goToPassword();
@@ -393,7 +393,7 @@ var GettingStarted = /** @class */ (function () {
                     else {
                         _this.goToPostLogin();
                     }
-                }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message))); });
+                }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message)), { formatter: undefined }); });
             }
             return Promise.resolve();
         }).finally(function () {
@@ -455,7 +455,7 @@ var GettingStarted = /** @class */ (function () {
                     _this.code = '';
                     _this.saveCreateAccountMemory(_this.sdLogin.state.sdlogin.createAccountValidationToken, _this.sdLogin.state.sdlogin.createAccountValidationTokenExpiry);
                     _this.setStep('validate-account');
-                }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message))); });
+                }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message)), { formatter: undefined }); });
             }
             return Promise.resolve();
         }).finally(function () {
@@ -474,19 +474,19 @@ var GettingStarted = /** @class */ (function () {
                 return _this.sdLogin.validateCode(_this.code, type).then(function (result) {
                     _this.username = _this.newAccountUsername;
                     _this.password = _this.newAccountPassword;
-                    //this.sdLogin.login(result.mobile || result.email, this.password);
-                }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message))); });
+                    //this.sdLogin.login(result.mobile || result.email, this.password);
+                }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message)), { formatter: undefined }); });
             }
             return Promise.resolve();
         }).finally(function () {
             _this.processing = false;
             _this.clearCreateAccountMemory();
             if (_this.password) {
-                aurelia_resources_1.notify(_this.i18n.tr('gettingStarted.Your account has been created'));
+                aurelia_resources_1.notify(_this.i18n.tr('gettingStarted.Your account has been created'), { formatter: undefined });
                 _this.login(true);
             }
             else {
-                aurelia_resources_1.notify(_this.i18n.tr('gettingStarted.Your account has been created, you can now enter your password to login'));
+                aurelia_resources_1.notify(_this.i18n.tr('gettingStarted.Your account has been created, you can now enter your password to login', { formatter: undefined }));
                 _this.goToPassword();
             }
         });
@@ -501,8 +501,8 @@ var GettingStarted = /** @class */ (function () {
             token: this.sdLogin.state.sdlogin.createAccountValidationToken,
             method: type
         }).then(deco_1.jsonify).then(function () {
-            aurelia_resources_1.notify(_this.i18n.tr('gettingStarted.Your code has been sent again'));
-        }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message))); }).finally(function () {
+            aurelia_resources_1.notify(_this.i18n.tr('gettingStarted.Your code has been sent again'), { formatter: undefined });
+        }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message)), { formatter: undefined }); }).finally(function () {
             _this.processing = false;
         });
     };
@@ -523,7 +523,7 @@ var GettingStarted = /** @class */ (function () {
                 var usernameForApi = _this.prepareUsernameForApi('forgotUsername');
                 return _this.sdLogin.checkIfUsernameExists(usernameForApi).then(function (exists) {
                     if (exists === false) {
-                        aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.This username does not exists')));
+                        aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.This username does not exists')), { formatter: undefined });
                     }
                     else if (exists === 'mobile') {
                         _this.goToResetPassword();
@@ -553,7 +553,7 @@ var GettingStarted = /** @class */ (function () {
         return this.sdLogin.requestResetPassword(usernameForApi).then(function () {
             _this.forgotNewPassword = '';
             _this.forgotCode = '';
-        }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message))); }).finally(function () {
+        }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message)), { formatter: undefined }); }).finally(function () {
             _this.processing = false;
         });
     };
@@ -574,7 +574,7 @@ var GettingStarted = /** @class */ (function () {
                     _this.forgotNewPassword = '';
                     _this.username = _this.forgotUsername;
                     _this.setStep('password');
-                }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message))); });
+                }).catch(function (error) { return aurelia_resources_1.errorify(new Error(_this.i18n.tr('gettingStarted.' + error.message)), { formatter: undefined }); });
             }
             return Promise.resolve();
         }).finally(function () {

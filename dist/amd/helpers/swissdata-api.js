@@ -23,7 +23,7 @@ define(["require", "exports", "./authentication-control", "./swissdata-global", 
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.AuthorizeStep = exports.SwissdataApi = void 0;
-    var globalContexts = ['', 'gettingStarted', 'shop', 'error', 'info', 'confirmation', 'admin', 'three', 'bcf'];
+    var globalContexts = ['', 'gettingStarted', 'login', 'shop', 'error', 'info', 'confirmation', 'admin', 'three', 'bcf'];
     var isGlobalDico = function (key) {
         if (key.indexOf('.') === -1) {
             return true;

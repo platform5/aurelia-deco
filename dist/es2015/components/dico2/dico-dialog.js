@@ -109,7 +109,7 @@ var DicoDialog = /** @class */ (function () {
                             for (_i = 0, _a = validationResult.results; _i < _a.length; _i++) {
                                 vResult = _a[_i];
                                 if (!vResult.valid) {
-                                    errorify(new Error(vResult.message));
+                                    errorify(new Error(vResult.message), { formatter: undefined });
                                 }
                             }
                             return [2 /*return*/, false];

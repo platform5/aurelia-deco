@@ -59,7 +59,7 @@ System.register(["./authentication-control", "./swissdata-global", "./request-re
             }
         ],
         execute: function () {
-            globalContexts = ['', 'gettingStarted', 'shop', 'error', 'info', 'confirmation', 'admin', 'three', 'bcf'];
+            globalContexts = ['', 'gettingStarted', 'login', 'shop', 'error', 'info', 'confirmation', 'admin', 'three', 'bcf'];
             isGlobalDico = function (key) {
                 if (key.indexOf('.') === -1) {
                     return true;

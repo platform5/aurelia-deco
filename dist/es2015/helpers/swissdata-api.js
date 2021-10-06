@@ -30,7 +30,7 @@ import { setState, authenticate, logout, waitForDoubleAuth, initSwissdataState, 
 import { getLogger } from 'aurelia-logging';
 import { Redirect } from 'aurelia-router';
 import { getI18NSetupOptions } from './i18n-setup';
-var globalContexts = ['', 'gettingStarted', 'shop', 'error', 'info', 'confirmation', 'admin', 'three', 'bcf'];
+var globalContexts = ['', 'gettingStarted', 'login', 'shop', 'error', 'info', 'confirmation', 'admin', 'three', 'bcf'];
 var isGlobalDico = function (key) {
     if (key.indexOf('.') === -1) {
         return true;

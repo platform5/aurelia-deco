@@ -137,7 +137,7 @@ define(["require", "exports", "aurelia-framework", "../../helpers/swissdata-api"
                             _a.sent();
                             this.currentPassword = '';
                             this.newPassword = '';
-                            aurelia_resources_1.notify(this.i18n.tr('userField.Your password has been updated'), { type: 'success' });
+                            aurelia_resources_1.notify(this.i18n.tr('userField.Your password has been updated'), { type: 'success', formatter: undefined });
                             this.notify();
                             return [3 /*break*/, 6];
                         case 5:
@@ -205,7 +205,7 @@ define(["require", "exports", "aurelia-framework", "../../helpers/swissdata-api"
                             }
                             if (this.instance === 'state')
                                 this.updateStateUserWithInstance();
-                            aurelia_resources_1.notify(this.i18n.tr('userField.Your email has been changed'), { type: 'success' });
+                            aurelia_resources_1.notify(this.i18n.tr('userField.Your email has been changed'), { type: 'success', formatter: undefined });
                             this.notify();
                             return [3 /*break*/, 4];
                         case 3:
@@ -279,7 +279,7 @@ define(["require", "exports", "aurelia-framework", "../../helpers/swissdata-api"
                             }
                             if (this.instance === 'state')
                                 this.updateStateUserWithInstance();
-                            aurelia_resources_1.notify(this.i18n.tr('userField.Your mobile has been changed'), { type: 'success' });
+                            aurelia_resources_1.notify(this.i18n.tr('userField.Your mobile has been changed'), { type: 'success', formatter: undefined });
                             this.notify();
                             return [3 /*break*/, 4];
                         case 3:

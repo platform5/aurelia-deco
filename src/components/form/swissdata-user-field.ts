@@ -4,10 +4,10 @@ import { SwissdataApi } from '../../helpers/swissdata-api';
 import { getLogger, Logger } from 'aurelia-logging';
 import { DOM } from 'aurelia-pal';
 import { jsonify, validate } from '../../deco';
-import { UserModel } from '../../models/user.model';
+import { UserModel } from '../../models/user.model';
 import { notify, errorify, AureliaUXFormRenderer } from 'aurelia-resources';
 import { ValidationController, validateTrigger } from 'aurelia-validation';
-import { I18N } from 'aurelia-i18n';
+import { I18N } from 'aurelia-i18n';
 import PhoneNumber from 'awesome-phonenumber';
 
 
@@ -81,7 +81,7 @@ export class SwissdataUserField {
   private processProperty() {
     let rightInstance = this._instance instanceof UserModel;
 
-    if (!this._instance || !rightInstance) {
+    if (!this._instance || !rightInstance) {
       log.warn('this._instance [' + this.property + '] is not set properly');
       log.debug('this.instance', this.instance);
       log.debug('this._instance', this._instance);
@@ -94,7 +94,7 @@ export class SwissdataUserField {
     const result1 = await this.validationController.validate({object: this, propertyName: 'currentPassword'});
     const result2 = await this.validationController.validate({object: this, propertyName: 'newPassword'});
 
-    if (!result1.valid || !result2.valid) {
+    if (!result1.valid || !result2.valid) {
       return;
     }
 
@@ -108,9 +108,9 @@ export class SwissdataUserField {
       this.currentPassword = '';
       this.newPassword = '';
 
-      notify(this.i18n.tr('userField.Your password has been updated'), {type: 'success'});
+      notify(this.i18n.tr('userField.Your password has been updated'), {type: 'success', formatter: undefined});
       this.notify();
-    } catch (error) {
+    } catch (error) {
       errorify(error);
     }
   }
@@ -146,7 +146,7 @@ export class SwissdataUserField {
         this._instance.emailValidated = user.emailValidated;
       }
       if (this.instance === 'state') this.updateStateUserWithInstance();
-      notify(this.i18n.tr('userField.Your email has been changed'), {type: 'success'});
+      notify(this.i18n.tr('userField.Your email has been changed'), {type: 'success', formatter: undefined});
       this.notify();
     } catch (error) {
       errorify(error);
@@ -193,7 +193,7 @@ export class SwissdataUserField {
         this._instance.mobileValidated = user.mobileValidated;
       }
       if (this.instance === 'state') this.updateStateUserWithInstance();
-      notify(this.i18n.tr('userField.Your mobile has been changed'), {type: 'success'});
+      notify(this.i18n.tr('userField.Your mobile has been changed'), {type: 'success', formatter: undefined});
       this.notify();
     } catch (error) {
       errorify(error);

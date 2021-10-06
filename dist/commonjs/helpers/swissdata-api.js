@@ -33,7 +33,7 @@ var actions_1 = require("../state/actions");
 var aurelia_logging_1 = require("aurelia-logging");
 var aurelia_router_1 = require("aurelia-router");
 var i18n_setup_1 = require("./i18n-setup");
-var globalContexts = ['', 'gettingStarted', 'shop', 'error', 'info', 'confirmation', 'admin', 'three', 'bcf'];
+var globalContexts = ['', 'gettingStarted', 'login', 'shop', 'error', 'info', 'confirmation', 'admin', 'three', 'bcf'];
 var isGlobalDico = function (key) {
     if (key.indexOf('.') === -1) {
         return true;

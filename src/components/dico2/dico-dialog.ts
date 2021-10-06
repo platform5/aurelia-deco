@@ -49,7 +49,7 @@ export class DicoDialog {
     if (!validationResult.valid) {
       for (let vResult of validationResult.results) {
         if (!vResult.valid) {
-          errorify(new Error(vResult.message));
+          errorify(new Error(vResult.message), {formatter: undefined});
         }
       }
       return false;

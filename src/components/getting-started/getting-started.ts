@@ -4,12 +4,12 @@ import { GettingStartedTheme } from './getting-started-theme';
 import { inject, bindable, observable, computedFrom, Container, TaskQueue } from 'aurelia-framework';
 import { ValidationControllerFactory, ValidationController, ValidationRules, validateTrigger } from 'aurelia-validation';
 import { getLogger } from 'aurelia-logging';
-import { I18N } from 'aurelia-i18n';
+import { I18N } from 'aurelia-i18n';
 import { ArNext, errorify, notify, AureliaUXFormRenderer, LocalesDialog } from 'aurelia-resources';
 import { jsonify } from '../../deco';
 import { SdLogin } from '../../helpers/sd-login';
 import { StyleEngine } from '@aurelia-ux/core';
-import { DialogService } from 'aurelia-dialog';
+import { DialogService } from 'aurelia-dialog';
 import PhoneNumber from 'awesome-phonenumber';
 import { notifier } from '../notification/swissdata-notification';
 import { Subscription } from 'aurelia-event-aggregator';
@@ -63,7 +63,7 @@ const log = getLogger('getting-started');
 // gettingStarted.Invalid request
 // gettingStarted.Token not found
 
-type StepTypes = 'pre-account' | 'post-account' | 'accounts-list' | 'login'
+type StepTypes = 'pre-account' | 'post-account' | 'accounts-list' | 'login'
                     | 'password' | 'create-account' | 'create-account-part2'
                     | 'validate-account' | 'forgot-password' | 'reset-password'
 
@@ -232,7 +232,7 @@ export class GettingStarted {
       }
     }));
     this.subscriptions.push(this.sdLogin.eventAggregator.subscribe('getting-started.goto-step', (data) => {
-      let allowedSteps = ['pre-account', 'post-account', 'accounts-list', 'login'
+      let allowedSteps = ['pre-account', 'post-account', 'accounts-list', 'login'
      , 'password', 'create-account', 'create-account-part2'
      , 'validate-account', 'forgot-password', 'reset-password'];
       if (allowedSteps.indexOf(data) !== -1) {
@@ -284,7 +284,7 @@ export class GettingStarted {
 
   @computedFrom('body.offsetHeight', 'window.innerHeight', 'html.scrollTop')
   get compensationHeight(): Number {
-    if (this.keyboardPlugin || !this.body || !this.window) return 0;
+    if (this.keyboardPlugin || !this.body || !this.window) return 0;
     this.html.scrollTop = 0;
     return this.body.offsetHeight - this.window.innerHeight;
   }
@@ -299,7 +299,7 @@ export class GettingStarted {
         let arNextItem = document.createElement('ar-next-item');
         arNextItem.appendChild(element);
         element.classList.add('getting-started__step');
-        arNextItem.id = element.id || `getting-started-pre-account-${this.nbStepPreAccount}`;
+        arNextItem.id = element.id || `getting-started-pre-account-${this.nbStepPreAccount}`;
         arNextItem.setAttribute('data-gs-id', `getting-started-pre-account-${this.nbStepPreAccount}`);
         this.arNextElement.prepend(arNextItem);
         this.nbStepPreAccount++;
@@ -308,7 +308,7 @@ export class GettingStarted {
         let arNextItem = document.createElement('ar-next-item');
         arNextItem.appendChild(element);
         element.classList.add('getting-started__step');
-        arNextItem.id = element.id || `getting-started-post-account-${this.nbStepPostAccount}`;
+        arNextItem.id = element.id || `getting-started-post-account-${this.nbStepPostAccount}`;
         arNextItem.setAttribute('data-gs-id', `getting-started-post-account-${this.nbStepPostAccount}`);
         this.arNextElement.appendChild(arNextItem);
         this.nbStepPostAccount++;
@@ -317,7 +317,7 @@ export class GettingStarted {
         let arNextItem = document.createElement('ar-next-item');
         arNextItem.appendChild(element);
         element.classList.add('getting-started__step');
-        arNextItem.id = element.id || `getting-started-post-login-${this.nbStepPostLogin}`;
+        arNextItem.id = element.id || `getting-started-post-login-${this.nbStepPostLogin}`;
         arNextItem.setAttribute('data-gs-id', `getting-started-post-login-${this.nbStepPostLogin}`);
         this.arNextElement.appendChild(arNextItem);
         this.nbStepPostLogin++;
@@ -340,7 +340,7 @@ export class GettingStarted {
 
   private showUsernameField: boolean = !(window as any).chrome;
   private showPasswordField: boolean = !(window as any).chrome;
-  private setStep(step: StepTypes, focusFirstField: boolean = true) {
+  private setStep(step: StepTypes, focusFirstField: boolean = true) {
     if (step === 'login') {
       setTimeout(() => {
         this.showUsernameField = true;
@@ -414,7 +414,7 @@ export class GettingStarted {
       if (result.valid) {
         return this.sdLogin.checkIfUsernameExists(usernameForApi).then((exists) => {
           if (exists === false) {
-            errorify(new Error(this.i18n.tr('gettingStarted.This username does not exists')));
+            errorify(new Error(this.i18n.tr('gettingStarted.This username does not exists')), {formatter: undefined});
           } else if (exists === 'mobile') {
             this.goToPassword();
           } else {
@@ -450,7 +450,7 @@ export class GettingStarted {
     this.login(false, null);
   }
 
-  private login(autoLoginAfterCreateAccount = false, event?: Event | null) {
+  private login(autoLoginAfterCreateAccount = false, event?: Event | null) {
     if (event && event.stopPropagation) event.stopPropagation();
     if (event && event.preventDefault) event.preventDefault();
     if (!this.sdLogin.inited) throw new Error('SdLogin must be inited before using Getting Started component');
@@ -468,7 +468,7 @@ export class GettingStarted {
           } else {
             this.goToPostLogin();
           }
-        }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message))));
+        }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message)), {formatter: undefined}));
       }
       return Promise.resolve();
     }).finally(() => {
@@ -529,7 +529,7 @@ export class GettingStarted {
           this.code = '';
           this.saveCreateAccountMemory(this.sdLogin.state.sdlogin.createAccountValidationToken, this.sdLogin.state.sdlogin.createAccountValidationTokenExpiry);
           this.setStep('validate-account');
-        }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message))));
+        }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message)), {formatter: undefined}));
       }
       return Promise.resolve();
     }).finally(() => {
@@ -547,18 +547,18 @@ export class GettingStarted {
         return this.sdLogin.validateCode(this.code, type).then((result) => {
           this.username = this.newAccountUsername;
           this.password = this.newAccountPassword;
-          //this.sdLogin.login(result.mobile || result.email, this.password);
-        }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message))));
+          //this.sdLogin.login(result.mobile || result.email, this.password);
+        }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message)), {formatter: undefined}));
       }
       return Promise.resolve();
     }).finally(() => {
       this.processing = false;
       this.clearCreateAccountMemory();
       if (this.password) {
-        notify(this.i18n.tr('gettingStarted.Your account has been created'));
+        notify(this.i18n.tr('gettingStarted.Your account has been created'), {formatter: undefined});
         this.login(true);
       } else {
-        notify(this.i18n.tr('gettingStarted.Your account has been created, you can now enter your password to login'));
+        notify(this.i18n.tr('gettingStarted.Your account has been created, you can now enter your password to login', {formatter: undefined}));
         this.goToPassword();
       }
     });
@@ -572,8 +572,8 @@ export class GettingStarted {
       token: this.sdLogin.state.sdlogin.createAccountValidationToken,
       method: type
     }).then(jsonify).then(() => {
-      notify(this.i18n.tr('gettingStarted.Your code has been sent again'));
-    }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message)))).finally(() => {
+      notify(this.i18n.tr('gettingStarted.Your code has been sent again'), {formatter: undefined});
+    }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message)), {formatter: undefined})).finally(() => {
       this.processing = false;
     });
 
@@ -597,7 +597,7 @@ export class GettingStarted {
         const usernameForApi = this.prepareUsernameForApi('forgotUsername')
         return this.sdLogin.checkIfUsernameExists(usernameForApi).then((exists) => {
           if (exists === false) {
-            errorify(new Error(this.i18n.tr('gettingStarted.This username does not exists')));
+            errorify(new Error(this.i18n.tr('gettingStarted.This username does not exists')), {formatter: undefined});
           } else if (exists === 'mobile') {
             this.goToResetPassword();
           } else {
@@ -625,7 +625,7 @@ export class GettingStarted {
     return this.sdLogin.requestResetPassword(usernameForApi).then(() => {
       this.forgotNewPassword = '';
       this.forgotCode = '';
-    }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message)))).finally(() => {
+    }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message)), {formatter: undefined})).finally(() => {
       this.processing = false;
     });
   }
@@ -646,7 +646,7 @@ export class GettingStarted {
           this.forgotNewPassword = '';
           this.username = this.forgotUsername;
           this.setStep('password');
-        }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message))));
+        }).catch(error => errorify(new Error(this.i18n.tr('gettingStarted.' + error.message)), {formatter: undefined}));
       }
       return Promise.resolve();
     }).finally(() => {
@@ -682,7 +682,7 @@ export class GettingStarted {
   }
 
   @computedFrom('sdLogin.state')
-  get state(): AppState | {} {
+  get state(): AppState | {} {
     return this.sdLogin ? this.sdLogin.state : {};
   }
 
@@ -694,8 +694,8 @@ export class GettingStarted {
     this.createAccountMemory.firstname = this.firstname;
     this.createAccountMemory.lastname = this.lastname;
     this.createAccountMemory.username = this.newAccountUsername;
-    this.createAccountMemory.token = token || undefined;
-    this.createAccountMemory.tokenExpiry = tokenExpiry ? moment(tokenExpiry).toString() : undefined;
+    this.createAccountMemory.token = token || undefined;
+    this.createAccountMemory.tokenExpiry = tokenExpiry ? moment(tokenExpiry).toString() : undefined;
     this.createAccountMemory.extraData = this.extraData;
     const string = btoa(JSON.stringify(this.createAccountMemory));
     localStorage.setItem('gs-cam', string);
