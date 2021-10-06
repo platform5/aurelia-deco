@@ -1,4 +1,5 @@
 export * from './components/form/ad-dialog-model';
+export * from './components/form/ux-file-input';
 export * from './dialogs';
 
 export * from './decorators';
@@ -16,7 +17,7 @@ export * from './interfaces/file';
 export * from './state';
 
 export { AdImage } from './components/ad-image';
-export { DecoField } from './components/form/deco-field';
+export { DecoField } from './components/form/deco-field';
 
 export * from './components/ad-images';
 export * from './components/ad-images-theme';

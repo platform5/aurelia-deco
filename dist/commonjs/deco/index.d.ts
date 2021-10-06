@@ -1,4 +1,5 @@
 export * from './components/form/ad-dialog-model';
+export * from './components/form/ux-file-input';
 export * from './dialogs';
 export * from './decorators';
 export * from './helpers/deco-api';
