@@ -12,6 +12,7 @@ System.register([], function (exports_1, context_1) {
                     this.labels = [];
                     this.dicoContext = '';
                     this.allowDescription = false;
+                    this.allowLatLngEdition = false;
                 }
                 AddressDialog.prototype.activate = function (params) {
                     if (params.address && typeof params.address === 'object') {
@@ -31,6 +32,9 @@ System.register([], function (exports_1, context_1) {
                     }
                     if (params.allowDescription && typeof params.allowDescription === 'boolean') {
                         this.allowDescription = params.allowDescription;
+                    }
+                    if (params.allowLatLngEdition && typeof params.allowLatLngEdition === 'boolean') {
+                        this.allowLatLngEdition = params.allowLatLngEdition;
                     }
                     if (params.dicoContext) {
                         this.dicoContext = params.dicoContext;
