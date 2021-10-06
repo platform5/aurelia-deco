@@ -52,6 +52,7 @@ export class UxFileInput implements UxComponent {
     public inputbox: HTMLInputElement;
     public inputform: HTMLFormElement;
     public canEdit: boolean = false;
+    public canRemoveBg: boolean = false;
 
     @observable public selectedFiles: Array < UxFileItem > = [];
 
@@ -181,6 +182,12 @@ export class UxFileInput implements UxComponent {
         }, 10);
       }
       
+    }
+
+    public static removeBG:  (files: UxFileItemArray<UxFileItem>, index: number) => Promise<void> = async (files) => {};
+
+    public async removebg(index: number): Promise<void> {
+      return UxFileInput.removeBG(this.files, index);
     }
 
 }

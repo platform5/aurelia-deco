@@ -6,7 +6,7 @@
   aria-readonly.bind="readonly & booleanAttr">
   <require from="./ux-file-input.css"></require>
   <div class="toolbar" if.bind="canEdit">
-    <ux-button size="small" if.bind="multiple || file === null || file === undefined" click.delegate="selectFile()"><span t="data.label.${buttonLabel | firstLetterUpper}"></span></ux-button>
+    <ux-button size="small" if.bind="multiple || file === null || file === undefined" click.delegate="selectFile()"><span t="data.label.${buttonLabel | firstLetterUpper}"></span></ux-button>
   </div>
   <div class="files-list">
     <!-- multiple files list -->
@@ -18,6 +18,7 @@
           <div class="name-zone">
             <div class="name">${f.name}</div>
           </div>
+          <ux-buttont type="text" if.bind="canRemoveBg" click.delegate="removebg($index)">Remove BG</ux-buttont>
           <ux-icon icon="clear" click.delegate="removeFile(f)"></ux-icon>
         </div>
       </template>
