@@ -68,10 +68,14 @@ export class AddressControl {
           const response = await this.httpClient.get(`/SearchServer?searchText=${encodeURIComponent(searchValue)}&type=locations`);
           console.log('response', response);
           const value = await response.json();
+          console.log('value', value);
           if (value?.results.length) {
             const firstResult = value.results[0];
+            console.log('firstResult', firstResult);
             const lat = firstResult?.attrs?.lat;
             const lng = firstResult?.attrs?.lng;
+            console.log('lat', lat);
+            console.log('lng', lng);
             if (typeof lat === 'number' && typeof lng === 'number') {
               this.value.lat = lat;
               this.value.lng = lng;
