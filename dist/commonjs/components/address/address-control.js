@@ -113,23 +113,17 @@ var AddressControl = /** @class */ (function () {
                         return [4 /*yield*/, this.httpClient.get("/SearchServer?searchText=" + encodeURIComponent(searchValue) + "&type=locations")];
                     case 2:
                         response = _g.sent();
-                        console.log('response', response);
                         return [4 /*yield*/, response.json()];
                     case 3:
                         value = _g.sent();
-                        console.log('value', value);
                         if (value === null || value === void 0 ? void 0 : value.results.length) {
                             firstResult = value.results[0];
-                            console.log('firstResult', firstResult);
                             lat = (_e = firstResult === null || firstResult === void 0 ? void 0 : firstResult.attrs) === null || _e === void 0 ? void 0 : _e.lat;
                             lng = (_f = firstResult === null || firstResult === void 0 ? void 0 : firstResult.attrs) === null || _f === void 0 ? void 0 : _f.lon;
-                            console.log('lat', lat);
-                            console.log('lng', lng);
                             if (typeof lat === 'number' && typeof lng === 'number') {
                                 this.value.lat = lat;
                                 this.value.lng = lng;
                             }
-                            console.log('value after fetch lat lng', this.value);
                         }
                         return [3 /*break*/, 5];
                     case 4:
