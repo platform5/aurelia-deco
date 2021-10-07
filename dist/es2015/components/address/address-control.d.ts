@@ -1,4 +1,6 @@
+import { HttpClient } from 'aurelia-fetch-client';
 export declare class AddressControl {
+    private httpClient;
     value: any;
     variant: 'filled' | 'outline';
     dense: boolean;
@@ -10,9 +12,12 @@ export declare class AddressControl {
     allowDescription: boolean;
     allowLatLngEdition: boolean;
     private ready;
+    constructor(httpClient: HttpClient);
     bind(): void;
     valueChanged(): void;
     fixValue(): void;
     get computedCountryList(): Array<string>;
     context(): string;
+    addressChanged(): void;
+    fetchLatLng(): Promise<void>;
 }
