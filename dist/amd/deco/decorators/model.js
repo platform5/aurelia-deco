@@ -338,7 +338,8 @@ define(["require", "exports", "aurelia-framework", "../helpers/deco-api", "aurel
                     }
                     else {
                         filesToUpload = true;
-                        form.append(property, body[property], body[property].name);
+                        var blob = body[property].replaced ? body[property].replaced : body[property];
+                        form.append(property, blob, body[property].name);
                         if (body[property].blobs) {
                             for (var _b = 0, _c = Object.keys(body[property].blobs); _b < _c.length; _b++) {
                                 var format = _c[_b];
@@ -352,7 +353,8 @@ define(["require", "exports", "aurelia-framework", "../helpers/deco-api", "aurel
                         var file = _e[_d];
                         if (file.toUpload === true) {
                             filesToUpload = true;
-                            form.append(property, file, file.name);
+                            var blob = file.replaced ? file.replaced : body[property];
+                            form.append(property, blob, file.name);
                             if (file.blobs) {
                                 for (var _f = 0, _g = Object.keys(file.blobs); _f < _g.length; _f++) {
                                     var format = _g[_f];

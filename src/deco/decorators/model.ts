@@ -354,7 +354,8 @@ export class Model {
           body[property] = undefined; // remove the data from the body, because it must not be changed on server side
         } else {
           filesToUpload = true;
-          form.append(property, body[property], body[property].name);
+          const blob = body[property].replaced ? body[property].replaced : body[property];
+          form.append(property, blob, body[property].name);
           if (body[property].blobs) {
             for (let format of Object.keys(body[property].blobs)) {
               form.append(property + '_preview', body[property].blobs[format], body[property].name);
@@ -365,7 +366,8 @@ export class Model {
         for (let file of (body[property] as UxFileItemArray<UxFileItem>)) {
           if (file.toUpload === true) {
             filesToUpload = true;
-            form.append(property, (file as File), file.name);
+            const blob: Blob = file.replaced ? file.replaced : body[property];
+            form.append(property, blob, file.name);
             if (file.blobs) {
               for (let format of Object.keys(file.blobs)) {
                 form.append(property + '_preview', file.blobs[format], file.name);
