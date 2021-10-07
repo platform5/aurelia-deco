@@ -40,7 +40,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { bindable, computedFrom, bindingMode, inject, newInstance } from 'aurelia-framework';
+import { bindable, computedFrom, bindingMode, inject, NewInstance } from 'aurelia-framework';
 import { countries } from 'aurelia-resources';
 import { HttpClient } from 'aurelia-fetch-client';
 var AddressControl = /** @class */ (function () {
@@ -168,7 +168,7 @@ var AddressControl = /** @class */ (function () {
         computedFrom('countryList')
     ], AddressControl.prototype, "computedCountryList", null);
     AddressControl = __decorate([
-        inject(newInstance(HttpClient))
+        inject(NewInstance.of(HttpClient))
     ], AddressControl);
     return AddressControl;
 }());

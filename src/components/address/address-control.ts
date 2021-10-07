@@ -1,8 +1,8 @@
-import { bindable, computedFrom, bindingMode, inject, newInstance } from 'aurelia-framework';
+import { bindable, computedFrom, bindingMode, inject, NewInstance } from 'aurelia-framework';
 import { countries } from 'aurelia-resources';
 import { HttpClient } from 'aurelia-fetch-client';
 
-@inject(newInstance(HttpClient))
+@inject(NewInstance.of(HttpClient))
 export class AddressControl {
   @bindable({defaultBindingMode: bindingMode.twoWay}) public value: any;
   @bindable public variant: 'filled' | 'outline' = 'filled';

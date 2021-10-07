@@ -182,7 +182,7 @@ System.register(["aurelia-framework", "aurelia-resources", "aurelia-fetch-client
                     aurelia_framework_1.computedFrom('countryList')
                 ], AddressControl.prototype, "computedCountryList", null);
                 AddressControl = __decorate([
-                    aurelia_framework_1.inject(aurelia_framework_1.newInstance(aurelia_fetch_client_1.HttpClient))
+                    aurelia_framework_1.inject(aurelia_framework_1.NewInstance.of(aurelia_fetch_client_1.HttpClient))
                 ], AddressControl);
                 return AddressControl;
             }());
