@@ -43,5 +43,6 @@ export declare class UxFileInput implements UxComponent {
     rawValueChanged(newValue: any): void;
     private addFiles;
     removeFile(file: Number | UxFileItem): void;
+    private removingBackground;
     removebg(index: number): Promise<void>;
 }

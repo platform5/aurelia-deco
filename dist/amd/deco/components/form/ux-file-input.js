@@ -65,6 +65,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             this.canEdit = false;
             this.canRemoveBg = false;
             this.selectedFiles = [];
+            this.removingBackground = false;
         }
         UxFileInput.prototype.bind = function () {
             var element = this.element;
@@ -193,6 +194,10 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
+                            if (this.removingBackground) {
+                                return [2 /*return*/];
+                            }
+                            this.removingBackground = true;
                             file = this.multiple ? this.files[index] : this.file;
                             _a.label = 1;
                         case 1:
@@ -218,7 +223,9 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                             error_1 = _a.sent();
                             aurelia_resources_1.errorify(error_1);
                             return [3 /*break*/, 6];
-                        case 6: return [2 /*return*/];
+                        case 6:
+                            this.removingBackground = false;
+                            return [2 /*return*/];
                     }
                 });
             });

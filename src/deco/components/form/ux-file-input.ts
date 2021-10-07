@@ -184,7 +184,12 @@ export class UxFileInput implements UxComponent {
       
     }
 
+    private removingBackground = false;
     public async removebg(index: number): Promise<void> {
+      if (this.removingBackground) {
+        return;
+      }
+      this.removingBackground = true;
       const file = this.multiple ? this.files[index] : this.file;
       try {
         // 1. Envoyer l'image original pour que le fond soit remplacé
@@ -205,6 +210,7 @@ export class UxFileInput implements UxComponent {
       } catch (error) {
         errorify(error);
       }
+      this.removingBackground = false;
     }
 
 }
