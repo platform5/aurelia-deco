@@ -1,6 +1,7 @@
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxFileInputTheme } from './ux-file-input-theme';
 import { UxFileItem } from '../../helpers/file-upload';
+import { DecoApi } from '../../helpers/deco-api';
 export interface UxInputElement extends HTMLElement {
     value: any;
 }
@@ -10,6 +11,7 @@ export interface UxFileItemArray<T> extends Array<T> {
 export declare class UxFileInput implements UxComponent {
     element: UxInputElement;
     styleEngine: StyleEngine;
+    private api;
     autofocus: any;
     disabled: any;
     accept: string;
@@ -29,7 +31,7 @@ export declare class UxFileInput implements UxComponent {
     canEdit: boolean;
     canRemoveBg: boolean;
     selectedFiles: Array<UxFileItem>;
-    constructor(element: UxInputElement, styleEngine: StyleEngine);
+    constructor(element: UxInputElement, styleEngine: StyleEngine, api: DecoApi);
     bind(): void;
     readonlyChanged(): void;
     disabledChanged(): void;
@@ -41,6 +43,5 @@ export declare class UxFileInput implements UxComponent {
     rawValueChanged(newValue: any): void;
     private addFiles;
     removeFile(file: Number | UxFileItem): void;
-    static removeBG: (files: UxFileItemArray<UxFileItem>, index: number, previewFormats: string[], defaultPreview: string, imageExportQuality: number) => Promise<void>;
     removebg(index: number): Promise<void>;
 }

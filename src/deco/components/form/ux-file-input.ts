@@ -3,10 +3,10 @@ import { observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxFileInputTheme } from './ux-file-input-theme';
-import { ImageHelpers } from 'aurelia-resources';
+import { errorify } from 'aurelia-resources';
 import { getLogger, Logger } from 'aurelia-logging';
 import { FileUpload, UxFileItem } from '../../helpers/file-upload';
-
+import { DecoApi } from '../../helpers/deco-api';
 
 let log: Logger;
 log = getLogger('ux-file-input');
@@ -21,7 +21,7 @@ export interface UxFileItemArray<T> extends Array<T> {
   removedFiles?: Array<UxFileItem>;
 }
 
-@inject(Element, StyleEngine)
+@inject(Element, StyleEngine, DecoApi)
 @customElement('ux-file-input')
 export class UxFileInput implements UxComponent {
     @bindable public autofocus = null;
@@ -56,7 +56,7 @@ export class UxFileInput implements UxComponent {
 
     @observable public selectedFiles: Array < UxFileItem > = [];
 
-    constructor(public element: UxInputElement, public styleEngine: StyleEngine) {
+    constructor(public element: UxInputElement, public styleEngine: StyleEngine, private api: DecoApi) {
     }
     
     public bind() {
@@ -184,16 +184,27 @@ export class UxFileInput implements UxComponent {
       
     }
 
-    public static removeBG:  (
-      files: UxFileItemArray<UxFileItem>,
-      index: number,
-      previewFormats: string[],
-      defaultPreview: string,
-      imageExportQuality: number
-      ) => Promise<void> = async (files) => {};
-
     public async removebg(index: number): Promise<void> {
-      return UxFileInput.removeBG(this.multiple ? this.files : [this.file], this.multiple ? index : 0, this.previewsFormats, this.defaultPreview, this.imageExportQuality);
+      const file = this.multiple ? this.files[index] : this.file;
+      try {
+        // 1. Envoyer l'image original pour que le fond soit remplacé
+        const formData = new FormData();
+        formData.append('file', file as File, file.name);
+        const response = await this.api .post('/remove-bg', formData, {bodyFormat: 'FormData'});
+      
+        // 2. Set the replaced value
+        const replaced = await response.blob();
+        file.replaced = replaced;
+      
+        // 3. Regenerate the previews
+        const gFiles = [file];
+        file.previewData = '';
+        file.previews = {};
+        file.blobs = {};
+        await FileUpload.generatePreviews(gFiles, this.previewsFormats, this.defaultPreview, this.imageExportQuality);
+      } catch (error) {
+        errorify(error);
+      }
     }
 
 }

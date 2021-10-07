@@ -47,14 +47,17 @@ var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
+var aurelia_resources_1 = require("aurelia-resources");
 var aurelia_logging_1 = require("aurelia-logging");
 var file_upload_1 = require("../../helpers/file-upload");
+var deco_api_1 = require("../../helpers/deco-api");
 var log;
 log = aurelia_logging_1.getLogger('ux-file-input');
 var UxFileInput = /** @class */ (function () {
-    function UxFileInput(element, styleEngine) {
+    function UxFileInput(element, styleEngine, api) {
         this.element = element;
         this.styleEngine = styleEngine;
+        this.api = api;
         this.autofocus = null;
         this.disabled = false;
         this.multiple = false;
@@ -70,7 +73,6 @@ var UxFileInput = /** @class */ (function () {
         this.canRemoveBg = false;
         this.selectedFiles = [];
     }
-    UxFileInput_1 = UxFileInput;
     UxFileInput.prototype.bind = function () {
         var element = this.element;
         var inputbox = this.inputbox;
@@ -194,15 +196,40 @@ var UxFileInput = /** @class */ (function () {
     };
     UxFileInput.prototype.removebg = function (index) {
         return __awaiter(this, void 0, void 0, function () {
+            var file, formData, response, replaced, gFiles, error_1;
             return __generator(this, function (_a) {
-                return [2 /*return*/, UxFileInput_1.removeBG(this.multiple ? this.files : [this.file], this.multiple ? index : 0, this.previewsFormats, this.defaultPreview, this.imageExportQuality)];
+                switch (_a.label) {
+                    case 0:
+                        file = this.multiple ? this.files[index] : this.file;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 5, , 6]);
+                        formData = new FormData();
+                        formData.append('file', file, file.name);
+                        return [4 /*yield*/, this.api.post('/remove-bg', formData, { bodyFormat: 'FormData' })];
+                    case 2:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.blob()];
+                    case 3:
+                        replaced = _a.sent();
+                        file.replaced = replaced;
+                        gFiles = [file];
+                        file.previewData = '';
+                        file.previews = {};
+                        file.blobs = {};
+                        return [4 /*yield*/, file_upload_1.FileUpload.generatePreviews(gFiles, this.previewsFormats, this.defaultPreview, this.imageExportQuality)];
+                    case 4:
+                        _a.sent();
+                        return [3 /*break*/, 6];
+                    case 5:
+                        error_1 = _a.sent();
+                        aurelia_resources_1.errorify(error_1);
+                        return [3 /*break*/, 6];
+                    case 6: return [2 /*return*/];
+                }
             });
         });
     };
-    var UxFileInput_1;
-    UxFileInput.removeBG = function (files) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-        return [2 /*return*/];
-    }); }); };
     __decorate([
         aurelia_templating_1.bindable
     ], UxFileInput.prototype, "autofocus", void 0);
@@ -251,8 +278,8 @@ var UxFileInput = /** @class */ (function () {
     __decorate([
         aurelia_binding_1.observable
     ], UxFileInput.prototype, "selectedFiles", void 0);
-    UxFileInput = UxFileInput_1 = __decorate([
-        aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
+    UxFileInput = __decorate([
+        aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine, deco_api_1.DecoApi),
         aurelia_templating_1.customElement('ux-file-input')
     ], UxFileInput);
     return UxFileInput;
