@@ -35,16 +35,17 @@ var FileUpload = /** @class */ (function () {
             file.previews = {};
         if (!file.blobs)
             file.blobs = {};
-        return ImageHelpers.exifRotation(file).then(function (exifRotation) {
+        var original = file.replaced ? file.replaced : file;
+        return ImageHelpers.exifRotation(original).then(function (exifRotation) {
             var promise = Promise.resolve();
             if (exifRotation > 2) {
                 // we must rotate the original file
-                promise = ImageHelpers.open(file).then(function (myimage) {
+                promise = ImageHelpers.open(original).then(function (myimage) {
                     var angle = ImageHelpers.exifRotation2Degrees(exifRotation);
                     myimage.rotate(angle);
                     return myimage.toBlob();
                 }).then(function (blob) {
-                    file.fixedOrientationBlob = blob;
+                    original.fixedOrientationBlob = blob;
                 });
             }
             promise.then(function () {
@@ -88,7 +89,7 @@ var FileUpload = /** @class */ (function () {
                                 resolve(file);
                             }).catch(reject);
                         };
-                        var fileToRead = file.fixedOrientationBlob || file;
+                        var fileToRead = original.fixedOrientationBlob || original;
                         reader.readAsDataURL(fileToRead);
                     }
                     catch (e) {

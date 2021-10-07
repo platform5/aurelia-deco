@@ -38,16 +38,17 @@ define(["require", "exports", "aurelia-resources"], function (require, exports, 
                 file.previews = {};
             if (!file.blobs)
                 file.blobs = {};
-            return aurelia_resources_1.ImageHelpers.exifRotation(file).then(function (exifRotation) {
+            var original = file.replaced ? file.replaced : file;
+            return aurelia_resources_1.ImageHelpers.exifRotation(original).then(function (exifRotation) {
                 var promise = Promise.resolve();
                 if (exifRotation > 2) {
                     // we must rotate the original file
-                    promise = aurelia_resources_1.ImageHelpers.open(file).then(function (myimage) {
+                    promise = aurelia_resources_1.ImageHelpers.open(original).then(function (myimage) {
                         var angle = aurelia_resources_1.ImageHelpers.exifRotation2Degrees(exifRotation);
                         myimage.rotate(angle);
                         return myimage.toBlob();
                     }).then(function (blob) {
-                        file.fixedOrientationBlob = blob;
+                        original.fixedOrientationBlob = blob;
                     });
                 }
                 promise.then(function () {
@@ -91,7 +92,7 @@ define(["require", "exports", "aurelia-resources"], function (require, exports, 
                                     resolve(file);
                                 }).catch(reject);
                             };
-                            var fileToRead = file.fixedOrientationBlob || file;
+                            var fileToRead = original.fixedOrientationBlob || original;
                             reader.readAsDataURL(fileToRead);
                         }
                         catch (e) {
