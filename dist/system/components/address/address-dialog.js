@@ -13,6 +13,8 @@ System.register([], function (exports_1, context_1) {
                     this.dicoContext = '';
                     this.allowDescription = false;
                     this.allowLatLngEdition = false;
+                    this.countryType = 'input';
+                    this.countryList = 'all';
                 }
                 AddressDialog.prototype.activate = function (params) {
                     if (params.address && typeof params.address === 'object') {
@@ -29,6 +31,12 @@ System.register([], function (exports_1, context_1) {
                     }
                     else {
                         this.labels = [];
+                    }
+                    if (params.countryType && typeof params.countryType === 'string') {
+                        this.countryType = params.countryType;
+                    }
+                    if (params.countryList) {
+                        this.countryList = params.countryList;
                     }
                     if (params.allowDescription && typeof params.allowDescription === 'boolean') {
                         this.allowDescription = params.allowDescription;

@@ -6,6 +6,8 @@ export declare class AddressDialog {
     dicoContext: string;
     allowDescription: boolean;
     allowLatLngEdition: boolean;
+    countryType: 'input' | 'list';
+    countryList: 'all' | Array<string>;
     activate(params: any): void;
     private fixAddressKeys;
 }

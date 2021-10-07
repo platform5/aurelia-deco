@@ -9,7 +9,14 @@
       <ux-form>
         <ux-field>
           <label t="Address"></label>
-          <address-control value.bind="address" labels.bind="labels" dico-context.bind="dicoContext" allow-description.bind="allowDescription" allow-lat-lng-edition.bind="allowLatLngEdition"></address-control>
+          <address-control
+            value.bind="address"
+            labels.bind="labels"
+            dico-context.bind="dicoContext"
+            country-type.bind="countryType"
+            country-list.bind="countryList"
+            allow-description.bind="allowDescription"
+            allow-lat-lng-edition.bind="allowLatLngEdition"></address-control>
         </ux-field>
       </ux-form>
     </ux-card-content>

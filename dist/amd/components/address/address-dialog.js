@@ -10,6 +10,8 @@ define(["require", "exports"], function (require, exports) {
             this.dicoContext = '';
             this.allowDescription = false;
             this.allowLatLngEdition = false;
+            this.countryType = 'input';
+            this.countryList = 'all';
         }
         AddressDialog.prototype.activate = function (params) {
             if (params.address && typeof params.address === 'object') {
@@ -26,6 +28,12 @@ define(["require", "exports"], function (require, exports) {
             }
             else {
                 this.labels = [];
+            }
+            if (params.countryType && typeof params.countryType === 'string') {
+                this.countryType = params.countryType;
+            }
+            if (params.countryList) {
+                this.countryList = params.countryList;
             }
             if (params.allowDescription && typeof params.allowDescription === 'boolean') {
                 this.allowDescription = params.allowDescription;

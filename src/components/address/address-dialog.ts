@@ -8,6 +8,8 @@ export class AddressDialog {
   public dicoContext = '';
   public allowDescription = false;
   public allowLatLngEdition = false;
+  public countryType: 'input' | 'list' = 'input';
+  public countryList: 'all' | Array<string> = 'all';
 
   public activate(params: any) {
     if (params.address && typeof params.address === 'object') {
@@ -22,6 +24,12 @@ export class AddressDialog {
       this.labels = params.labels;
     } else {
       this.labels = [];
+    }
+    if (params.countryType && typeof params.countryType === 'string') {
+      this.countryType = params.countryType;
+    }
+    if (params.countryList) {
+      this.countryList = params.countryList;
     }
     if (params.allowDescription && typeof params.allowDescription === 'boolean') {
       this.allowDescription = params.allowDescription;
