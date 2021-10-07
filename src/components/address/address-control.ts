@@ -73,7 +73,7 @@ export class AddressControl {
             const firstResult = value.results[0];
             console.log('firstResult', firstResult);
             const lat = firstResult?.attrs?.lat;
-            const lng = firstResult?.attrs?.lng;
+            const lng = firstResult?.attrs?.lon;
             console.log('lat', lat);
             console.log('lng', lng);
             if (typeof lat === 'number' && typeof lng === 'number') {

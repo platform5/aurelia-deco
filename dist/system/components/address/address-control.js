@@ -133,7 +133,7 @@ System.register(["aurelia-framework", "aurelia-resources", "aurelia-fetch-client
                                         firstResult = value.results[0];
                                         console.log('firstResult', firstResult);
                                         lat = (_e = firstResult === null || firstResult === void 0 ? void 0 : firstResult.attrs) === null || _e === void 0 ? void 0 : _e.lat;
-                                        lng = (_f = firstResult === null || firstResult === void 0 ? void 0 : firstResult.attrs) === null || _f === void 0 ? void 0 : _f.lng;
+                                        lng = (_f = firstResult === null || firstResult === void 0 ? void 0 : firstResult.attrs) === null || _f === void 0 ? void 0 : _f.lon;
                                         console.log('lat', lat);
                                         console.log('lng', lng);
                                         if (typeof lat === 'number' && typeof lng === 'number') {
