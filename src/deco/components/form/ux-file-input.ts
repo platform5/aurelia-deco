@@ -6,7 +6,7 @@ import { UxFileInputTheme } from './ux-file-input-theme';
 import { errorify } from 'aurelia-resources';
 import { getLogger, Logger } from 'aurelia-logging';
 import { FileUpload, UxFileItem } from '../../helpers/file-upload';
-import { DecoApi } from '../../helpers/deco-api';
+import { DecoApi } from '../../helpers/deco-api';
 
 let log: Logger;
 log = getLogger('ux-file-input');

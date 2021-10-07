@@ -61,6 +61,7 @@ var FileUpload = /** @class */ (function () {
                                 var createPreview = function (e) {
                                     return aurelia_resources_1.ImageHelpers.open(e.target.result).then(function (myimage) {
                                         myimage.exportQuality = quality;
+                                        myimage.mimetype = 'image/jpeg';
                                         if (format.indexOf(':') !== -1) {
                                             myimage.cover(parseInt(format.split(':')[0], 10), parseInt(format.split(':')[1], 10));
                                             file.previews[format] = myimage.toDataUrl();

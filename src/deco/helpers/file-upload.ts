@@ -62,6 +62,7 @@ export class FileUpload {
                 let createPreview = (e: any): Promise<any> => {
                   return ImageHelpers.open((e as any).target.result).then((myimage) => {
                     myimage.exportQuality = quality;
+                    myimage.mimetype = 'image/jpeg';
                     if (format.indexOf(':') !== -1) {
                       myimage.cover(
                         parseInt(format.split(':')[0], 10),
