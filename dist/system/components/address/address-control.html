@@ -7,14 +7,14 @@
     </ux-chip-list>
   </div>
   <div class="ux-form__row">
-    <ux-textarea value.bind="value['street']" label="${'Street' | t}" auto-resize.bind="true" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.delegate="addressChanged()"></ux-textarea>
+    <ux-textarea value.bind="value['street']" label="${'Street' | t}" auto-resize.bind="true" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.trigger="addressChanged()"></ux-textarea>
   </div>
   <div class="ux-form__row">
-    <ux-input style="width: 40%" value.bind="value['zip']" label="${'ZIP' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.delegate="addressChanged()"></ux-input>
-    <ux-input value.bind="value['city']" label="${'City' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.delegate="addressChanged()"></ux-input>
+    <ux-input style="width: 40%" value.bind="value['zip']" label="${'ZIP' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.trigger="addressChanged()"></ux-input>
+    <ux-input value.bind="value['city']" label="${'City' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.trigger="addressChanged()"></ux-input>
   </div>
   <div class="ux-form__row">
-    <ux-input if.bind="countryType === 'input'" value.bind="value['country']" label="${'Country' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.delegate="addressChanged()"></ux-input>
+    <ux-input if.bind="countryType === 'input'" value.bind="value['country']" label="${'Country' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.trigger="addressChanged()"></ux-input>
     <ux-select if.bind="countryType === 'list'" change.delegate="addressChanged()">
       <ux-option repeat.for="country of computedCountryList">${country}</ux-option>
     </ux-select>
