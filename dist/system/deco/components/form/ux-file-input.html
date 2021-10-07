@@ -18,7 +18,7 @@
           <div class="name-zone">
             <div class="name">${f.name}</div>
           </div>
-          <ux-button type="text" if.bind="f.toUpload && canRemoveBg" click.delegate="removebg($index)">Remove BG</ux-button>
+          <ux-button type="text" if.bind="f.toUpload && !f.replaced && canRemoveBg" click.delegate="removebg($index)">Remove BG</ux-button>
           <ux-icon icon="clear" click.delegate="removeFile(f)"></ux-icon>
         </div>
       </template>
@@ -30,7 +30,7 @@
       <div class="name-zone">
         <div class="name">${file.name}</div>
       </div>
-      <ux-button type="text" if.bind="f.toUpload && canRemoveBg" click.delegate="removebg(0)">Remove BG</ux-button>
+      <ux-button type="text" if.bind="file.toUpload && !file.replaced && canRemoveBg" click.delegate="removebg(0)">Remove BG</ux-button>
       <ux-icon icon="clear" click.delegate="removeFile(file)"></ux-icon>
     </div>
   </div>
