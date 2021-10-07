@@ -193,7 +193,7 @@ export class UxFileInput implements UxComponent {
       ) => Promise<void> = async (files) => {};
 
     public async removebg(index: number): Promise<void> {
-      return UxFileInput.removeBG(this.files, index, this.previewsFormats, this.defaultPreview, this.imageExportQuality);
+      return UxFileInput.removeBG(this.multiple ? this.files : [this.file], this.multiple ? index : 0, this.previewsFormats, this.defaultPreview, this.imageExportQuality);
     }
 
 }

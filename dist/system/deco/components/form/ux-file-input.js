@@ -214,7 +214,7 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                 UxFileInput.prototype.removebg = function (index) {
                     return __awaiter(this, void 0, void 0, function () {
                         return __generator(this, function (_a) {
-                            return [2 /*return*/, UxFileInput_1.removeBG(this.files, index, this.previewsFormats, this.defaultPreview, this.imageExportQuality)];
+                            return [2 /*return*/, UxFileInput_1.removeBG(this.multiple ? this.files : [this.file], this.multiple ? index : 0, this.previewsFormats, this.defaultPreview, this.imageExportQuality)];
                         });
                     });
                 };
