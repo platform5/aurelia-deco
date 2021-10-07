@@ -79,7 +79,13 @@ export class AddressControl {
         } catch (error) {
           console.warn('Error when fetch lat lng', error.message);
         }
+      } else {
+        this.value.lat = undefined;
+        this.value.lng = undefined;
       }
+    } else {
+      this.value.lat = undefined;
+      this.value.lng = undefined;
     }
   }
 }

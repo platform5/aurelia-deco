@@ -99,8 +99,8 @@ define(["require", "exports", "aurelia-framework", "aurelia-resources", "aurelia
                 return __generator(this, function (_g) {
                     switch (_g.label) {
                         case 0:
-                            if (!(((_a = this.value) === null || _a === void 0 ? void 0 : _a.street) && ((_b = this.value) === null || _b === void 0 ? void 0 : _b.zip) && ((_c = this.value) === null || _c === void 0 ? void 0 : _c.city) && ((_d = this.value) === null || _d === void 0 ? void 0 : _d.country))) return [3 /*break*/, 5];
-                            if (!(this.value.country === 'Suisse')) return [3 /*break*/, 5];
+                            if (!(((_a = this.value) === null || _a === void 0 ? void 0 : _a.street) && ((_b = this.value) === null || _b === void 0 ? void 0 : _b.zip) && ((_c = this.value) === null || _c === void 0 ? void 0 : _c.city) && ((_d = this.value) === null || _d === void 0 ? void 0 : _d.country))) return [3 /*break*/, 8];
+                            if (!(this.value.country === 'Suisse')) return [3 /*break*/, 6];
                             this.httpClient.configure(function (config) {
                                 config.withBaseUrl('https://api3.geo.admin.ch/rest/services/api');
                             });
@@ -128,7 +128,17 @@ define(["require", "exports", "aurelia-framework", "aurelia-resources", "aurelia
                             error_1 = _g.sent();
                             console.warn('Error when fetch lat lng', error_1.message);
                             return [3 /*break*/, 5];
-                        case 5: return [2 /*return*/];
+                        case 5: return [3 /*break*/, 7];
+                        case 6:
+                            this.value.lat = undefined;
+                            this.value.lng = undefined;
+                            _g.label = 7;
+                        case 7: return [3 /*break*/, 9];
+                        case 8:
+                            this.value.lat = undefined;
+                            this.value.lng = undefined;
+                            _g.label = 9;
+                        case 9: return [2 /*return*/];
                     }
                 });
             });

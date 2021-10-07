@@ -15,7 +15,7 @@
   </div>
   <div class="ux-form__row">
     <ux-input if.bind="countryType === 'input'" value.bind="value['country']" label="${'Country' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.trigger="addressChanged()"></ux-input>
-    <ux-select if.bind="countryType === 'list'" change.delegate="addressChanged()">
+    <ux-select if.bind="countryType === 'list'" value.bind="value['country']" change.delegate="addressChanged()">
       <ux-option repeat.for="country of computedCountryList">${country}</ux-option>
     </ux-select>
   </div>
