@@ -353,7 +353,7 @@ define(["require", "exports", "aurelia-framework", "../helpers/deco-api", "aurel
                         var file = _e[_d];
                         if (file.toUpload === true) {
                             filesToUpload = true;
-                            var blob = file.replaced ? file.replaced : body[property];
+                            var blob = file.replaced ? file.replaced : file;
                             form.append(property, blob, file.name);
                             if (file.blobs) {
                                 for (var _f = 0, _g = Object.keys(file.blobs); _f < _g.length; _f++) {

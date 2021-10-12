@@ -366,7 +366,7 @@ export class Model {
         for (let file of (body[property] as UxFileItemArray<UxFileItem>)) {
           if (file.toUpload === true) {
             filesToUpload = true;
-            const blob: Blob = file.replaced ? file.replaced : body[property];
+            const blob: Blob = file.replaced ? file.replaced : (file as File);
             form.append(property, blob, file.name);
             if (file.blobs) {
               for (let format of Object.keys(file.blobs)) {
