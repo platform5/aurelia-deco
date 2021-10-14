@@ -14,6 +14,9 @@ export interface BootstrapConfig {
     container?: Container;
     enableStateLog?: boolean;
     enableStateStorage?: boolean;
+    localStorageMiddleware?: (state: unknown, _: unknown, settings?: {
+        key: string;
+    }) => void;
     stateStorageKey?: string;
     enableRestoringRouteFromState?: boolean;
     restoreRouteFromStateOnlyFor?: Array<string>;

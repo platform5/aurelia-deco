@@ -23,6 +23,9 @@ export interface BootstrapConfig {
   container?: Container;
   enableStateLog?: boolean;
   enableStateStorage?: boolean;
+  localStorageMiddleware?: (state: unknown, _: unknown, settings?: {
+    key: string;
+  }) => void;
   stateStorageKey?: string;
   enableRestoringRouteFromState?: boolean;
   restoreRouteFromStateOnlyFor?: Array<string>;
@@ -120,7 +123,7 @@ export class SwissdataGlobal {
       if (config.enableStateLog) store.registerMiddleware(logMiddleware, MiddlewarePlacement.After, { logType: LogLevel.debug });
 
       if (config.enableStateStorage) {
-        store.registerMiddleware(localStorageMiddleware, MiddlewarePlacement.After, { key: config.stateStorageKey })
+        store.registerMiddleware(config.localStorageMiddleware || localStorageMiddleware, MiddlewarePlacement.After, { key: config.stateStorageKey })
         store.registerAction('Rehydrate', rehydrateFromLocalStorage);
         this.container.registerAlias(Store, 'aurelia-store');
         return store.dispatch(rehydrateFromLocalStorage, config.stateStorageKey);

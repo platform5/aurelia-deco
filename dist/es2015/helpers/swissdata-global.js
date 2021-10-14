@@ -127,7 +127,7 @@ var SwissdataGlobal = /** @class */ (function () {
             if (config.enableStateLog)
                 store.registerMiddleware(logMiddleware, MiddlewarePlacement.After, { logType: LogLevel.debug });
             if (config.enableStateStorage) {
-                store.registerMiddleware(localStorageMiddleware, MiddlewarePlacement.After, { key: config.stateStorageKey });
+                store.registerMiddleware(config.localStorageMiddleware || localStorageMiddleware, MiddlewarePlacement.After, { key: config.stateStorageKey });
                 store.registerAction('Rehydrate', rehydrateFromLocalStorage);
                 _this.container.registerAlias(Store, 'aurelia-store');
                 return store.dispatch(rehydrateFromLocalStorage, config.stateStorageKey);

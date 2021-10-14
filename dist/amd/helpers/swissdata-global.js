@@ -113,7 +113,7 @@ define(["require", "exports", "./../models/profile.model", "./../models/user.mod
                 if (config.enableStateLog)
                     store.registerMiddleware(aurelia_store_1.logMiddleware, aurelia_store_1.MiddlewarePlacement.After, { logType: aurelia_store_1.LogLevel.debug });
                 if (config.enableStateStorage) {
-                    store.registerMiddleware(aurelia_store_1.localStorageMiddleware, aurelia_store_1.MiddlewarePlacement.After, { key: config.stateStorageKey });
+                    store.registerMiddleware(config.localStorageMiddleware || aurelia_store_1.localStorageMiddleware, aurelia_store_1.MiddlewarePlacement.After, { key: config.stateStorageKey });
                     store.registerAction('Rehydrate', aurelia_store_1.rehydrateFromLocalStorage);
                     _this.container.registerAlias(deco_1.Store, 'aurelia-store');
                     return store.dispatch(aurelia_store_1.rehydrateFromLocalStorage, config.stateStorageKey);
