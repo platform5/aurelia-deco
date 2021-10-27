@@ -115,7 +115,7 @@ var AuthenticationControl = /** @class */ (function () {
                                 'Token not found',
                                 'Token has expired'
                             ];
-                            if (json && json.error && errors.includes(json.error)) {
+                            if (json && json.error && errors.includes(json.error) && !req.url.includes('/validate')) {
                                 // notify('Please login again to continue');
                                 this.debounceLoginAgainMessage();
                                 this.notAuthenticated();

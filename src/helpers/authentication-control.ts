@@ -1,6 +1,6 @@
 import { Interceptor } from 'aurelia-fetch-client';
 import { Router } from 'aurelia-router';
-import { inject } from 'aurelia-framework';
+import { inject } from 'aurelia-framework';
 import { notify } from 'aurelia-resources';
 import { Container } from 'aurelia-framework';
 import { SwissdataGlobal } from './swissdata-global';
@@ -53,7 +53,7 @@ export class AuthenticationControl {
               'Token not found',
               'Token has expired'
             ];
-            if (json && json.error && errors.includes(json.error)) {
+            if (json && json.error && errors.includes(json.error) && !req.url.includes('/validate')) {
               // notify('Please login again to continue');
               this.debounceLoginAgainMessage();
               this.notAuthenticated();
