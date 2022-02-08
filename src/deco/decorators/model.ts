@@ -540,6 +540,23 @@ export class Model {
     });
   }
 
+  getUxFileData(property: string, file: UxFileItem):  Promise<Blob | UxFileItem> | null {
+    let type: TypeDecorator = this.deco.propertyTypes[property];
+    let url : string = null;
+    if (type.name !== 'file' && type.name !== 'files') return null;
+    url = this.getOneRoute(this.id) + '?download=' + property + '&fileId=' + file.filename;
+    return this.api.get(url).then((response) => {
+      return response.blob();
+    }).then((blob) => {
+      if (blob) {
+        file.previewData = URL.createObjectURL(blob);
+        file.filename = url;
+        return file;
+      }
+      return null;
+    });
+  }
+
   validationRules() {
     let rules: any;
     for (let key in this.deco.propertyTypes) {

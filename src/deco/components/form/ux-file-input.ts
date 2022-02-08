@@ -7,6 +7,7 @@ import { errorify } from 'aurelia-resources';
 import { getLogger, Logger } from 'aurelia-logging';
 import { FileUpload, UxFileItem } from '../../helpers/file-upload';
 import { DecoApi } from '../../helpers/deco-api';
+import { Model } from '../../decorators/model';
 
 let log: Logger;
 log = getLogger('ux-file-input');
@@ -43,6 +44,9 @@ export class UxFileInput implements UxComponent {
 
     @bindable public imageExportQuality = 0.6;
 
+    @bindable public instance? : Model; // Optionnal
+    @bindable public property? : string; // Optionnal
+
     @observable
     public rawValue: string = '';
 
@@ -50,6 +54,7 @@ export class UxFileInput implements UxComponent {
     public focused: boolean = false;
 
     //public value: any = undefined;
+    public activeSort: boolean = false;
     public inputbox: HTMLInputElement;
     public inputform: HTMLFormElement;
     public canEdit: boolean = false;
@@ -63,6 +68,7 @@ export class UxFileInput implements UxComponent {
     public bind() {
       const element = this.element;
       const inputbox = this.inputbox;
+      this.activeSort = true;
 
       if (this.autofocus || this.autofocus === '') {
         this.focused = true;
@@ -114,6 +120,7 @@ export class UxFileInput implements UxComponent {
     }
 
     public selectFile() {
+       this.activeSort = false;
         this.inputbox.click();
     }
 
@@ -153,6 +160,9 @@ export class UxFileInput implements UxComponent {
     }
 
     public removeFile(file: Number |  UxFileItem) {
+
+      this.activeSort = false; // disable sorting if remove file
+
       if (!this.multiple) {
         this.file = null;
         return;
@@ -196,7 +206,7 @@ export class UxFileInput implements UxComponent {
         // 1. Envoyer l'image original pour que le fond soit remplacé
         const formData = new FormData();
         formData.append('file', file as File, file.name);
-        const response = await this.api .post('/remove-bg', formData, {bodyFormat: 'FormData'});
+        const response = await this.api.post('/remove-bg', formData, {bodyFormat: 'FormData'});
       
         // 2. Set the replaced value
         const replaced = await response.blob();
@@ -212,6 +222,36 @@ export class UxFileInput implements UxComponent {
         errorify(error);
       }
       this.removingBackground = false;
+      this.activeSort = false; // disable sorting if remove background
+    }
+
+    public async downloadFile(index : number) {
+      try {
+        let tmpFiles = JSON.parse(JSON.stringify(this.files));
+        const file : UxFileItem = tmpFiles[index];
+        await this.instance.getUxFileData(this.property, file).then((blob) => {
+            return blob;
+          }).then((f) => {
+            let objectURL: string;
+            if (objectURL) {
+              window.URL.revokeObjectURL(objectURL);
+            }
+               this.api.get(file.filename).then((response: Response) => {
+              return response.arrayBuffer();
+            }).then((buffer) => {
+              let fileBuffer = new File([buffer], file.name, {type: file.type});
+              objectURL = window.URL.createObjectURL(fileBuffer);
+        
+              let link = document.createElement('a');
+              link.setAttribute('href', objectURL);
+              link.setAttribute('download', file.name);
+              link.click();
+            }).catch(errorify);
+            return f
+          })
+      } catch (error) {
+        console.error(error);
+      };
     }
 
     public topList(index : number) {
@@ -239,7 +279,6 @@ export class UxFileInput implements UxComponent {
         });
         this.files = newFiles;
         this.files.sortFiles = newFiles;
-        console.log('files',  this.files);
       }, 10);
     }
 
