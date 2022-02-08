@@ -7,6 +7,7 @@ export interface UxInputElement extends HTMLElement {
 }
 export interface UxFileItemArray<T> extends Array<T> {
     removedFiles?: Array<UxFileItem>;
+    sortFiles?: Array<UxFileItem>;
 }
 export declare class UxFileInput implements UxComponent {
     element: UxInputElement;
@@ -45,4 +46,8 @@ export declare class UxFileInput implements UxComponent {
     removeFile(file: Number | UxFileItem): void;
     private removingBackground;
     removebg(index: number): Promise<void>;
+    topList(index: number): void;
+}
+export declare class SortValueConverter {
+    toView(array: any, propertyName: any, direction: any): any;
 }

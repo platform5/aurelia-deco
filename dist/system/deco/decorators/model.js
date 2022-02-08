@@ -392,6 +392,14 @@ System.register(["aurelia-framework", "../helpers/deco-api", "aurelia-validation
                                 }
                                 form.append(property + "_remove", JSON.stringify(body[property + "_remove"]));
                             }
+                            if (body[property].sortFiles) {
+                                body[property + "_sort"] = [];
+                                for (var _k = 0, _l = body[property].sortFiles; _k < _l.length; _k++) {
+                                    var sortFile = _l[_k];
+                                    body[property + "_sort"].push(sortFile.filename);
+                                }
+                                form.append(property + "_sort", JSON.stringify(body[property + "_sort"]));
+                            }
                             body[property] = 'changed'; // the body of the property must be 'changed' to indicate that there are changes in this property
                             form.append(property, 'changed');
                         }

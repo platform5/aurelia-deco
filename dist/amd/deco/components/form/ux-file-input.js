@@ -43,7 +43,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "aurelia-resources", "aurelia-logging", "../../helpers/file-upload", "../../helpers/deco-api"], function (require, exports, aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, aurelia_resources_1, aurelia_logging_1, file_upload_1, deco_api_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.UxFileInput = void 0;
+    exports.SortValueConverter = exports.UxFileInput = void 0;
     var log;
     log = aurelia_logging_1.getLogger('ux-file-input');
     var UxFileInput = /** @class */ (function () {
@@ -230,6 +230,36 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                 });
             });
         };
+        UxFileInput.prototype.topList = function (index) {
+            var _this = this;
+            for (var i = 0; i < this.files.length; i++) {
+                this.files[i].index = i;
+            }
+            var tmpFiles = JSON.parse(JSON.stringify(this.files));
+            setTimeout(function () {
+                var newFiles = [];
+                var i = 0;
+                for (var _i = 0, _a = tmpFiles; _i < _a.length; _i++) {
+                    var file = _a[_i];
+                    if (i == index && i != 0) {
+                        file.index = i - 1;
+                    }
+                    else if (i == index - 1 && index - 1 >= 0) {
+                        file.index = i + 1;
+                    }
+                    else {
+                    }
+                    newFiles.push(file);
+                    i++;
+                }
+                newFiles.sort(function (a, b) {
+                    return a.index - b.index;
+                });
+                _this.files = newFiles;
+                _this.files.sortFiles = newFiles;
+                console.log('files', _this.files);
+            }, 10);
+        };
         __decorate([
             aurelia_templating_1.bindable
         ], UxFileInput.prototype, "autofocus", void 0);
@@ -285,6 +315,19 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
         return UxFileInput;
     }());
     exports.UxFileInput = UxFileInput;
+    var SortValueConverter = /** @class */ (function () {
+        function SortValueConverter() {
+        }
+        SortValueConverter.prototype.toView = function (array, propertyName, direction) {
+            console.log('sort', propertyName);
+            var factor = direction === 'ascending' ? 1 : -1;
+            return array.slice(0).sort(function (a, b) {
+                return (a[propertyName] - b[propertyName]) * factor;
+            });
+        };
+        return SortValueConverter;
+    }());
+    exports.SortValueConverter = SortValueConverter;
     function stopEvent(e) {
         e.stopPropagation();
     }

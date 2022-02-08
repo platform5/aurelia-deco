@@ -234,6 +234,36 @@ var UxFileInput = /** @class */ (function () {
             });
         });
     };
+    UxFileInput.prototype.topList = function (index) {
+        var _this = this;
+        for (var i = 0; i < this.files.length; i++) {
+            this.files[i].index = i;
+        }
+        var tmpFiles = JSON.parse(JSON.stringify(this.files));
+        setTimeout(function () {
+            var newFiles = [];
+            var i = 0;
+            for (var _i = 0, _a = tmpFiles; _i < _a.length; _i++) {
+                var file = _a[_i];
+                if (i == index && i != 0) {
+                    file.index = i - 1;
+                }
+                else if (i == index - 1 && index - 1 >= 0) {
+                    file.index = i + 1;
+                }
+                else {
+                }
+                newFiles.push(file);
+                i++;
+            }
+            newFiles.sort(function (a, b) {
+                return a.index - b.index;
+            });
+            _this.files = newFiles;
+            _this.files.sortFiles = newFiles;
+            console.log('files', _this.files);
+        }, 10);
+    };
     __decorate([
         bindable
     ], UxFileInput.prototype, "autofocus", void 0);
@@ -289,6 +319,19 @@ var UxFileInput = /** @class */ (function () {
     return UxFileInput;
 }());
 export { UxFileInput };
+var SortValueConverter = /** @class */ (function () {
+    function SortValueConverter() {
+    }
+    SortValueConverter.prototype.toView = function (array, propertyName, direction) {
+        console.log('sort', propertyName);
+        var factor = direction === 'ascending' ? 1 : -1;
+        return array.slice(0).sort(function (a, b) {
+            return (a[propertyName] - b[propertyName]) * factor;
+        });
+    };
+    return SortValueConverter;
+}());
+export { SortValueConverter };
 function stopEvent(e) {
     e.stopPropagation();
 }

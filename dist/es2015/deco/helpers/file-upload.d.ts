@@ -11,6 +11,7 @@ export interface UxFileItem {
         [key: string]: any;
     };
     replaced?: Blob;
+    index?: number;
 }
 export declare class FileUpload {
     static generatePreviews(files: Array<UxFileItem>, formats?: string[], defaultPreviewFormat?: string, quality?: number): Promise<any[]>;
