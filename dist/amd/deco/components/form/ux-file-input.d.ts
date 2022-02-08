@@ -2,6 +2,7 @@ import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxFileInputTheme } from './ux-file-input-theme';
 import { UxFileItem } from '../../helpers/file-upload';
 import { DecoApi } from '../../helpers/deco-api';
+import { Model } from '../../decorators/model';
 export interface UxInputElement extends HTMLElement {
     value: any;
 }
@@ -25,8 +26,11 @@ export declare class UxFileInput implements UxComponent {
     previewsFormats: Array<string>;
     defaultPreview: string;
     imageExportQuality: number;
+    instance?: Model;
+    property?: string;
     rawValue: string;
     focused: boolean;
+    activeSort: boolean;
     inputbox: HTMLInputElement;
     inputform: HTMLFormElement;
     canEdit: boolean;
@@ -46,6 +50,7 @@ export declare class UxFileInput implements UxComponent {
     removeFile(file: Number | UxFileItem): void;
     private removingBackground;
     removebg(index: number): Promise<void>;
+    downloadFile(index: number): Promise<void>;
     topList(index: number): void;
 }
 export declare class SortValueConverter {

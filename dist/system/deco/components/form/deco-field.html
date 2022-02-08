@@ -196,6 +196,8 @@
     <ux-field>
       <label>${mylabel}</label>
       <ux-file-input 
+        instance.bind="instance"
+        property.bind="property"
         file.two-way="instance[property] & validate:instance.validationController" 
         accept.bind="options.accepted" 
         multiple.bind="false" 
@@ -212,6 +214,8 @@
     <ux-field>
       <label>${mylabel}</label>
       <ux-file-input
+        instance.bind="instance"
+        property.bind="property"
         files.two-way="instance[property] & validate:instance.validationController"
         accept.bind="options.accepted"
         multiple.bind="true"

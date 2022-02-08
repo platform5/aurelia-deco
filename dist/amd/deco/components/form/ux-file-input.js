@@ -62,6 +62,8 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             this.imageExportQuality = 0.6;
             this.rawValue = '';
             this.focused = false;
+            //public value: any = undefined;
+            this.activeSort = false;
             this.canEdit = false;
             this.canRemoveBg = false;
             this.selectedFiles = [];
@@ -70,6 +72,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
         UxFileInput.prototype.bind = function () {
             var element = this.element;
             var inputbox = this.inputbox;
+            this.activeSort = true;
             if (this.autofocus || this.autofocus === '') {
                 this.focused = true;
             }
@@ -112,6 +115,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             this.inputbox.removeEventListener('input', stopEvent);
         };
         UxFileInput.prototype.selectFile = function () {
+            this.activeSort = false;
             this.inputbox.click();
         };
         UxFileInput.prototype.themeChanged = function (newValue) {
@@ -154,6 +158,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
         };
         UxFileInput.prototype.removeFile = function (file) {
             var _this = this;
+            this.activeSort = false; // disable sorting if remove file
             if (!this.multiple) {
                 this.file = null;
                 return;
@@ -225,6 +230,50 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                             return [3 /*break*/, 6];
                         case 6:
                             this.removingBackground = false;
+                            this.activeSort = false; // disable sorting if remove background
+                            return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        UxFileInput.prototype.downloadFile = function (index) {
+            return __awaiter(this, void 0, void 0, function () {
+                var tmpFiles, file_2, error_2;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            _a.trys.push([0, 2, , 3]);
+                            tmpFiles = JSON.parse(JSON.stringify(this.files));
+                            file_2 = tmpFiles[index];
+                            return [4 /*yield*/, this.instance.getUxFileData(this.property, file_2).then(function (blob) {
+                                    return blob;
+                                }).then(function (f) {
+                                    var objectURL;
+                                    if (objectURL) {
+                                        window.URL.revokeObjectURL(objectURL);
+                                    }
+                                    _this.api.get(file_2.filename).then(function (response) {
+                                        return response.arrayBuffer();
+                                    }).then(function (buffer) {
+                                        var fileBuffer = new File([buffer], file_2.name, { type: file_2.type });
+                                        objectURL = window.URL.createObjectURL(fileBuffer);
+                                        var link = document.createElement('a');
+                                        link.setAttribute('href', objectURL);
+                                        link.setAttribute('download', file_2.name);
+                                        link.click();
+                                    }).catch(aurelia_resources_1.errorify);
+                                    return f;
+                                })];
+                        case 1:
+                            _a.sent();
+                            return [3 /*break*/, 3];
+                        case 2:
+                            error_2 = _a.sent();
+                            console.error(error_2);
+                            return [3 /*break*/, 3];
+                        case 3:
+                            ;
                             return [2 /*return*/];
                     }
                 });
@@ -257,7 +306,6 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                 });
                 _this.files = newFiles;
                 _this.files.sortFiles = newFiles;
-                console.log('files', _this.files);
             }, 10);
         };
         __decorate([
@@ -296,6 +344,12 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
         __decorate([
             aurelia_templating_1.bindable
         ], UxFileInput.prototype, "imageExportQuality", void 0);
+        __decorate([
+            aurelia_templating_1.bindable
+        ], UxFileInput.prototype, "instance", void 0);
+        __decorate([
+            aurelia_templating_1.bindable
+        ], UxFileInput.prototype, "property", void 0);
         __decorate([
             aurelia_binding_1.observable
         ], UxFileInput.prototype, "rawValue", void 0);

@@ -558,6 +558,23 @@ var Model = /** @class */ (function () {
             }
         });
     };
+    Model.prototype.getUxFileData = function (property, file) {
+        var type = this.deco.propertyTypes[property];
+        var url = null;
+        if (type.name !== 'file' && type.name !== 'files')
+            return null;
+        url = this.getOneRoute(this.id) + '?download=' + property + '&fileId=' + file.filename;
+        return this.api.get(url).then(function (response) {
+            return response.blob();
+        }).then(function (blob) {
+            if (blob) {
+                file.previewData = URL.createObjectURL(blob);
+                file.filename = url;
+                return file;
+            }
+            return null;
+        });
+    };
     Model.prototype.validationRules = function () {
         var rules;
         for (var key in this.deco.propertyTypes) {

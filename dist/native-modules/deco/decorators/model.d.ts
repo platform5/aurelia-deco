@@ -78,6 +78,7 @@ export declare class Model {
     getFilePreview(property: string, format: string, options?: FilePreviewOptions): Promise<Blob | null>;
     getFilePreviewUrl(property: string, format: string, options?: FilePreviewOptions): Promise<string | null>;
     getUxFilePreviewData(property: string, file: UxFileItem, format: string): Promise<void>;
+    getUxFileData(property: string, file: UxFileItem): Promise<Blob | UxFileItem> | null;
     validationRules(): any;
     validate(): Promise<boolean>;
     private _validationController;
