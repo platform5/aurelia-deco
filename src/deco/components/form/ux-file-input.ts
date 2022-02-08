@@ -19,6 +19,7 @@ export interface UxInputElement extends HTMLElement {
 
 export interface UxFileItemArray<T> extends Array<T> {
   removedFiles?: Array<UxFileItem>;
+  sortFiles?: Array<UxFileItem>;
 }
 
 @inject(Element, StyleEngine, DecoApi)
@@ -213,7 +214,49 @@ export class UxFileInput implements UxComponent {
       this.removingBackground = false;
     }
 
-}
+    public topList(index : number) {
+      for (let i = 0; i < this.files.length; i++) {
+        this.files[i].index = i;
+      }
+      let tmpFiles = JSON.parse(JSON.stringify(this.files)) as UxFileItemArray<UxFileItem>;
+      setTimeout(() => {
+        let newFiles: UxFileItemArray<UxFileItem> = [];
+        let i : number = 0;
+        for (let file of (tmpFiles as UxFileItemArray<UxFileItem>)) {
+            if (i == index && i != 0){
+              file.index = i - 1;
+            }
+            else if (i == index - 1 && index - 1 >= 0) {
+              file.index = i + 1;
+            }
+            else {
+            }
+          newFiles.push(file);
+          i++;
+        }
+        newFiles.sort(function (a, b) {
+          return a.index - b.index;
+        });
+        this.files = newFiles;
+        this.files.sortFiles = newFiles;
+        console.log('files',  this.files);
+      }, 10);
+    }
+
+
+
+  }
+  
+  export class SortValueConverter {
+    toView(array, propertyName, direction) {
+      console.log('sort',propertyName );
+
+        var factor = direction === 'ascending' ? 1 : -1;
+        return array.slice(0).sort((a, b) => {
+            return (a[propertyName] - b[propertyName]) * factor;
+        });
+    }
+} 
 
 function stopEvent(e: Event) {
   e.stopPropagation();

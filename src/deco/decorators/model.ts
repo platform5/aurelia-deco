@@ -382,6 +382,13 @@ export class Model {
           }
           form.append(`${property}_remove`, JSON.stringify(body[`${property}_remove`]));
         }
+        if ((body[property] as UxFileItemArray<UxFileItem>).sortFiles) {
+          body[`${property}_sort`] = [];
+          for (let sortFile of (body[property] as UxFileItemArray<UxFileItem>).sortFiles) {
+            body[`${property}_sort`].push(sortFile.filename);
+          }
+          form.append(`${property}_sort`, JSON.stringify(body[`${property}_sort`]));
+        }
         body[property] = 'changed'; // the body of the property must be 'changed' to indicate that there are changes in this property
         form.append(property, 'changed');
       }

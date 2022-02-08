@@ -9,6 +9,7 @@ export interface UxFileItem /*extends File*/ {
   previews?: {[key: string]: any};
   blobs?: {[key: string]: any};
   replaced?: Blob;
+  index?: number;
 }
 
 export class FileUpload {
