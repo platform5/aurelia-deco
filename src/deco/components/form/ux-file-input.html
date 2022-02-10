@@ -7,6 +7,7 @@
   <require from="./ux-file-input.css"></require>
   <div class="toolbar" if.bind="canEdit">
     <ux-button size="small" if.bind="multiple || file === null || file === undefined" click.delegate="selectFile()"><span t="data.label.${buttonLabel | firstLetterUpper}"></span></ux-button>
+    <span if.bind="credits != '-1'"><br><small>(</small><small t="shop.There are {{ credits }} credits left to remove BG"  t-params.bind="{credits: credits}"></small><small>)</small></span>
   </div>
   <div class="files-list">
     <!-- multiple files list -->
@@ -38,7 +39,7 @@
     </div>
   </div>
   <form ref="inputform">
-  <input  
+    <input  
     ref="inputbox"
     type="file"
     value.from-view="rawValue"

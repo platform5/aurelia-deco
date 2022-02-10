@@ -58,6 +58,7 @@ export class UxFileInput implements UxComponent {
     public inputbox: HTMLInputElement;
     public inputform: HTMLFormElement;
     public canEdit: boolean = false;
+    public credits: string = '-1';
     @bindable public canRemoveBg: boolean = false;
 
     @observable public selectedFiles: Array < UxFileItem > = [];
@@ -207,7 +208,8 @@ export class UxFileInput implements UxComponent {
         const formData = new FormData();
         formData.append('file', file as File, file.name);
         const response = await this.api.post('/remove-bg', formData, {bodyFormat: 'FormData'});
-      
+        this.credits = response.headers.get("X-Credits");
+
         // 2. Set the replaced value
         const replaced = await response.blob();
         file.replaced = replaced;
