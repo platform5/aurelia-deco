@@ -34,6 +34,7 @@ export declare class UxFileInput implements UxComponent {
     inputbox: HTMLInputElement;
     inputform: HTMLFormElement;
     canEdit: boolean;
+    credits: string;
     canRemoveBg: boolean;
     selectedFiles: Array<UxFileItem>;
     constructor(element: UxInputElement, styleEngine: StyleEngine, api: DecoApi);

@@ -65,6 +65,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             //public value: any = undefined;
             this.activeSort = false;
             this.canEdit = false;
+            this.credits = '-1';
             this.canRemoveBg = false;
             this.selectedFiles = [];
             this.removingBackground = false;
@@ -212,6 +213,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                             return [4 /*yield*/, this.api.post('/remove-bg', formData, { bodyFormat: 'FormData' })];
                         case 2:
                             response = _a.sent();
+                            this.credits = response.headers.get("X-Credits");
                             return [4 /*yield*/, response.blob()];
                         case 3:
                             replaced = _a.sent();
