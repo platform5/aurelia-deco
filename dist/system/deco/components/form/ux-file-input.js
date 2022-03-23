@@ -407,9 +407,14 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                 SortValueConverter.prototype.toView = function (array, propertyName, direction) {
                     console.log('sort', propertyName);
                     var factor = direction === 'ascending' ? 1 : -1;
-                    return array.slice(0).sort(function (a, b) {
-                        return (a[propertyName] - b[propertyName]) * factor;
-                    });
+                    if (array && array.length != 0) {
+                        return array.slice(0).sort(function (a, b) {
+                            return (a[propertyName] - b[propertyName]) * factor;
+                        });
+                    }
+                    else {
+                        return array;
+                    }
                 };
                 return SortValueConverter;
             }());

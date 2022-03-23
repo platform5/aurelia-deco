@@ -293,9 +293,14 @@ export class UxFileInput implements UxComponent {
       console.log('sort',propertyName );
 
         var factor = direction === 'ascending' ? 1 : -1;
-        return array.slice(0).sort((a, b) => {
-            return (a[propertyName] - b[propertyName]) * factor;
-        });
+        if (array && array.length != 0){
+          return array.slice(0).sort((a, b) => {
+              return (a[propertyName] - b[propertyName]) * factor;
+          });
+        }
+        else {
+          return array;
+        }
     }
 } 
 
