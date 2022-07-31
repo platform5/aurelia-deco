@@ -90,7 +90,7 @@ define(["require", "exports", "../deco", "./app.model"], function (require, expo
         __decorate([
             deco_1.type.boolean,
             deco_1.form.label('Is this model public ?'),
-            deco_1.form.hint('If yes, anyone can access its data. Otherwise, only logged in users can.')
+            deco_1.form.hint('If yes, anyone can access its data Otherwise, only logged in users can')
         ], DynamicConfigModel.prototype, "isPublic", void 0);
         __decorate([
             deco_1.type.select({ options: ['all', 'creator', 'users', 'usersWithRoles'] }),

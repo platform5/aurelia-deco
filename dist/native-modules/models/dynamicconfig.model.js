@@ -88,7 +88,7 @@ var DynamicConfigModel = /** @class */ (function (_super) {
     __decorate([
         type.boolean,
         form.label('Is this model public ?'),
-        form.hint('If yes, anyone can access its data. Otherwise, only logged in users can.')
+        form.hint('If yes, anyone can access its data Otherwise, only logged in users can')
     ], DynamicConfigModel.prototype, "isPublic", void 0);
     __decorate([
         type.select({ options: ['all', 'creator', 'users', 'usersWithRoles'] }),
