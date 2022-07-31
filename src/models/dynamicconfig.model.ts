@@ -47,7 +47,7 @@ export class DynamicConfigModel extends Model {
 
   @type.boolean
   @form.label('Is this model public ?')
-  @form.hint('If yes, anyone can access its data. Otherwise, only logged in users can.')
+  @form.hint('If yes, anyone can access its data Otherwise, only logged in users can')
   public isPublic: boolean = false;
 
   @type.select({options: ['all', 'creator', 'users', 'usersWithRoles']})
