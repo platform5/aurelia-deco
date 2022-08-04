@@ -29,6 +29,9 @@ var ProfileModel = /** @class */ (function (_super) {
         _this.zip = '';
         _this.city = '';
         _this.country = '';
+        _this.company = '';
+        _this.department = '';
+        _this.metadata = [];
         return _this;
     }
     __decorate([
@@ -49,6 +52,20 @@ var ProfileModel = /** @class */ (function (_super) {
     __decorate([
         type.string
     ], ProfileModel.prototype, "country", void 0);
+    __decorate([
+        type.string
+    ], ProfileModel.prototype, "company", void 0);
+    __decorate([
+        type.string
+    ], ProfileModel.prototype, "department", void 0);
+    __decorate([
+        type.array({ type: 'object', options: {
+                keys: {
+                    key: { type: 'string' },
+                    value: { type: 'any' }
+                }
+            } })
+    ], ProfileModel.prototype, "metadata", void 0);
     ProfileModel = __decorate([
         model('/profile')
     ], ProfileModel);

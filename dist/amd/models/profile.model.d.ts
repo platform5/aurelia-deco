@@ -1,4 +1,4 @@
-import { Model } from '../deco';
+import { Model, Metadata } from '../deco';
 export declare class ProfileModel extends Model {
     userId?: string;
     picture: any;
@@ -6,4 +6,7 @@ export declare class ProfileModel extends Model {
     zip: string;
     city: string;
     country: string;
+    company: string;
+    department: string;
+    metadata: Array<Metadata>;
 }

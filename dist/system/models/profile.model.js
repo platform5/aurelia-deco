@@ -41,6 +41,9 @@ System.register(["../deco", "./user.model"], function (exports_1, context_1) {
                     _this.zip = '';
                     _this.city = '';
                     _this.country = '';
+                    _this.company = '';
+                    _this.department = '';
+                    _this.metadata = [];
                     return _this;
                 }
                 __decorate([
@@ -61,6 +64,20 @@ System.register(["../deco", "./user.model"], function (exports_1, context_1) {
                 __decorate([
                     deco_1.type.string
                 ], ProfileModel.prototype, "country", void 0);
+                __decorate([
+                    deco_1.type.string
+                ], ProfileModel.prototype, "company", void 0);
+                __decorate([
+                    deco_1.type.string
+                ], ProfileModel.prototype, "department", void 0);
+                __decorate([
+                    deco_1.type.array({ type: 'object', options: {
+                            keys: {
+                                key: { type: 'string' },
+                                value: { type: 'any' }
+                            }
+                        } })
+                ], ProfileModel.prototype, "metadata", void 0);
                 ProfileModel = __decorate([
                     deco_1.model('/profile')
                 ], ProfileModel);
