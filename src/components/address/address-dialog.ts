@@ -1,15 +1,22 @@
 import { Address } from './../../decorators/address';
+import { UxModalServiceResult } from '@aurelia-ux/modal';
+import { errorify } from 'aurelia-resources';
+import { I18N } from 'aurelia-i18n';
 
 export class AddressDialog {
 
+  public dialogTitle: string = 'Edit Address'
   public address: Address = {};
   public mode: 'create' | 'edit' = 'create';
+  public checkAllValues: boolean = false;
   public labels: string[] = [];
   public dicoContext = '';
   public allowDescription = false;
   public allowLatLngEdition = false;
   public countryType: 'input' | 'list' = 'input';
   public countryList: 'all' | Array<string> = 'all';
+  public i18n: I18N;
+
 
   public activate(params: any) {
     if (params.address && typeof params.address === 'object') {
@@ -19,6 +26,15 @@ export class AddressDialog {
       this.mode = 'edit';
     } else {
       this.mode = 'create';
+    }
+    
+    if (params.checkAllValues) {
+      this.checkAllValues = params.checkAllValues;
+    }
+    if (params.dialogTitle) {
+      this.dialogTitle = params.dialogTitle;
+    } else {
+      this.dialogTitle = this.i18n.tr('Edit Address');
     }
     if (params.labels && Array.isArray(params.labels)) {
       this.labels = params.labels;
@@ -42,6 +58,29 @@ export class AddressDialog {
     } else {
       this.dicoContext = '';
     }
+  }
+  
+  public async canDeactivate(result: UxModalServiceResult) {
+    if (result.wasCancelled) {
+      return true;
+    }
+    
+    if (this.checkAllValues) {
+      if (!this.address.country && this.countryList && this.countryList.length > 0) this.address.country = this.countryList[0];
+      if (!this.address.street || !this.address.zip || !this.address.city || !this.address.country) {
+        errorify(new Error('You must fill out all fields'));
+        return false;
+      } else {
+        result.output = this.address;
+        return true;
+      } 
+    }
+
+    if (!this.address) return false;
+
+    result.output = this.address;
+    return true;
+
   }
 
   private fixAddressKeys() {
