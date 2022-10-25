@@ -18,8 +18,9 @@ export class AddressDialog {
   public allowLatLngEdition = false;
   public countryType: 'input' | 'list' = 'input';
   public countryList: 'all' | Array<string> = 'all';
-  public i18n: I18N;
 
+  constructor(private i18n: I18N) {
+  }
 
   public activate(params: any) {
     if (params.address && typeof params.address === 'object') {
