@@ -1,9 +1,0 @@
-<template>
-  <require from="./as-contact.css"></require>
-  <template if.bind="instance && properties">
-    <deco-field repeat.for="property of properties" instance.bind="instance" property.bind="property" dico-context="global"></deco-field>
-    <span show.bind="showSuccess">${success}</span>
-    <ar-spinner-line height="3px" active.bind="sending"></ar-spinner-line>
-    <deco-save processing.bind="sending" instance.bind="instance" saved.delegate="saved()" saving-error.delegate="savingError($event)"><span t="Send"></span></deco-save>
-  </template>
-</template>

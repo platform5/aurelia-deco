@@ -1,9 +1,0 @@
-<template class="select-address-control">
-  <require from="./select-address-control.css"></require>
-  <ux-button if.bind="!hasAddress" type="text" click.delegate="openDialog()"><span t="shop.Select Address"></span></ux-button>
-  <ux-list show.bind="hasAddress">
-    <address-item address.bind="value" dico-context.bind="dicoContext" display-description.bind="displayDescription">
-      <ux-icon icon="clear" slot="action" click.delegate="unselect()"></ux-icon>
-    </address-item>
-  </ux-list>
-</template>
