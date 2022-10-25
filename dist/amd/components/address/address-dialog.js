@@ -45,7 +45,8 @@ define(["require", "exports", "aurelia-resources", "aurelia-i18n", "aurelia-fram
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.AddressDialog = void 0;
     var AddressDialog = /** @class */ (function () {
-        function AddressDialog() {
+        function AddressDialog(i18n) {
+            this.i18n = i18n;
             this.dialogTitle = 'Edit Address';
             this.address = {};
             this.mode = 'create';

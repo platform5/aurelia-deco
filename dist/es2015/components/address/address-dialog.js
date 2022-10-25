@@ -44,7 +44,8 @@ import { errorify } from 'aurelia-resources';
 import { I18N } from 'aurelia-i18n';
 import { inject } from 'aurelia-framework';
 var AddressDialog = /** @class */ (function () {
-    function AddressDialog() {
+    function AddressDialog(i18n) {
+        this.i18n = i18n;
         this.dialogTitle = 'Edit Address';
         this.address = {};
         this.mode = 'create';

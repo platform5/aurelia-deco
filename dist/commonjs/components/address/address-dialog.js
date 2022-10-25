@@ -47,7 +47,8 @@ var aurelia_resources_1 = require("aurelia-resources");
 var aurelia_i18n_1 = require("aurelia-i18n");
 var aurelia_framework_1 = require("aurelia-framework");
 var AddressDialog = /** @class */ (function () {
-    function AddressDialog() {
+    function AddressDialog(i18n) {
+        this.i18n = i18n;
         this.dialogTitle = 'Edit Address';
         this.address = {};
         this.mode = 'create';

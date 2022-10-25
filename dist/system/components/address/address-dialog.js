@@ -58,7 +58,8 @@ System.register(["aurelia-resources", "aurelia-i18n", "aurelia-framework"], func
         ],
         execute: function () {
             AddressDialog = /** @class */ (function () {
-                function AddressDialog() {
+                function AddressDialog(i18n) {
+                    this.i18n = i18n;
                     this.dialogTitle = 'Edit Address';
                     this.address = {};
                     this.mode = 'create';
