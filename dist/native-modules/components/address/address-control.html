@@ -1,0 +1,32 @@
+<template>
+  <div class="ux-form__row" if.bind="labels.length > 0">
+    <ux-chip-list ux-choice-container.bind="value['label']">
+      <template repeat.for="label of labels">
+        <ux-chip ux-choice.bind="label">${context(dicoContext) + 'addressLabel.' + label | t}</ux-chip>
+      </template>
+    </ux-chip-list>
+  </div>
+  <div class="ux-form__row">
+    <ux-textarea value.bind="value['street']" label="${'Street' | t}" auto-resize.bind="true" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.trigger="addressChanged()"></ux-textarea>
+  </div>
+  <div class="ux-form__row">
+    <ux-input style="width: 40%" value.bind="value['zip']" label="${'ZIP' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.trigger="addressChanged()"></ux-input>
+    <ux-input value.bind="value['city']" label="${'City' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.trigger="addressChanged()"></ux-input>
+  </div>
+  <div class="ux-form__row">
+    <ux-input if.bind="countryType === 'input'" value.bind="value['country']" label="${'Country' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled" blur.trigger="addressChanged()"></ux-input>
+    <ux-select if.bind="countryType === 'list'" value.bind="value['country']" change.delegate="addressChanged()">
+      <ux-option repeat.for="country of computedCountryList">${country}</ux-option>
+    </ux-select>
+  </div>
+  <div class="ux-form__row" if.bind="allowDescription">
+    <div>
+      <ux-textarea value.bind="value['description']" label="${'Description' | t}" auto-resize.bind="true" variant.bind="variant" dense.bind="dense" disabled.bind="disabled"></ux-textarea>
+      <ux-input-info><span t="AddressDescriptionHint"></span></ux-input-info>
+    </div>
+  </div>
+  <div class="ux-form__row" if.bind="allowLatLngEdition">
+    <ux-input style="width: 50%" value.bind="value['lat']" label="${'LAT' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled"></ux-input>
+    <ux-input value.bind="value['lng']" label="${'LNG' | t}" variant.bind="variant" dense.bind="dense" disabled.bind="disabled"></ux-input>
+  </div>
+</template>

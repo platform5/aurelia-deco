@@ -1,0 +1,12 @@
+<template>
+  <span class="context" t="admin.dico.${locale | firstLetterUpper}"></span>
+  <template if.bind="instance">
+    <ux-textarea value.bind="instance.value" blur.trigger="valueChanged()" auto-resize.bind="true">
+
+    </ux-textarea>
+    <!-- <span class="value" decoedit="instance.bind: instance; property: value; trigger: blur; suffix.bind: suffixFromLocale(locale)"></span></span> -->
+  </template>
+  <template if.bind="!instance">
+    <span class="value" t="Loading"></span>
+  </template>
+</template>

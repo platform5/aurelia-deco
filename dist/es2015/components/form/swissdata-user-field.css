@@ -1,0 +1,16 @@
+/* Styles for page SwissdataUserField */
+.swissdata-user-field {
+  display: block;
+}
+.swissdata-user-field .ux-form {
+  margin-bottom: 16px;
+}
+
+.swissdata-user_field__button-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.swissdata-user_field__button-row--right {
+  margin-left: auto;
+}

@@ -1,0 +1,38 @@
+.request-recorder-viewer__card {
+  /* max-width: 80%; */
+}
+
+.request-recorder-viewer__row {
+  border-bottom: 1px solid #ccc;
+  padding: 16px;
+  font-size: 12px;
+}
+
+.request-recorder-viewer__row > label {
+  color: #666;
+  letter-spacing: 0.5;
+}
+
+.request-recorder-viewer__row-value {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  padding: 8px;
+  max-width: 50vw;
+}
+
+.request-recorder-viewer__highlight {
+  font-weight: bold;
+  text-decoration: underline;
+  color: var(--aurelia-ux--design-primary);
+}
+
+.request-recorder-viewer__copy {
+  background: var(--ux-swatch--grey-p200);
+  color: var(--ux-swatch--grey-p800);
+  font-size: 12px;
+  padding: 16px;
+  margin: 16px;
+}

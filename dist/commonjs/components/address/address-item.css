@@ -1,0 +1,21 @@
+.address-item .address-item__check-icon {
+  display: none;
+}
+.address-item--selectable {
+  cursor: pointer;
+}
+.address-item--selectable .address-item__default-icon {
+  display: none;
+}
+.address-item--selectable .address-item__check-icon {
+  display: inline-flex;
+  opacity: 0;
+}
+.address-item--selectable.address-item--selected .address-item__check-icon {
+  opacity: 1;
+}
+.address-item ux-chip.address-label {
+  height: 20px;
+  font-size: 12px;
+  margin: 4px 4px 4px 0;
+}

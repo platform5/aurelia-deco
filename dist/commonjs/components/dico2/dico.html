@@ -1,0 +1,51 @@
+<template>
+  <require from="aurelia-resources/elements/listing/listing-list.css"></require>
+  <section if.bind="!canEdit" class="center">Loading or access denied</section>
+  <div class="listing vscroll abs-full" if.bind="canEdit">
+    <listing-head class="listing-head--sticky">
+      <h2>
+        <span t="admin.Dico"></span>
+      </h2>
+      <p t="admin.dico.{{ nbElements }} Dico Elements" t-params.bind="{nbElements: nbElements}"></p>
+      <ux-button size="small" class="listing__head__button" slot="button" click.delegate="openAddDicoDialog()"><span t="admin.dico.Add Dico Element"></span></ux-button>
+    </listing-head>
+
+    <listing-toolbar search.bind="search" current-count.bind="currentCount !== nbElements ? currentCount : undefined">
+      <div slot="center">
+        <!-- <ux-button type="text" click.delegate="addUserWhereMissing()">Add user where missing</ux-button> -->
+        <ux-button type="text" click.delegate="addCertifiedTag()">Add certified tag</ux-button>
+        <ux-button type="text" click.delegate="autoTranslate()">Auto Translate</ux-button>
+        <ar-select value.bind="selectedContexts" change.delegate="selectedContextsChanged()" multiple.bind="true" label="Context Filter">
+          <ar-option value.bind="context" repeat.for="context of contexts">${context || 'Global'}</ar-option>
+        </ar-select>
+      </div>
+      <small t="Sorted By"></small>
+        <ux-select value.bind="sort">
+          <ux-option value="key">${'Key' | t}</ux-option>
+          <ux-option value="-_updatedAt">${'Updated Date' | t}</ux-option>
+        </ux-select>
+    </listing-toolbar>
+
+    <section class="listing-list" if.bind="items.length > 0">
+      <div class="ux-list ux-list--border">
+        <div class="ux-list-item click"  virtual-repeat.for="dico of items" infinite-scroll-next.call="getMoreItems($scrollContext)" click.delegate="openEditDicoDialog(dico)">
+          <div class="ux-list-item__detail">
+            <ux-icon icon="person"></ux-icon>
+          </div>
+          <div class="ux-list-item__content">
+            ${dico.key}
+            <div class="ux-list-item__secondary-content">
+              ${dico.value}
+            </div>
+          </div>
+          <div class="ux-list-item__action-item small muted right">
+            ${dico._updatedAt | date:'DD/MM/YY'}
+            <br >${global.ensureUsers.instances[dico._updatedBy].firstname} ${global.ensureUsers.instances[dico._updatedBy].lastname}
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</template>

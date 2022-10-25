@@ -1,0 +1,76 @@
+swissdata-notification {
+  display: block;
+  width: 100%;
+}
+
+swissdata-notification > div {
+  display: block;
+  width: 100%;
+}
+
+swissdata-notification.notifications-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: start;
+  justify-items: start;
+  justify-content: start;
+  z-index: 1001;
+}
+
+swissdata-notification.notifications-popup .notification {
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: var(--aurelia-ux--design-elevation4dp);
+}
+
+swissdata-notification.notifications-inline {
+  display: flex;
+}
+
+swissdata-notification .notification {
+  background: var(--aurelia-ux--swissdata-notification-background, var(--aurelia-ux--design-primary));
+  color: var(--aurelia-ux--swissdata-notification-foreground, var(--aurelia-ux--design-primary-foreground));
+  margin-top: 10px;
+  padding: 5px;
+  width: 100%;
+}
+
+swissdata-notification span.notification-title {
+  font-size: 16px;
+  display: block;
+  margin: 0 0 3px 0;
+}
+
+swissdata-notification span.notification-message {
+  font-size: 14px;
+  display: block;
+  margin: 0;
+}
+
+swissdata-notification .notification-error {
+  background: var(--aurelia-ux--swissdata-notification-error-background, var(--ux-swatch--red-a700));
+  color: var(--aurelia-ux--swissdata-notification-error-foreground, #fff);
+}
+
+swissdata-notification .notification-warning {
+  background: var(--aurelia-ux--swissdata-notification-warning-background, var(--ux-swatch--deep-orange-p200));
+  color: var(--aurelia-ux--swissdata-notification-warning-foreground, #fff);
+}
+
+swissdata-notification .notification-info {
+  background: var(--aurelia-ux--swissdata-notification-message-background, var(--ux-swatch--blue-p200));
+  color: var(--aurelia-ux--swissdata-notification-message-foreground, #fff);
+}
+
+swissdata-notification .notification-confirmation {
+  background: var(--aurelia-ux--swissdata-notification-confirmation-background, var(--ux-swatch--green-p300));
+  color: var(--aurelia-ux--swissdata-notification-confirmation-foreground, #fff);
+}
+
+swissdata-notification .notification-clickable {
+  cursor: pointer;
+}

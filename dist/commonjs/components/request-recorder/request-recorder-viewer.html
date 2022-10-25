@@ -1,0 +1,61 @@
+<template>
+  <require from="./request-recorder-viewer.css"></require>
+  <ux-card class="request-recorder-viewer__card">
+    <ux-card-header>
+      <div class="ux-card__title" t="Request Recorder Viewer"></div>
+    </ux-card-header>
+    <ux-card-content>
+      <ux-card repeat.for="request of recorder.requests">
+        
+        <div style="display: flex; padding-left: 16px; padding-right: 16px;">
+          <ux-icon if.bind="request.show" click.delegate="request.show = false" icon="visibility" style="flex-shrink: 0"></ux-icon>
+          <ux-icon if.bind="!request.show" click.delegate="request.show = true" icon="visibility_off" style="flex-shrink: 0"></ux-icon>
+          <div class="request-recorder-viewer__row" style="width: 100%;">
+            <label>URL ${request.method}</label>
+            <div class="request-recorder-viewer__row-value" innerhtml="${request.testUrl | highlight}"></div>
+          </div>
+          <div class="request-recorder-viewer__row-value" style="flex-shrink: 0">
+            <ux-switch checked.bind="request.keep"></ux-switch>
+          </div>
+        </div>
+
+        <template if.bind="request.keep && request.show">
+          <div class="request-recorder-viewer__row">
+            <label>Expect Status Code (${request.response.statusCode})</label>
+            <div class="request-recorder-viewer__row-value">
+              <ux-switch checked.bind="request.expectStatusCode"></ux-switch>
+            </div>
+          </div>
+
+          <div class="request-recorder-viewer__row" repeat.for="expect of request.expectProperties">
+            <label><span class="request-recorder-viewer__highlight">${expect.key}</span><span t="Expect"></span></label>
+            <div class="request-recorder-viewer__row-value">
+              <ux-chip-list ux-choice-value.bind="expect.type">
+                <ux-chip ux-choice="ignore" t="Ignore"></ux-chip>
+                <ux-chip ux-choice="exact" if.bind="expect.expectedValue" t="Exact"></ux-chip>
+                <ux-chip ux-choice="has" t="Has Property"></ux-chip>
+                <ux-chip ux-choice="captured" if.bind="expect.capturedValue" t="Captured"></ux-chip>
+              </ux-chip-list>
+            </div>
+            <div class="request-recorder-viewer__row-value" if.bind="expect.type === 'exact'" innerhtml="${expect.expectedValue}"></div>
+            <div class="request-recorder-viewer__row-value" if.bind="expect.type === 'captured'" innerhtml="${expect.capturedValue | highlight}"></div>
+          </div>
+        </template>
+
+        
+
+      </ux-card>
+
+      <ux-card-separator></ux-card-separator>
+
+      <ux-button click.delegate="generateArtillery()" ignore-dico>Artillery</ux-button>
+
+      <div class="request-recorder-viewer__copy" if.bind="artillery" innerhtml="${artillery | nl2br}">
+
+      </div>
+    </ux-card-content>
+    <ux-card-footer style="justify-content: flex-end;">
+      <ux-button show.bind="cancelButtonType !== 'none'" type="${cancelButtonType}" click.delegate="dismiss()" ><span t="Close"></span></ux-button>
+    </ux-card-footer>
+  </ux-card>
+</template>

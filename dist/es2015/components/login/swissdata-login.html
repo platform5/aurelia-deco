@@ -1,0 +1,299 @@
+<template>
+  <require from="./swissdata-login.css"></require>
+  <require from="./swissdata-input-phone.css"></require>
+
+  <div class="slot-logo">
+    <slot></slot>
+  </div>
+
+  <div class="slot-contact">
+    <slot name="contact"></slot>
+  </div>
+
+  <!-- LOGIN STEP -->
+  <div class="swissdata-login-step ${step}" if.bind="step === 'login'">
+    <h2 t="login.Login"></h2>
+    <form submit.trigger="login()">
+      <div if.bind="forgotOk">
+        <p t="Your password has been reset, You can now safely login with your new password"></p>
+      </div>
+      <div class="input-container click" click.delegate="usernameElement.focus()">
+        <ux-icon icon="person_outline"></ux-icon>
+        <input ref="usernameElement" t="[placeholder]login.Enter your username" value.bind="loginInput" class="preventfocus" >
+      </div>
+      <div class="input-container click" click.delegate="passwordElement.focus()">
+        <ux-icon icon="lock_outline"></ux-icon>
+        <input ref="passwordElement" t="[placeholder]login.And your password" type="password" value.bind="loginPassword" class="preventfocus" >
+      </div>
+      <div class="input-bottom-info" if.bind="currentError">
+        <span class="error-text" t="login.${currentError | firstLetterUpper}"></span>
+      </div>
+      <ar-spinner-line height="3px" active.bind="processing"></ar-spinner-line>
+      <swissdata-notification display="inline" handler-id="login.login"></swissdata-notification>
+      <ux-button click.delegate="login()"><span t="login.Login"></span></ux-button>
+
+      <div class="login-buttons">
+        <span click.delegate="startForgotPassword()" t="login.Forgot password ?"></span>
+      </div>
+
+      <ux-button type="outline" click.delegate="startCreateAccount()"><span t="login.Create an account"></span></ux-button>
+    </form>
+  </div>
+
+  <!-- DOUBLE AUTH STEP -->
+  <div class="swissdata-login-step ${step}" if.bind="step === 'double-auth'">
+    <h2 t="login.Double Authentication"></h2>
+    <form submit.trigger="doubleAuth()">
+      <div class="input-container">
+        <ux-icon icon="lock_outline"></ux-icon>
+        <input t="[placeholder]login.Enter your validation code" value.bind="doubleAuthCode" >
+      </div>
+      <div class="input-bottom-info" if.bind="currentError">
+        <span class="error-text" t="login.${currentError | firstLetterUpper}">${currentError}</span>
+      </div>
+      <ar-spinner-line height="3px" active.bind="processing"></ar-spinner-line>
+      <swissdata-notification display="inline" handler-id="login.double-auth"></swissdata-notification>
+      <ux-button click.delegate="doubleAuth()"><span t="login.Validate"></span></ux-button>
+      <p>
+        <ux-button type="outline" click.delegate="backToLogin()"><span t="login.Back to login">Back to login</span></ux-button>
+      </p>
+    </form>
+  </div>
+
+  <!-- CREATE ACCOUNT STEP -->
+  <div class="swissdata-login-step ${step}" if.bind="step === 'create-account'">
+    <h2 t="login.Create Account"></h2>
+    <form submit.trigger="createAccount()">
+      <div class="input-container">
+        <ux-icon icon="person_outline"></ux-icon>
+        <input t="[placeholder]login.Firstname"
+          value.bind="newAccountInstance.firstname & validate:newAccountInstance.validationController"
+          change.delegate="saveNewAccountInstanceInState()"  placeholder="${'Firstname' | t}">
+      </div>
+      <div class="input-bottom-info"></div>
+      <div class="input-container">
+        <ux-icon icon="person_outline"></ux-icon>
+        <input t="[placeholder]login.Lastname"
+          value.bind="newAccountInstance.lastname & validate:newAccountInstance.validationController"
+          change.delegate="saveNewAccountInstanceInState()"  placeholder="${'Lastname' | t}">
+      </div>
+      <div class="input-bottom-info"></div>
+      <div class="input-container" if.bind="requireEmail">
+        <ux-icon icon="email"></ux-icon>
+        <input value.bind="newAccountInstance.email & validate:newAccountInstance.validationController"
+          change.delegate="saveNewAccountInstanceInState()"  placeholder="${'Email' | t}">
+      </div>
+      <div class="input-bottom-info" if.bind="requireEmail"></div>
+      <div class="swissdata-input-phone-country-selector-list-overlay" if.bind="countrySelectorOpened"
+        click.delegate="closeCountrySelector()">
+      </div>
+      <div class="input-container swissdata-input-phone prefix-length-${countryPrefix.length}" if.bind="requireMobile">
+        <ux-icon icon="phone"></ux-icon>
+        <div class="swissdata-input-phone-country-selector"
+          click.delegate="countrySelectorOpened = !countrySelectorOpened">
+          <img src="${countryCodeFlag}" >
+          ${countryPrefix}
+        </div>
+
+        <div class="swissdata-input-phone-country-selector-list" if.bind="countrySelectorOpened">
+          <div class="swissdata-input-phone-country-selector-list-search">
+            <input value.bind="countrySearchTerm" placeholder="${'Search a country' | t}">
+          </div>
+          <div class="swissdata-input-phone-country-selector-list-items">
+            <div class="swissdata-input-phone-country-selector-list-item"
+              repeat.for="country of countries | filterCountries:countrySearchTerm"
+              click.delegate="selectCountry(country)">
+              <img src="/svg-country-flags/png100px/${country.countryCode2.toLowerCase()}.png" > ${country.name}
+            </div>
+          </div>
+        </div>
+        <input value.bind="newAccountInstance.mobile & validate:newAccountInstance.validationController"
+          class="aurelia-hide" >
+        <input value.bind="createAccountMobile & validate:newAccountInstance.validationController"
+          placeholder="${phonePlaceholder}" change.delegate="saveNewAccountPhoneInState()" >
+      </div>
+      <div class="input-bottom-info" if.bind="requireMobile"></div>
+      <div t="login.Minimum 10" class="input-top-info">
+        Minimum 10 characters and special characters
+      </div>
+      <div class="input-container">
+        <ux-icon icon="lock_outline"></ux-icon>
+        <input t="[placeholder]login.Enter your password" type="password"
+          value.bind="createAccountPassword & validate:newAccountInstance.validationController"
+          placeholder="${'Enter your password' | t}">
+      </div>
+      <div class="input-bottom-info"></div>
+      <div class="input-bottom-info" if.bind="currentError">
+        <span class="error-text" t="login.${currentError | firstLetterUpper}">${currentError}</span>
+      </div>
+      <ar-spinner-line height="3px" active.bind="processing"></ar-spinner-line>
+      <swissdata-notification display="inline" handler-id="login.create-account"></swissdata-notification>
+      <ux-button click.delegate="createAccount()"><span t="login.Create an account">Create an account</span></ux-button>
+      <p class="small form-info"><span t="login.By creating an account">By creating an account you are agreeing to our
+        </span><strong><a href="/conditions" target="_blank" t="login.Terms and conditions">terms and
+            conditions</a></strong>&nbsp;<span t="login.And">and</span>&nbsp;<strong><a href="/confidentiality"
+            target="_blank" t="login.Privacy policy">privacy policy.</a></strong></p>
+      <ux-button type="outline" click.delegate="backToLogin()"><span t="login.Back to login">Back to login</span>
+      </ux-button>
+    </form>
+  </div>
+
+  <!-- VALIDATE ACCOUNT STEP -->
+  <div class="swissdata-login-step ${step}" if.bind="step === 'validate-account'">
+    <h2 t="login.Validate Your Account"></h2>
+    <template if.bind="email && mobile && (createAccountValidation === 'emailOrMobile' || createAccountValidation === 'emailAndMobile')">
+      <p if.bind="newAccountInstance && newAccountInstance.mobile && newAccountInstance.email"
+        t="login.We sent a validation code to your email ({{email}}) and mobile ({{mobile}})"
+        t-params.bind="newAccountInstance"></p>
+      <p if.bind="createAccountValidation === 'emailOrMobile'"
+        t="login.Please enter at least one of these code to validate your account"></p>
+      <p if.bind="createAccountValidation === 'emailAndMobile'"
+        t="login.Please enter both codes to validate your account"></p>
+    </template>
+    <template if.bind="!newAccountInstance.mobile || createAccountValidation === 'emailOnly'">
+      <p if.bind="newAccountInstance && newAccountInstance.email"
+        t="login.We sent a validation code to your email ({{email}})" t-params.bind="newAccountInstance"></p>
+      <p t="login.Please enter this code to validate your account"></p>
+    </template>
+    <template if.bind="!newAccountInstance.email || createAccountValidation === 'mobileOnly'">
+      <p if.bind="newAccountInstance && newAccountInstance.mobile"
+        t="login.We sent a validation code to your mobile ({{mobile}})" t-params.bind="newAccountInstance"></p>
+      <p t="login.Please enter this code to validate your account"></p>
+    </template>
+    <form submit.trigger="validateEmail()"
+      if.bind="!emailValidated && createAccountValidation !== 'mobileOnly' && newAccountInstance.email">
+      <div class="input-container">
+        <ux-icon icon="lock_outline"></ux-icon>
+        <input value.bind="validateEmailCode" t="[placeholder]login.Code sent to your email" >
+      </div>
+      <div class="input-bottom-info" if.bind="currentError">
+        <span class="error-text" t="login.${currentError | firstLetterUpper}">${currentError}</span>
+      </div>
+      <ar-spinner-line height="3px" active.bind="processing"></ar-spinner-line>
+      <swissdata-notification display="inline" handler-id="login.validate-email"></swissdata-notification>
+      <ux-button click.delegate="validateEmail()"><span t="login.Validate Email"></span></ux-button>
+      <ux-button click.delegate="resendCode('email')" type="text"><span t="login.Resend code"></span></ux-button>
+      <p class="small form-info"></p>
+    </form>
+    <p if.bind="emailValidated && createAccountValidation !== 'mobileOnly'">
+      <ux-icon icon="check"></ux-icon><span t="login.Your email has been validated"></span>
+    </p>
+    <form submit.trigger="validateMobile()"
+      if.bind="!mobileValidated && createAccountValidation !== 'emailOnly' && newAccountInstance.mobile">
+      <div class="input-container">
+        <ux-icon icon="lock_outline"></ux-icon>
+        <input value.bind="validateMobileCode" t="[placeholder]login.Code sent to your mobile" >
+      </div>
+      <div class="input-bottom-info" if.bind="currentError">
+        <span class="error-text" t="login.${currentError | firstLetterUpper}">${currentError}</span>
+      </div>
+      <ar-spinner-line height="3px" active.bind="processing"></ar-spinner-line>
+      <swissdata-notification display="inline" handler-id="login.validate-mobile"></swissdata-notification>
+      <ux-button click.delegate="validateMobile()"><span t="login.Validate Mobile"></span></ux-button>
+      <ux-button click.delegate="resendCode('mobile')" type="text"><span t="login.Resend code"></span></ux-button>
+      <p class="small form-info"></p>
+      <p if.bind="mobileValidated && createAccountValidation !== 'emailOnly'">
+        <ux-icon icon="check"></ux-icon><span t="login.Your mobile has been validated"></span>
+      </p>
+
+      <template if.bind="createAccountValidation === 'emailOrMobile' && (emailValidated || mobileValidated)">
+        <p t="login.Your account has successfully been validated"></p>
+        <p if.bind="emailValidated"
+          t="login.It is best to also validated your mobile before to continue, but if you prefer you can do it later">
+        </p>
+        <p if.bind="mobileValidated"
+          t="login.It is best to also validated your email before to continue, but if you prefer you can do it later">
+        </p>
+        <p><a click.delegate="skipSecondValidation()" t="login.Continuer"></a></p>
+      </template>
+    </form>
+
+    <p>
+      <ux-button type="outline" click.delegate="backToLogin()"><span t="login.Back to login">Back to login</span></ux-button>
+    </p>
+
+  </div>
+
+  <!-- ACCOUNT CREATED -->
+  <div class="swissdata-login-step ${step}" if.bind="step === 'account-created'">
+    <h2 t="login.Account Created"></h2>
+    <form>
+      <ux-button type="outline" click.delegate="stopForgotPassword()"><span t="login.Back to login">Back to login</span>
+      </ux-button>
+    </form>
+  </div>
+
+
+  <!-- FORGOT PASSWORD STEP -->
+  <div class="swissdata-login-step ${step}" if.bind="step === 'forgot-password'">
+    <h2 t="login.Forgot Password"></h2>
+    <form submit.trigger="requestResetPassword()">
+      <p t="login.Tell us your email or mobile and we will send you a code to reset your password"></p>
+      <div class="input-container">
+        <ux-icon icon="email"></ux-icon>
+        <input value.bind="forgotPasswordEmail" placeholder="${'Email' | t}">
+      </div>
+      <div class="input-container swissdata-input-phone prefix-length-${countryPrefix.length}" if.bind="requireMobile">
+        <ux-icon icon="phone"></ux-icon>
+        <div class="swissdata-input-phone-country-selector"
+          click.delegate="countrySelectorOpened = !countrySelectorOpened">
+          <img src="${countryCodeFlag}" >
+          ${countryPrefix}
+        </div>
+        <div class="swissdata-input-phone-country-selector-list" if.bind="countrySelectorOpened">
+          <div class="swissdata-input-phone-country-selector-list-search">
+            <input value.bind="countrySearchTerm" placeholder="${'Search a country' | t}">
+          </div>
+          <div class="swissdata-input-phone-country-selector-list-items">
+            <div class="swissdata-input-phone-country-selector-list-item"
+              repeat.for="country of countries | filterCountries:countrySearchTerm"
+              click.delegate="selectCountry(country)">
+              <img src="/svg-country-flags/png100px/${country.countryCode2.toLowerCase()}.png" > ${country.name}
+            </div>
+          </div>
+        </div>
+        <input value.bind="forgotPasswordMobileInput & validate:forgotPasswordValidationController"
+          placeholder="${phonePlaceholder}" >
+      </div>
+      <div class="input-bottom-info" if.bind="currentError">
+        <span class="error-text" t="login.${currentError | firstLetterUpper}">${currentError}</span>
+      </div>
+      <ar-spinner-line height="3px" active.bind="processing"></ar-spinner-line>
+      <swissdata-notification display="inline" handler-id="login.forgot-password"></swissdata-notification>
+      <ux-button click.delegate="requestResetPassword()" disabled.bind="!forgotPasswordEmail && !forgotPasswordMobileInput"><span t="login.Send me the code">Send me the code</span></ux-button>
+      <p class="small form-info"></p>
+      <ux-button type="outline" click.delegate="stopForgotPassword()"><span t="login.Back to login">Back to login</span>
+      </ux-button>
+    </form>
+  </div>
+
+  <!-- RESET PASSWORD STEP -->
+  <div class="swissdata-login-step ${step}" if.bind="step === 'reset-password'">
+    <h2 t="login.Reset Password"></h2>
+    <form submit.trigger="resetPassword()">
+      <p><span t="login.We sent a code to your email or mobile"></span></p>
+      <p t="login.Please enter this code"></p>
+      <div class="input-container">
+        <ux-icon icon="lock_outline"></ux-icon>
+        <input name="code" autocomplete="off" value.bind="resetPasswordCode" placeholder="${'0123456' | t}">
+      </div>
+      <template if.bind="resetPasswordCode">
+        <p t="login.And a new password"></p>
+        <div class="input-container">
+          <ux-icon icon="lock_outline"></ux-icon>
+          <input name="newPassword" autocomplete="new-password" t="[placeholder]login.And a new password" type="password" value.bind="resetPasswordNewPassword"
+            placeholder="${'And your password' | t}">
+        </div>
+        <div class="input-bottom-info" if.bind="currentError">
+          <span class="error-text" t="login.${currentError | firstLetterUpper}">${currentError}</span>
+        </div>
+        <ar-spinner-line height="3px" active.bind="processing"></ar-spinner-line>
+        <swissdata-notification display="inline" handler-id="login.reset-password"></swissdata-notification>
+        <ux-button click.delegate="resetPassword()" disabled.bind="!resetPasswordCode || !resetPasswordNewPassword"><span t="login.Reset my password"></span></ux-button>
+      </template>
+      <p class="small form-info"></p>
+      <ux-button type="outline" click.delegate="backToLogin()"><span t="login.Back to login">Back to login</span>
+      </ux-button>
+    </form>
+  </div>
+</template>

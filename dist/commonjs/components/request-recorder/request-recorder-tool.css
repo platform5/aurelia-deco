@@ -1,0 +1,31 @@
+.request-recorder-tool {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  width: 100px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.request-recorder-tool__toggle-button {
+  --aurelia-ux--button-background: green;
+  --aurelia-ux--button-foreground: white;
+}
+
+.request-recorder-tool--recording .request-recorder-tool__toggle-button {
+  background-color: red;
+}
+
+.request-recorder-tool__view-button {
+  --aurelia-ux--button-background: orange;
+  --aurelia-ux--button-foreground: white;
+  --aurelia-ux--icon-size: 16px;
+}
+
+.request-recorder-tool__view-button .ux-button--fab{
+  width: 30px;
+  height: 30px;
+}

@@ -1,0 +1,4 @@
+<template>
+  <ux-button type="text" theme.bind="{background: 'var(--aurelia-ux--design-error)'}" show.bind="!requestConfirmation" click.delegate="remove()"><slot></slot></ux-button>
+  <ux-button type="text" theme.bind="{background: 'var(--aurelia-ux--design-error)'}" if.bind="requestConfirmation" click.delegate="confirm()"><span>${confirmLabel}</span></ux-button>
+</template>

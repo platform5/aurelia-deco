@@ -1,0 +1,90 @@
+deco-field,
+.deco-field {
+  display: block;
+  margin-top: 16px;
+}
+
+deco-field label,
+.deco-field label {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--ux-swatch--grey-p600);
+  margin: 4px 0;
+  font-weight: bold;
+}
+
+deco-field ux-input-info,
+.deco-field ux-input-info {
+  font-size: 12px;
+  margin-top: 4px;
+  color: var(--ux-swatch--grey-p400);
+}
+
+deco-field ux-file-input,
+.deco-field ux-file-input {
+  margin-top: 5px;
+}
+
+deco-field .ux-select,
+.deco-field .ux-select {
+  display: block;
+}
+
+deco-field ux-switch,
+.deco-field ux-switch {
+  display: block;
+}
+
+deco-field .ux-textarea__inner-textarea,
+.deco-field .ux-textarea__inner-textarea {
+  min-height: 60px;
+}
+
+
+/* .field-ref-locale {
+  color: var(--ux-swatch--grey-p500);
+  border-left: 5px dotted var(--ux-swatch--grey-p200);
+  border-right: 5px dotted var(--ux-swatch--grey-p200);
+  padding-left: 10px;
+  padding-right: 90px;
+  position: relative;
+  min-height: 50px;
+}
+
+.field-ref-locale ux-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.field-ref-locale .ref-locale {
+  display:block;
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.field-ref-locale .ref-locale-value {
+  display:block;
+  text-decoration: underline;
+  font-size: 12px;
+} */
+
+.field-ref-locale {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 8px;
+}
+
+.field-ref-locale > ux-icon {
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.field-ref-locale__content {
+  width: 100%;
+  flex-shrink: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0 16px;
+}
