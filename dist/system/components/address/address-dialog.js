@@ -1,5 +1,11 @@
-System.register(["aurelia-resources"], function (exports_1, context_1) {
+System.register(["aurelia-resources", "aurelia-i18n", "aurelia-framework"], function (exports_1, context_1) {
     "use strict";
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
     var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,12 +42,18 @@ System.register(["aurelia-resources"], function (exports_1, context_1) {
             if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
         }
     };
-    var aurelia_resources_1, AddressDialog;
+    var aurelia_resources_1, aurelia_i18n_1, aurelia_framework_1, AddressDialog;
     var __moduleName = context_1 && context_1.id;
     return {
         setters: [
             function (aurelia_resources_1_1) {
                 aurelia_resources_1 = aurelia_resources_1_1;
+            },
+            function (aurelia_i18n_1_1) {
+                aurelia_i18n_1 = aurelia_i18n_1_1;
+            },
+            function (aurelia_framework_1_1) {
+                aurelia_framework_1 = aurelia_framework_1_1;
             }
         ],
         execute: function () {
@@ -132,6 +144,9 @@ System.register(["aurelia-resources"], function (exports_1, context_1) {
                         this.address.label = '';
                     }
                 };
+                AddressDialog = __decorate([
+                    aurelia_framework_1.inject(aurelia_i18n_1.I18N)
+                ], AddressDialog);
                 return AddressDialog;
             }());
             exports_1("AddressDialog", AddressDialog);
