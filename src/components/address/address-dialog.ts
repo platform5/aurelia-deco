@@ -2,7 +2,10 @@ import { Address } from './../../decorators/address';
 import { UxModalServiceResult } from '@aurelia-ux/modal';
 import { errorify } from 'aurelia-resources';
 import { I18N } from 'aurelia-i18n';
+import { inject } from 'aurelia-framework';
 
+
+@inject(I18N)
 export class AddressDialog {
 
   public dialogTitle: string = 'Edit Address'
