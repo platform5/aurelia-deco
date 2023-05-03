@@ -20,7 +20,7 @@
     </ux-select>
   </div>
   <div class="ux-form__row" if.bind="allowDescription">
-    <div>
+    <div style="width: 100%">
       <ux-textarea value.bind="value['description']" label="${'Description' | t}" auto-resize.bind="true" variant.bind="variant" dense.bind="dense" disabled.bind="disabled"></ux-textarea>
       <ux-input-info><span t="AddressDescriptionHint"></span></ux-input-info>
     </div>
