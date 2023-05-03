@@ -15,6 +15,7 @@ export class AddressDialog {
   public labels: string[] = [];
   public dicoContext = '';
   public allowDescription = false;
+  public allowAccessInformation = false;
   public allowLatLngEdition = false;
   public countryType: 'input' | 'list' = 'input';
   public countryList: 'all' | Array<string> = 'all';
@@ -53,6 +54,9 @@ export class AddressDialog {
     }
     if (params.allowDescription && typeof params.allowDescription === 'boolean') {
       this.allowDescription = params.allowDescription;
+    }
+    if (params.allowAccessInformation && typeof params.allowAccessInformation === 'boolean') {
+      this.allowAccessInformation = params.allowAccessInformation;
     }
     if (params.allowLatLngEdition && typeof params.allowLatLngEdition === 'boolean') {
       this.allowLatLngEdition = params.allowLatLngEdition;

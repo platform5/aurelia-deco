@@ -5,6 +5,7 @@ export class AddressItem {
   @bindable public address: Address;
   @bindable public dicoContext = '';
   @bindable public displayDescription = false;
+  @bindable public displayAccessInformation = false;
   public main: string = '';
   public secondary: string = '';
   public label: string = '';
@@ -29,6 +30,9 @@ export class AddressItem {
     }
     if (this.address.description && this.displayDescription) {
       parts.push(this.address.description);
+    }
+    if (this.address.accessInformation && this.displayAccessInformation) {
+      parts.push(this.address.accessInformation);
     }
     this.secondary = parts.join(', ');
     this.label = this.address.label || '';

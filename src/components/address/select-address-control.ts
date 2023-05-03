@@ -12,6 +12,7 @@ export class SelectAddressControl {
   @bindable public addresses: Array<Address> = [];
   @bindable public dicoContext = '';
   @bindable public displayDescription = false;
+  @bindable public displayAccessInformation = false;
 
   constructor(private modalService: UxModalService, private element: HTMLElement) {
 
