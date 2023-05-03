@@ -9,6 +9,7 @@ var AddressItem = /** @class */ (function () {
     function AddressItem() {
         this.dicoContext = '';
         this.displayDescription = false;
+        this.displayAccessInformation = false;
         this.main = '';
         this.secondary = '';
         this.label = '';
@@ -33,6 +34,9 @@ var AddressItem = /** @class */ (function () {
         if (this.address.description && this.displayDescription) {
             parts.push(this.address.description);
         }
+        if (this.address.accessInformation && this.displayAccessInformation) {
+            parts.push(this.address.accessInformation);
+        }
         this.secondary = parts.join(', ');
         this.label = this.address.label || '';
     };
@@ -48,6 +52,9 @@ var AddressItem = /** @class */ (function () {
     __decorate([
         bindable
     ], AddressItem.prototype, "displayDescription", void 0);
+    __decorate([
+        bindable
+    ], AddressItem.prototype, "displayAccessInformation", void 0);
     return AddressItem;
 }());
 export { AddressItem };

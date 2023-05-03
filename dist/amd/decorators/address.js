@@ -15,8 +15,8 @@ define(["require", "exports", "../deco", "aurelia-logging"], function (require, 
             return true;
         if (typeof value !== 'object')
             return false;
-        var allowedKeys = ['label', 'street', 'city', 'zip', 'country', 'description', 'lat', 'lng'];
-        var stringKeys = ['label', 'street', 'city', 'zip', 'country', 'description'];
+        var allowedKeys = ['label', 'street', 'city', 'zip', 'country', 'description', 'accessInformation', 'lat', 'lng'];
+        var stringKeys = ['label', 'street', 'city', 'zip', 'country', 'description', 'accessInformation'];
         var numberKeys = ['lat', 'lng'];
         for (var key in value) {
             if (allowedKeys.indexOf(key) === -1)

@@ -10,6 +10,7 @@ export declare class AddressControl {
     labels: string[];
     dicoContext: string;
     allowDescription: boolean;
+    allowAccessInformation: boolean;
     allowLatLngEdition: boolean;
     private ready;
     constructor(httpClient: HttpClient);

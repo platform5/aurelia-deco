@@ -53,6 +53,7 @@ var AddressDialog = /** @class */ (function () {
         this.labels = [];
         this.dicoContext = '';
         this.allowDescription = false;
+        this.allowAccessInformation = false;
         this.allowLatLngEdition = false;
         this.countryType = 'input';
         this.countryList = 'all';
@@ -90,6 +91,9 @@ var AddressDialog = /** @class */ (function () {
         }
         if (params.allowDescription && typeof params.allowDescription === 'boolean') {
             this.allowDescription = params.allowDescription;
+        }
+        if (params.allowAccessInformation && typeof params.allowAccessInformation === 'boolean') {
+            this.allowAccessInformation = params.allowAccessInformation;
         }
         if (params.allowLatLngEdition && typeof params.allowLatLngEdition === 'boolean') {
             this.allowLatLngEdition = params.allowLatLngEdition;

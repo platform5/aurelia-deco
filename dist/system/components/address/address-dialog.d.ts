@@ -10,6 +10,7 @@ export declare class AddressDialog {
     labels: string[];
     dicoContext: string;
     allowDescription: boolean;
+    allowAccessInformation: boolean;
     allowLatLngEdition: boolean;
     countryType: 'input' | 'list';
     countryList: 'all' | Array<string>;

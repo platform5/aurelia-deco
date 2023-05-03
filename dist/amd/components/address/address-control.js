@@ -55,6 +55,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-resources", "aurelia
             this.labels = [];
             this.dicoContext = '';
             this.allowDescription = false;
+            this.allowAccessInformation = false;
             this.allowLatLngEdition = false;
             this.ready = false;
         }
@@ -170,6 +171,9 @@ define(["require", "exports", "aurelia-framework", "aurelia-resources", "aurelia
         __decorate([
             aurelia_framework_1.bindable
         ], AddressControl.prototype, "allowDescription", void 0);
+        __decorate([
+            aurelia_framework_1.bindable
+        ], AddressControl.prototype, "allowAccessInformation", void 0);
         __decorate([
             aurelia_framework_1.bindable
         ], AddressControl.prototype, "allowLatLngEdition", void 0);

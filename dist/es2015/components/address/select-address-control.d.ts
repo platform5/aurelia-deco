@@ -7,6 +7,7 @@ export declare class SelectAddressControl {
     addresses: Array<Address>;
     dicoContext: string;
     displayDescription: boolean;
+    displayAccessInformation: boolean;
     constructor(modalService: UxModalService, element: HTMLElement);
     get hasAddress(): boolean;
     unselect(): void;

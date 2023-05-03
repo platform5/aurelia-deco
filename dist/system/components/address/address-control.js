@@ -68,6 +68,7 @@ System.register(["aurelia-framework", "aurelia-resources", "aurelia-fetch-client
                     this.labels = [];
                     this.dicoContext = '';
                     this.allowDescription = false;
+                    this.allowAccessInformation = false;
                     this.allowLatLngEdition = false;
                     this.ready = false;
                 }
@@ -183,6 +184,9 @@ System.register(["aurelia-framework", "aurelia-resources", "aurelia-fetch-client
                 __decorate([
                     aurelia_framework_1.bindable
                 ], AddressControl.prototype, "allowDescription", void 0);
+                __decorate([
+                    aurelia_framework_1.bindable
+                ], AddressControl.prototype, "allowAccessInformation", void 0);
                 __decorate([
                     aurelia_framework_1.bindable
                 ], AddressControl.prototype, "allowLatLngEdition", void 0);

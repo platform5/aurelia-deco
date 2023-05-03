@@ -54,6 +54,7 @@ var AddressControl = /** @class */ (function () {
         this.labels = [];
         this.dicoContext = '';
         this.allowDescription = false;
+        this.allowAccessInformation = false;
         this.allowLatLngEdition = false;
         this.ready = false;
     }
@@ -169,6 +170,9 @@ var AddressControl = /** @class */ (function () {
     __decorate([
         bindable
     ], AddressControl.prototype, "allowDescription", void 0);
+    __decorate([
+        bindable
+    ], AddressControl.prototype, "allowAccessInformation", void 0);
     __decorate([
         bindable
     ], AddressControl.prototype, "allowLatLngEdition", void 0);

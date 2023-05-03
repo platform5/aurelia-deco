@@ -67,6 +67,7 @@ System.register(["aurelia-resources", "aurelia-i18n", "aurelia-framework"], func
                     this.labels = [];
                     this.dicoContext = '';
                     this.allowDescription = false;
+                    this.allowAccessInformation = false;
                     this.allowLatLngEdition = false;
                     this.countryType = 'input';
                     this.countryList = 'all';
@@ -104,6 +105,9 @@ System.register(["aurelia-resources", "aurelia-i18n", "aurelia-framework"], func
                     }
                     if (params.allowDescription && typeof params.allowDescription === 'boolean') {
                         this.allowDescription = params.allowDescription;
+                    }
+                    if (params.allowAccessInformation && typeof params.allowAccessInformation === 'boolean') {
+                        this.allowAccessInformation = params.allowAccessInformation;
                     }
                     if (params.allowLatLngEdition && typeof params.allowLatLngEdition === 'boolean') {
                         this.allowLatLngEdition = params.allowLatLngEdition;
